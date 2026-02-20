@@ -860,12 +860,16 @@ function GlobalStyles() {
         .testimonials-grid { grid-template-columns: 1fr !important; }
         .awards-row { flex-direction: column !important; align-items: center !important; }
         .specs-params { grid-template-columns: repeat(3, 1fr) !important; }
+        .promo-popup-content { flex-direction: column !important; }
+        .promo-popup-img { flex: 0 0 160px !important; min-height: 160px !important; }
       }
       @media (min-width: 769px) { .mobile-menu-btn { display: none !important; } }
       input[type="range"] { -webkit-appearance: none; appearance: none; outline: none; height: 1px; background: #E8E0D0; }
       input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; height: 18px; width: 18px; background: #C4A265; cursor: pointer; border: none; }
       input::placeholder, textarea::placeholder { color: rgba(232,226,216,0.3); }
       input:focus, textarea:focus { border-color: #C4A265 !important; }
+      .promo-popup-content { flex-direction: column !important; }
+      .promo-popup-img { flex: 0 0 160px !important; min-height: 160px !important; }
     `}</style>
   );
 }
@@ -881,7 +885,8 @@ function PromoPopup({ onClose }) {
       title: "36 rat RRSO 0% + drugie naczynie za 499 zł",
       desc: "Kup Thermomix® TM7 na 36 rat RRSO 0% lub w zestawie z drugim kompletnym naczyniem miksującym za jedyne 499 zł (zamiast 1 400 zł)!",
       deadline: "31.03.2026",
-      note: "Finansowanie: Cofidis, Alior Bank, Credit Agricole",
+      note: "Cofidis · Alior Bank · Credit Agricole",
+      img: "https://media.vorwerk.com/is/image/vorwerk/1080x1350%20Thermomix%20promocja%20dodatkowe%20naczynie%20marzec?wid=600&fmt=webp",
     },
     {
       badge: "DO 28.02",
@@ -889,17 +894,18 @@ function PromoPopup({ onClose }) {
       desc: "Zamów nowy Thermomix® TM7 i odbierz elegancki saturator SodaStream w promocyjnej cenie. Idealne połączenie smaku i stylu!",
       deadline: "28.02.2026",
       note: "Nie łączy się z innymi promocjami",
+      img: "https://media.vorwerk.com/is/image/vorwerk/oferta-luty-thermomix-tm7-sodastream-zestaw-vorwerk?wid=600&fmt=webp",
     },
   ];
 
   return (
     <div style={{ position: "fixed", inset: 0, zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
       <div onClick={onClose} style={{ position: "absolute", inset: 0, background: "rgba(13,26,15,0.75)", backdropFilter: "blur(4px)" }} />
-      <div style={{ position: "relative", background: C.dark, maxWidth: 520, width: "100%", border: `1px solid ${C.goldBorder}`, overflow: "hidden" }}>
+      <div style={{ position: "relative", background: C.dark, maxWidth: 560, width: "100%", border: `1px solid ${C.goldBorder}`, overflow: "hidden" }}>
         <GoldCorners size={20} thickness={1} />
 
         {/* Header */}
-        <div style={{ background: `linear-gradient(135deg, ${C.forest} 0%, ${C.dark} 100%)`, padding: "28px 28px 20px", textAlign: "center" }}>
+        <div style={{ background: `linear-gradient(135deg, ${C.forest} 0%, ${C.dark} 100%)`, padding: "24px 28px 16px", textAlign: "center" }}>
           <div style={{ fontSize: 11, color: C.gold, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 8, fontWeight: 600 }}>✦&ensp;Aktualne promocje Thermomix®&ensp;✦</div>
           <div style={{ fontSize: 13, color: C.textOnDarkMed }}>Wybierz ofertę, która Ci odpowiada</div>
         </div>
@@ -918,23 +924,35 @@ function PromoPopup({ onClose }) {
           ))}
         </div>
 
-        {/* Content */}
-        <div style={{ padding: "28px 28px 20px" }}>
-          <h3 style={{ fontFamily: fontSerif, fontSize: 22, color: C.white, fontWeight: 600, marginBottom: 12, lineHeight: 1.3 }}>
-            {promos[active].title}
-          </h3>
-          <div style={{ width: 40, height: 1, background: C.gold, marginBottom: 12 }} />
-          <p style={{ fontSize: 15, color: C.textOnDarkMed, lineHeight: 1.7, marginBottom: 16 }}>
-            {promos[active].desc}
-          </p>
-          <div style={{ display: "flex", gap: 16, fontSize: 12, color: C.textOnDarkMed, marginBottom: 20, flexWrap: "wrap" }}>
-            <span>⏳ Ważne do: <strong style={{ color: C.goldLight }}>{promos[active].deadline}</strong></span>
-            <span>·&ensp;{promos[active].note}</span>
+        {/* Content with image */}
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+          {/* Image */}
+          <div style={{ flex: "0 0 200px", minHeight: 220, overflow: "hidden", background: C.darkCard }}>
+            <img src={promos[active].img} alt={promos[active].title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
+
+          {/* Text */}
+          <div style={{ flex: 1, minWidth: 240, padding: "24px 24px 20px" }}>
+            <h3 style={{ fontFamily: fontSerif, fontSize: 20, color: C.white, fontWeight: 600, marginBottom: 10, lineHeight: 1.3 }}>
+              {promos[active].title}
+            </h3>
+            <div style={{ width: 40, height: 1, background: C.gold, marginBottom: 10 }} />
+            <p style={{ fontSize: 14, color: C.textOnDarkMed, lineHeight: 1.7, marginBottom: 12 }}>
+              {promos[active].desc}
+            </p>
+            <div style={{ fontSize: 11, color: C.textOnDarkMed, marginBottom: 16 }}>
+              <span>⏳ Do: <strong style={{ color: C.goldLight }}>{promos[active].deadline}</strong></span>
+              <br /><span style={{ fontSize: 10 }}>{promos[active].note}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div style={{ padding: "0 24px 24px" }}>
           <a href="#rezerwacja" onClick={onClose} style={{ ...S.btnLight, width: "100%", justifyContent: "center" }}>
             Umów pokaz i skorzystaj
           </a>
-          <div style={{ display: "flex", gap: 16, justifyContent: "center", marginTop: 16 }}>
+          <div style={{ display: "flex", gap: 16, justifyContent: "center", marginTop: 12 }}>
             <a href={`tel:${CONFIG.phoneFormatted}`} style={{ fontSize: 13, color: C.gold, textDecoration: "none", fontWeight: 600 }}>✆ {CONFIG.phone}</a>
             <a href={`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent("Cześć Kasiu! Widziałam promocję na stronie — chciałabym się umówić na pokaz!")}`}
               target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: C.gold, textDecoration: "none", fontWeight: 600 }}>WhatsApp →</a>
@@ -943,14 +961,13 @@ function PromoPopup({ onClose }) {
 
         {/* Close */}
         <button onClick={onClose} style={{
-          position: "absolute", top: 12, right: 12, background: "none", border: "none",
-          color: C.textOnDarkMed, fontSize: 20, cursor: "pointer", padding: 4, lineHeight: 1,
+          position: "absolute", top: 12, right: 12, background: "rgba(0,0,0,0.3)", border: "none",
+          color: C.textOnDark, fontSize: 18, cursor: "pointer", padding: "4px 8px", lineHeight: 1,
         }}>×</button>
       </div>
     </div>
   );
 }
-
 // ═══════════════════════════════════════════════════════════
 // MAIN APP
 // ═══════════════════════════════════════════════════════════
