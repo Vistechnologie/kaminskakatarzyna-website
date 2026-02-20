@@ -351,10 +351,10 @@ function Gallery() {
 
         {/* Awards */}
         <Reveal delay={0.5}>
-          <div style={{ display: "flex", gap: 32, justifyContent: "center", alignItems: "center", marginTop: 40, padding: "24px 0", borderTop: `1px solid rgba(196,162,101,0.15)` }}>
+          <div style={{ display: "flex", gap: 40, justifyContent: "center", alignItems: "center", marginTop: 40, padding: "32px 0", borderTop: `1px solid rgba(196,162,101,0.15)` }}>
             <span style={{ fontSize: 11, color: C.textOnDarkMed, letterSpacing: "0.1em", textTransform: "uppercase" }}>Nagrody 2025:</span>
             {[TM7.awardUx, TM7.awardPxa, TM7.awardGc].map((src, i) => (
-              <img key={i} src={src} alt="Award" loading="lazy" style={{ height: 48, opacity: 0.75, filter: "brightness(1.2)" }} />
+              <img key={i} src={src} alt="Award" loading="lazy" style={{ height: 80, background: "rgba(255,255,255,0.9)", padding: 8 }} />
             ))}
           </div>
         </Reveal>
@@ -368,8 +368,8 @@ function Gallery() {
 // ═══════════════════════════════════════════════════════════
 function Showcase() {
   const items = [
-    { img: TM7.angle, tag: "10-calowy ekran dotykowy", title: "Intuicyjna obsługa krok po kroku", text: "Duży, responsywny ekran prowadzi Cię przez każdy przepis. Wystarczy dotknąć — Thermomix zrobi resztę. Ponad 6 000 przepisów w języku polskim dostępnych od razu.", reverse: false },
-    { img: TM7.varomaTile, tag: "Varoma — 45% większa", title: "Gotowanie na parze na nowym poziomie", text: "Nowa Varoma jest o 45% większa niż w TM6. Przygotuj pełny posiłek na parze dla całej rodziny — zdrowo, szybko i bez wysiłku.", reverse: true },
+    { img: TM7.kitchen, tag: "10-calowy ekran dotykowy", title: "Intuicyjna obsługa krok po kroku", text: "Duży, responsywny ekran prowadzi Cię przez każdy przepis. Wystarczy dotknąć — Thermomix zrobi resztę. Ponad 6 000 przepisów w języku polskim dostępnych od razu.", reverse: false },
+    { img: TM7.cooking, tag: "Varoma — 45% większa", title: "Gotowanie na parze na nowym poziomie", text: "Nowa Varoma jest o 45% większa niż w TM6. Przygotuj pełny posiłek na parze dla całej rodziny — zdrowo, szybko i bez wysiłku.", reverse: true },
   ];
 
   return (
