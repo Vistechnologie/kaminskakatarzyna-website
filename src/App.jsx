@@ -772,81 +772,132 @@ function Booking() {
     setTimeout(() => setSent(false), 5000);
   };
 
+  const inputStyle = {
+    width: "100%", padding: "14px 16px", background: "rgba(255,255,255,0.06)",
+    border: `1px solid rgba(196,162,101,0.2)`, color: C.textOnDark,
+    fontSize: 15, fontFamily: fontSans, outline: "none",
+  };
+
   return (
     <section id="rezerwacja" style={{
       background: `linear-gradient(175deg, ${C.dark} 0%, ${C.forest} 100%)`,
-      padding: "100px 24px", textAlign: "center", position: "relative", overflow: "hidden",
+      padding: "100px 24px", position: "relative", overflow: "hidden",
     }}>
       <div style={{
-        position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
+        position: "absolute", top: "50%", left: "70%", transform: "translate(-50%, -50%)",
         width: 500, height: 500, borderRadius: "50%",
         background: `radial-gradient(circle, ${C.goldGlow} 0%, transparent 70%)`,
         pointerEvents: "none",
       }} />
 
-      <div style={{ maxWidth: 520, margin: "0 auto", position: "relative" }}>
-        <Reveal><div style={S.divider} /></Reveal>
-        <Reveal delay={0.1}>
-          <h2 style={{ ...S.h2Light, marginBottom: 12 }}>Umów się na pokaz</h2>
-          <p style={{ fontSize: 16, color: C.textOnDarkMed, marginBottom: 40, lineHeight: 1.7 }}>
-            Zostaw swoje dane — oddzwonię i umówimy wygodny termin.
-          </p>
-        </Reveal>
+      <div style={{ maxWidth: 1000, margin: "0 auto", position: "relative" }}>
+        <div style={{ textAlign: "center", marginBottom: 48 }}>
+          <Reveal><div style={S.divider} /></Reveal>
+          <Reveal delay={0.1}><h2 style={{ ...S.h2Light, marginBottom: 12 }}>Umów się na pokaz</h2></Reveal>
+          <Reveal delay={0.15}><p style={{ fontSize: 16, color: C.textOnDarkMed, lineHeight: 1.7 }}>
+            Zostaw dane lub zadzwoń — umówimy wygodny termin.
+          </p></Reveal>
+        </div>
 
-        <Reveal delay={0.2}>
-          <div style={{
-            background: "rgba(255,255,255,0.04)", border: `1px solid ${C.goldBorder}`,
-            padding: "40px 32px", position: "relative",
-          }}>
-            <GoldCorners size={18} thickness={1} />
+        <div style={{ display: "flex", gap: 32, flexWrap: "wrap", alignItems: "stretch" }}>
 
-            <div style={{ marginBottom: 20 }}>
-              <label style={{ display: "block", fontSize: 11, color: C.goldLight, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8, textAlign: "left" }}>Imię *</label>
-              <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Twoje imię"
-                style={{ width: "100%", padding: "14px 16px", background: "rgba(255,255,255,0.06)", border: `1px solid rgba(196,162,101,0.2)`, color: C.textOnDark, fontSize: 15, fontFamily: fontSans, outline: "none" }} />
-            </div>
-
-            <div style={{ marginBottom: 20 }}>
-              <label style={{ display: "block", fontSize: 11, color: C.goldLight, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8, textAlign: "left" }}>Telefon *</label>
-              <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="Twój numer telefonu"
-                style={{ width: "100%", padding: "14px 16px", background: "rgba(255,255,255,0.06)", border: `1px solid rgba(196,162,101,0.2)`, color: C.textOnDark, fontSize: 15, fontFamily: fontSans, outline: "none" }} />
-            </div>
-
-            <div style={{ marginBottom: 28 }}>
-              <label style={{ display: "block", fontSize: 11, color: C.goldLight, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8, textAlign: "left" }}>Wiadomość <span style={{ color: C.textOnDarkMed }}>(opcjonalnie)</span></label>
-              <textarea value={message} onChange={e => setMessage(e.target.value)} placeholder="Np. preferowany termin, pytania..." rows={3}
-                style={{ width: "100%", padding: "14px 16px", background: "rgba(255,255,255,0.06)", border: `1px solid rgba(196,162,101,0.2)`, color: C.textOnDark, fontSize: 15, fontFamily: fontSans, outline: "none", resize: "vertical" }} />
-            </div>
-
-            <button onClick={handleSubmit} disabled={!name.trim() || !phone.trim()} style={{
-              ...S.btnLight, width: "100%", justifyContent: "center",
-              opacity: (!name.trim() || !phone.trim()) ? 0.5 : 1,
-              cursor: (!name.trim() || !phone.trim()) ? "default" : "pointer",
+          {/* LEFT — FORM */}
+          <Reveal delay={0.2} style={{ flex: "1 1 340px", minWidth: 300 }}>
+            <div style={{
+              background: "rgba(255,255,255,0.04)", border: `1px solid ${C.goldBorder}`,
+              padding: "36px 28px", position: "relative", height: "100%",
+              display: "flex", flexDirection: "column",
             }}>
-              {sent ? "✓ Wysłano!" : "Wyślij — oddzwonię"}
-            </button>
+              <GoldCorners size={18} thickness={1} />
 
-            <p style={{ fontSize: 12, color: C.textOnDarkMed, marginTop: 16 }}>
-              Formularz otworzy WhatsApp z Twoimi danymi
-            </p>
-          </div>
-        </Reveal>
+              <div style={{ fontSize: 11, color: C.gold, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 24, fontWeight: 600 }}>
+                ✦&ensp;Formularz kontaktowy
+              </div>
 
-        <Reveal delay={0.3}>
-          <div style={{ marginTop: 32, padding: "24px 0", borderTop: `1px solid rgba(196,162,101,0.15)` }}>
-            <p style={{ fontSize: 13, color: C.textOnDarkMed, marginBottom: 16 }}>Wolisz bezpośrednio?</p>
-            <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap" }}>
-              <a href={`tel:${CONFIG.phoneFormatted}`} style={{ color: C.gold, textDecoration: "none", fontSize: 16, fontWeight: 600, letterSpacing: "0.04em" }}>
-                ✆ {CONFIG.phone}
-              </a>
-              <a href={`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(CONFIG.whatsappDefaultMsg)}`}
-                target="_blank" rel="noopener noreferrer"
-                style={{ color: C.gold, textDecoration: "none", fontSize: 16, fontWeight: 600 }}>
-                WhatsApp →
-              </a>
+              <div style={{ marginBottom: 16 }}>
+                <label style={{ display: "block", fontSize: 11, color: C.goldLight, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8, textAlign: "left" }}>Imię *</label>
+                <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Twoje imię" style={inputStyle} />
+              </div>
+
+              <div style={{ marginBottom: 16 }}>
+                <label style={{ display: "block", fontSize: 11, color: C.goldLight, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8, textAlign: "left" }}>Telefon *</label>
+                <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="Twój numer telefonu" style={inputStyle} />
+              </div>
+
+              <div style={{ marginBottom: 24, flex: 1 }}>
+                <label style={{ display: "block", fontSize: 11, color: C.goldLight, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8, textAlign: "left" }}>Wiadomość <span style={{ color: C.textOnDarkMed }}>(opcjonalnie)</span></label>
+                <textarea value={message} onChange={e => setMessage(e.target.value)} placeholder="Np. preferowany termin, pytania..." rows={3}
+                  style={{ ...inputStyle, resize: "vertical" }} />
+              </div>
+
+              <button onClick={handleSubmit} disabled={!name.trim() || !phone.trim()} style={{
+                ...S.btnLight, width: "100%", justifyContent: "center",
+                opacity: (!name.trim() || !phone.trim()) ? 0.5 : 1,
+                cursor: (!name.trim() || !phone.trim()) ? "default" : "pointer",
+              }}>
+                {sent ? "✓ Wysłano!" : "Wyślij — oddzwonię"}
+              </button>
+              <p style={{ fontSize: 11, color: C.textOnDarkMed, marginTop: 12, textAlign: "center" }}>
+                Otworzy WhatsApp z Twoimi danymi
+              </p>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+
+          {/* RIGHT — PHOTO + PHONE */}
+          <Reveal delay={0.3} style={{ flex: "1 1 340px", minWidth: 300 }}>
+            <div style={{
+              height: "100%", display: "flex", flexDirection: "column",
+              gap: 20,
+            }}>
+              {/* Photo placeholder */}
+              <div style={{
+                flex: 1, background: `linear-gradient(135deg, ${C.darkCard} 0%, ${C.forestLight}40 100%)`,
+                border: `1px solid ${C.goldBorder}`,
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                position: "relative", minHeight: 260,
+              }}>
+                <div style={{ position: "absolute", top: 12, left: 12, width: 24, height: 24, borderTop: `1.5px solid ${C.gold}`, borderLeft: `1.5px solid ${C.gold}` }} />
+                <div style={{ position: "absolute", bottom: 12, right: 12, width: 24, height: 24, borderBottom: `1.5px solid ${C.gold}`, borderRight: `1.5px solid ${C.gold}` }} />
+
+                <span style={{ fontSize: 64, marginBottom: 8 }}>👩‍🍳</span>
+                <div style={{ fontFamily: fontSerif, fontSize: 18, color: C.textOnDark, fontWeight: 600, marginBottom: 4 }}>{CONFIG.shortName} + Thermomix</div>
+                <div style={{ fontSize: 12, color: C.textOnDarkMed, letterSpacing: "0.08em", textTransform: "uppercase" }}>Zdjęcie wkrótce</div>
+              </div>
+
+              {/* Phone CTA */}
+              <div style={{
+                background: "rgba(255,255,255,0.04)", border: `1px solid ${C.goldBorder}`,
+                padding: "28px 24px", textAlign: "center",
+              }}>
+                <div style={{ fontSize: 11, color: C.gold, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16, fontWeight: 600 }}>
+                  ✦&ensp;Wolisz zadzwonić?
+                </div>
+                <a href={`tel:${CONFIG.phoneFormatted}`} style={{
+                  fontFamily: fontSerif, fontSize: 32, color: C.gold, textDecoration: "none",
+                  fontWeight: 600, display: "block", marginBottom: 12, letterSpacing: "0.02em",
+                }}>
+                  {CONFIG.phone}
+                </a>
+                <p style={{ fontSize: 13, color: C.textOnDarkMed, lineHeight: 1.6, marginBottom: 16 }}>
+                  Zadzwoń lub napisz SMS — odezwę się najszybciej jak mogę
+                </p>
+                <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
+                  <a href={`tel:${CONFIG.phoneFormatted}`} style={{
+                    ...S.btnOutlineLight, padding: "10px 20px", fontSize: 12,
+                  }}>Zadzwoń</a>
+                  <a href={`sms:${CONFIG.phoneFormatted}`} style={{
+                    ...S.btnOutlineLight, padding: "10px 20px", fontSize: 12,
+                  }}>Wyślij SMS</a>
+                  <a href={`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(CONFIG.whatsappDefaultMsg)}`}
+                    target="_blank" rel="noopener noreferrer" style={{
+                      ...S.btnOutlineLight, padding: "10px 20px", fontSize: 12,
+                    }}>WhatsApp</a>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+        </div>
       </div>
     </section>
   );
@@ -886,7 +937,6 @@ function Contact() {
             {[
               { label: "Instagram", href: CONFIG.instagram },
               { label: "Facebook", href: CONFIG.facebook },
-              { label: "TikTok", href: CONFIG.tiktok },
             ].map((s, i) => (
               <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" style={{
                 textDecoration: "none", color: C.textLight, fontSize: 13, fontWeight: 500,
