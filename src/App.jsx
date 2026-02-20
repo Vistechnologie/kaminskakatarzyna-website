@@ -21,76 +21,101 @@ const CONFIG = {
   whatsappReferralMsg: "Cześć! Polecono mi Cię jako przedstawicielkę Thermomix. Chętnie umówię się na pokaz!",
   promotion: {
     active: true,
-    text: "Kup Thermomix® TM7 do 28.02.2026 i odbierz saturator SodaStream za 49 zł!",
-    emoji: "🔥",
-    linkText: "Dowiedz się więcej",
+    text: "Thermomix® TM7 + SodaStream za 49 zł — oferta do 28.02.2026",
+    emoji: "✦",
+    linkText: "Szczegóły",
     linkUrl: "#rezerwacja",
   },
   promoSection: {
     active: true,
-    title: "Thermomix® TM7 + SodaStream za 49 zł!",
-    description: "Kup nowy Thermomix® TM7 do końca lutego i odbierz saturator SodaStream w promocyjnej cenie. Oferta ograniczona czasowo!",
+    title: "Ekskluzywna oferta limitowana",
+    subtitle: "Thermomix® TM7 + SodaStream za 49 zł",
+    description: "Zamów nowy Thermomix® TM7 do końca lutego i odbierz elegancki saturator SodaStream w promocyjnej cenie.",
     deadline: "28.02.2026",
     price: "6 669 zł",
-    ctaText: "Umów pokaz i dowiedz się więcej",
+    ctaText: "Umów prywatny pokaz",
   },
   giftBanner: { active: false },
 };
 
 // ═══════════════════════════════════════════════════════════
-// PALETTE A: Świeża Kuchnia
+// LUXURY PALETTE
 // ═══════════════════════════════════════════════════════════
 const C = {
-  primary: "#E8722A",
-  primaryLight: "#F5924F",
-  primaryDark: "#C45A1A",
-  secondary: "#4A9B5F",
-  secondaryLight: "#5FB876",
-  accent: "#D64545",
-  bg: "#FFF8F0",
-  bgAlt: "#FFFFFF",
-  dark: "#1A3A2A",
-  darkLight: "#254A38",
-  text: "#2D1F14",
-  textMed: "#6B5344",
-  textLight: "#A08B7A",
-  card: "#FFFFFF",
-  border: "rgba(45,31,20,0.08)",
+  gold: "#C4A265",
+  goldLight: "#D4B87A",
+  goldPale: "#E8D5A8",
+  goldGlow: "rgba(196,162,101,0.15)",
+  dark: "#0D1A0F",
+  darkSoft: "#152118",
+  darkCard: "#1A2B1E",
+  forest: "#1E3A25",
+  forestLight: "#2A5035",
+  cream: "#FAF6EF",
+  creamDark: "#F0EBE0",
+  creamMid: "#E8E0D0",
+  white: "#FFFFFF",
+  text: "#1A1A18",
+  textMed: "#5A5750",
+  textLight: "#8A8578",
+  textOnDark: "#E8E2D8",
+  textOnDarkMed: "rgba(232,226,216,0.65)",
+  border: "rgba(26,26,24,0.06)",
+  borderGold: "rgba(196,162,101,0.25)",
 };
 
 // ═══════════════════════════════════════════════════════════
-// STYLES
+// TYPOGRAPHY & SHARED STYLES
 // ═══════════════════════════════════════════════════════════
-const font = `'Nunito', sans-serif`;
-const fontSerif = `'Fraunces', Georgia, serif`;
+const fontSans = `'DM Sans', 'Helvetica Neue', sans-serif`;
+const fontSerif = `'Playfair Display', Georgia, serif`;
 
 const S = {
-  page: { fontFamily: font, color: C.text, background: C.bg, lineHeight: 1.7, margin: 0, WebkitFontSmoothing: "antialiased" },
-  section: { padding: "80px 20px", maxWidth: 1100, margin: "0 auto" },
-  sectionAlt: { background: C.bgAlt },
-  h2: { fontFamily: fontSerif, fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 700, color: C.text, marginBottom: 12, lineHeight: 1.2 },
-  subtitle: { fontSize: 17, color: C.textMed, marginBottom: 40, maxWidth: 600 },
+  page: { fontFamily: fontSans, color: C.text, background: C.cream, lineHeight: 1.7, margin: 0, WebkitFontSmoothing: "antialiased" },
+  h2: { fontFamily: fontSerif, fontSize: "clamp(30px, 5vw, 48px)", fontWeight: 600, color: C.text, marginBottom: 16, lineHeight: 1.15, letterSpacing: "-0.01em" },
+  h2Light: { fontFamily: fontSerif, fontSize: "clamp(30px, 5vw, 48px)", fontWeight: 600, color: "#fff", marginBottom: 16, lineHeight: 1.15, letterSpacing: "-0.01em" },
+  subtitle: { fontSize: 17, color: C.textMed, marginBottom: 48, maxWidth: 520, lineHeight: 1.7 },
+  subtitleLight: { fontSize: 17, color: C.textOnDarkMed, marginBottom: 48, maxWidth: 520, lineHeight: 1.7 },
   btn: {
-    display: "inline-flex", alignItems: "center", gap: 8, background: C.primary, color: "#fff",
-    border: "none", borderRadius: 50, padding: "14px 32px", fontSize: 16, fontWeight: 700,
-    fontFamily: font, cursor: "pointer", textDecoration: "none", transition: "all 0.25s ease",
-    boxShadow: `0 4px 16px ${C.primary}40`,
+    display: "inline-flex", alignItems: "center", gap: 8,
+    background: C.gold, color: C.dark, border: "none", borderRadius: 0,
+    padding: "16px 36px", fontSize: 14, fontWeight: 600, fontFamily: fontSans,
+    cursor: "pointer", textDecoration: "none", transition: "all 0.3s ease",
+    letterSpacing: "0.08em", textTransform: "uppercase",
   },
   btnOutline: {
-    display: "inline-flex", alignItems: "center", gap: 8, background: "transparent",
-    color: C.text, border: `2px solid ${C.border}`, borderRadius: 50, padding: "12px 28px",
-    fontSize: 15, fontWeight: 600, fontFamily: font, cursor: "pointer", textDecoration: "none",
-    transition: "all 0.25s ease",
+    display: "inline-flex", alignItems: "center", gap: 8,
+    background: "transparent", color: C.text, borderRadius: 0,
+    border: `1.5px solid ${C.text}`, padding: "15px 34px",
+    fontSize: 14, fontWeight: 600, fontFamily: fontSans, cursor: "pointer",
+    textDecoration: "none", transition: "all 0.3s ease",
+    letterSpacing: "0.08em", textTransform: "uppercase",
+  },
+  btnLight: {
+    display: "inline-flex", alignItems: "center", gap: 8,
+    background: C.gold, color: C.dark, border: "none", borderRadius: 0,
+    padding: "16px 36px", fontSize: 14, fontWeight: 600, fontFamily: fontSans,
+    cursor: "pointer", textDecoration: "none", transition: "all 0.3s ease",
+    letterSpacing: "0.08em", textTransform: "uppercase",
+  },
+  btnOutlineLight: {
+    display: "inline-flex", alignItems: "center", gap: 8,
+    background: "transparent", color: C.textOnDark, borderRadius: 0,
+    border: `1.5px solid rgba(232,226,216,0.3)`, padding: "15px 34px",
+    fontSize: 14, fontWeight: 600, fontFamily: fontSans, cursor: "pointer",
+    textDecoration: "none", transition: "all 0.3s ease",
+    letterSpacing: "0.08em", textTransform: "uppercase",
   },
   card: {
-    background: C.card, borderRadius: 20, padding: "32px 24px",
-    boxShadow: "0 2px 20px rgba(0,0,0,0.04)", border: `1px solid ${C.border}`,
-    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+    background: C.white, padding: "36px 28px",
+    border: `1px solid ${C.border}`, transition: "all 0.4s ease",
   },
+  divider: { width: 48, height: 1, background: C.gold, margin: "0 auto 20px" },
+  section: { padding: "100px 24px", maxWidth: 1100, margin: "0 auto" },
 };
 
 // ═══════════════════════════════════════════════════════════
-// SCROLL REVEAL HOOK
+// SCROLL REVEAL
 // ═══════════════════════════════════════════════════════════
 function useReveal() {
   const ref = useRef(null);
@@ -98,7 +123,7 @@ function useReveal() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } }, { threshold: 0.15 });
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } }, { threshold: 0.12 });
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
@@ -109,8 +134,8 @@ function Reveal({ children, delay = 0, style = {} }) {
   const [ref, vis] = useReveal();
   return (
     <div ref={ref} style={{
-      ...style, opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(30px)",
-      transition: `opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s`,
+      ...style, opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(24px)",
+      transition: `opacity 0.8s cubic-bezier(0.25,0.46,0.45,0.94) ${delay}s, transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94) ${delay}s`,
     }}>{children}</div>
   );
 }
@@ -122,17 +147,18 @@ function PromoBar({ onClose }) {
   if (!CONFIG.promotion.active) return null;
   return (
     <div style={{
-      background: `linear-gradient(135deg, ${C.secondary} 0%, ${C.secondaryLight} 100%)`,
-      color: "#fff", padding: "10px 20px", fontSize: 14, textAlign: "center",
-      display: "flex", alignItems: "center", justifyContent: "center", gap: 12, flexWrap: "wrap",
+      background: C.dark, color: C.goldPale, padding: "11px 20px", fontSize: 13, textAlign: "center",
+      display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap",
+      letterSpacing: "0.06em", fontWeight: 500,
     }}>
-      <span>{CONFIG.promotion.emoji} {CONFIG.promotion.text}</span>
+      <span><span style={{ color: C.gold, marginRight: 8 }}>{CONFIG.promotion.emoji}</span>{CONFIG.promotion.text}</span>
       <a href={CONFIG.promotion.linkUrl} style={{
-        color: "#fff", fontWeight: 700, textDecoration: "underline", textUnderlineOffset: 3,
-      }}>{CONFIG.promotion.linkText} →</a>
+        color: C.gold, fontWeight: 600, textDecoration: "none", borderBottom: `1px solid ${C.gold}`,
+        paddingBottom: 1, transition: "opacity 0.2s",
+      }}>{CONFIG.promotion.linkText}</a>
       <button onClick={onClose} style={{
-        background: "none", border: "none", color: "rgba(255,255,255,0.7)", cursor: "pointer",
-        fontSize: 18, padding: "0 0 0 8px", lineHeight: 1,
+        background: "none", border: "none", color: "rgba(232,226,216,0.35)", cursor: "pointer",
+        fontSize: 16, padding: "0 0 0 8px", lineHeight: 1,
       }}>×</button>
     </div>
   );
@@ -147,60 +173,57 @@ function Nav({ scrolled }) {
   return (
     <nav style={{
       position: "sticky", top: 0, zIndex: 1000,
-      background: scrolled ? "rgba(255,248,240,0.95)" : C.bg,
-      backdropFilter: scrolled ? "blur(12px)" : "none",
+      background: scrolled ? "rgba(250,246,239,0.92)" : C.cream,
+      backdropFilter: scrolled ? "blur(16px)" : "none",
       borderBottom: `1px solid ${scrolled ? C.border : "transparent"}`,
-      transition: "all 0.3s ease",
+      transition: "all 0.4s ease",
     }}>
-      {/* Main bar */}
       <div style={{
-        maxWidth: 1200, margin: "0 auto", padding: "12px 20px",
+        maxWidth: 1200, margin: "0 auto", padding: "14px 24px",
         display: "flex", alignItems: "center", justifyContent: "space-between",
       }}>
+        {/* Logo */}
         <a href="#" style={{ textDecoration: "none" }}>
-          <div style={{ fontFamily: fontSerif, fontSize: 20, fontWeight: 700, color: C.text, lineHeight: 1.1 }}>
-            {CONFIG.brandName}
+          <div style={{ fontFamily: fontSerif, fontSize: 18, fontWeight: 600, color: C.text, lineHeight: 1.15, letterSpacing: "0.02em" }}>
+            Katarzyna<br />Kamińska
           </div>
-          <div style={{ fontSize: 11, color: C.textLight, letterSpacing: "0.06em" }}>Thermomix®</div>
         </a>
 
         {/* Desktop menu */}
-        <div style={{ display: "flex", alignItems: "center", gap: 24 }} className="desktop-only">
+        <div style={{ display: "flex", alignItems: "center", gap: 28 }} className="desktop-only">
           {links.map(l => (
             <a key={l} href={`#${l.toLowerCase().replace(/ /g, "")}`} style={{
-              textDecoration: "none", color: C.textMed, fontSize: 14, fontWeight: 600,
-              transition: "color 0.2s",
+              textDecoration: "none", color: C.textLight, fontSize: 13, fontWeight: 500,
+              letterSpacing: "0.06em", textTransform: "uppercase", transition: "color 0.3s",
             }}>{l}</a>
           ))}
         </div>
 
-        {/* Phone + CTA always visible */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        {/* Phone + CTA */}
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <a href={`tel:${CONFIG.phoneFormatted}`} style={{
-            textDecoration: "none", color: C.text, fontWeight: 700, fontSize: 15,
-            display: "flex", alignItems: "center", gap: 6,
+            textDecoration: "none", color: C.text, fontWeight: 600, fontSize: 14,
+            letterSpacing: "0.04em", display: "flex", alignItems: "center", gap: 6,
           }}>
-            <span style={{ fontSize: 18 }}>📞</span>
+            <span style={{ fontSize: 15 }}>✆</span>
             <span className="phone-text">{CONFIG.phone}</span>
           </a>
           <a href="#rezerwacja" style={{
-            ...S.btn, padding: "10px 22px", fontSize: 14,
-          }}>Umów prezentację</a>
+            ...S.btn, padding: "10px 24px", fontSize: 12,
+          }}>Umów pokaz</a>
           <button onClick={() => setMenuOpen(!menuOpen)} className="mobile-menu-btn" style={{
-            display: "none", background: "none", border: "none", fontSize: 24, cursor: "pointer", color: C.text, padding: 4,
+            display: "none", background: "none", border: "none", fontSize: 22, cursor: "pointer", color: C.text, padding: 4,
           }}>☰</button>
         </div>
       </div>
 
-      {/* Mobile dropdown */}
       {menuOpen && (
-        <div style={{
-          background: C.bgAlt, borderTop: `1px solid ${C.border}`, padding: "12px 20px",
-        }}>
+        <div style={{ background: C.white, borderTop: `1px solid ${C.border}`, padding: "8px 24px" }}>
           {links.map(l => (
             <a key={l} href={`#${l.toLowerCase().replace(/ /g, "")}`} onClick={() => setMenuOpen(false)} style={{
-              display: "block", padding: "12px 0", textDecoration: "none", color: C.text,
-              fontWeight: 600, fontSize: 15, borderBottom: `1px solid ${C.border}`,
+              display: "block", padding: "14px 0", textDecoration: "none", color: C.text,
+              fontWeight: 500, fontSize: 14, letterSpacing: "0.04em", textTransform: "uppercase",
+              borderBottom: `1px solid ${C.border}`,
             }}>{l}</a>
           ))}
         </div>
@@ -215,65 +238,64 @@ function Nav({ scrolled }) {
 function Hero() {
   return (
     <section style={{
-      background: `linear-gradient(170deg, ${C.bg} 0%, #FFF0E0 50%, ${C.bg} 100%)`,
-      padding: "80px 20px 60px", textAlign: "center", position: "relative", overflow: "hidden",
+      background: `linear-gradient(175deg, ${C.dark} 0%, ${C.darkSoft} 40%, ${C.forest} 100%)`,
+      padding: "100px 24px 90px", textAlign: "center", position: "relative", overflow: "hidden",
     }}>
-      {/* Decorative circles */}
+      {/* Subtle gold glow */}
       <div style={{
-        position: "absolute", top: -80, right: -80, width: 300, height: 300,
-        borderRadius: "50%", background: `${C.primary}08`, pointerEvents: "none",
-      }} />
-      <div style={{
-        position: "absolute", bottom: -60, left: -60, width: 200, height: 200,
-        borderRadius: "50%", background: `${C.secondary}08`, pointerEvents: "none",
+        position: "absolute", top: "20%", left: "50%", transform: "translateX(-50%)",
+        width: 600, height: 600, borderRadius: "50%",
+        background: `radial-gradient(circle, ${C.goldGlow} 0%, transparent 70%)`,
+        pointerEvents: "none",
       }} />
 
-      <div style={{ maxWidth: 700, margin: "0 auto", position: "relative" }}>
+      <div style={{ maxWidth: 680, margin: "0 auto", position: "relative" }}>
         <Reveal>
           <div style={{
-            display: "inline-block", background: `${C.primary}12`, color: C.primary,
-            fontSize: 13, fontWeight: 700, padding: "6px 18px", borderRadius: 50,
-            letterSpacing: "0.04em", marginBottom: 24,
+            display: "inline-block", color: C.gold, fontSize: 12, fontWeight: 600,
+            padding: "8px 20px", letterSpacing: "0.18em", textTransform: "uppercase",
+            border: `1px solid ${C.borderGold}`, marginBottom: 32,
           }}>{CONFIG.tagline}</div>
         </Reveal>
 
-        <Reveal delay={0.1}>
+        <Reveal delay={0.15}>
           <h1 style={{
-            fontFamily: fontSerif, fontSize: "clamp(36px, 7vw, 60px)", fontWeight: 800,
-            color: C.text, lineHeight: 1.1, marginBottom: 16, margin: "0 0 16px",
+            fontFamily: fontSerif, fontSize: "clamp(38px, 7vw, 64px)", fontWeight: 600,
+            color: "#fff", lineHeight: 1.08, marginBottom: 20, letterSpacing: "-0.01em",
           }}>
-            Gotowanie może być{" "}
-            <span style={{
-              color: C.primary,
-              backgroundImage: `linear-gradient(120deg, ${C.primary}20 0%, ${C.primary}20 100%)`,
-              backgroundRepeat: "no-repeat", backgroundSize: "100% 35%", backgroundPosition: "0 88%",
-            }}>przyjemnością</span>
+            Odkryj przyjemność<br />
+            <span style={{ color: C.gold }}>doskonałego</span> gotowania
           </h1>
         </Reveal>
 
-        <Reveal delay={0.2}>
-          <p style={{ fontSize: 18, color: C.textMed, marginBottom: 32, lineHeight: 1.7, padding: "0 10px" }}>
-            Cześć, jestem Kasia! Pokażę Ci, jak Thermomix® odmieni Twoje gotowanie — oszczędź czas, jedz zdrowiej i odkryj radość w kuchni.
+        <Reveal delay={0.25}>
+          <p style={{ fontSize: 17, color: C.textOnDarkMed, marginBottom: 40, lineHeight: 1.8, padding: "0 20px" }}>
+            Thermomix® TM7 — jedno urządzenie, które odmieni Twoją kuchnię.
+            Oszczędność czasu, smak i elegancja w jednym. Umów się na prywatny pokaz.
           </p>
         </Reveal>
 
-        <Reveal delay={0.3}>
-          <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginBottom: 40 }}>
-            <a href="#rezerwacja" style={S.btn}>Umów darmowy pokaz →</a>
-            <a href="#thermomix" style={S.btnOutline}>Dowiedz się więcej</a>
+        <Reveal delay={0.35}>
+          <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap", marginBottom: 56 }}>
+            <a href="#rezerwacja" style={S.btnLight}>Umów prywatny pokaz</a>
+            <a href="#thermomix" style={S.btnOutlineLight}>Poznaj Thermomix</a>
           </div>
         </Reveal>
 
-        <Reveal delay={0.4}>
+        <Reveal delay={0.45}>
           <div style={{
-            display: "flex", gap: 20, justifyContent: "center", flexWrap: "wrap",
-            fontSize: 14, color: C.textMed,
+            display: "flex", gap: 40, justifyContent: "center", flexWrap: "wrap",
+            paddingTop: 40, borderTop: `1px solid rgba(232,226,216,0.1)`,
           }}>
-            {["🏠 Pokazy u Ciebie w domu", "📺 Pokazy online na żywo", "🆓 Zawsze za darmo"].map((t, i) => (
-              <span key={i} style={{
-                background: C.bgAlt, padding: "8px 16px", borderRadius: 50,
-                border: `1px solid ${C.border}`, fontWeight: 500,
-              }}>{t}</span>
+            {[
+              { num: "20+", label: "Urządzeń w jednym" },
+              { num: "80 000+", label: "Przepisów Cookidoo®" },
+              { num: "1h", label: "Pełny posiłek" },
+            ].map((s, i) => (
+              <div key={i} style={{ textAlign: "center" }}>
+                <div style={{ fontFamily: fontSerif, fontSize: 28, fontWeight: 600, color: C.gold, marginBottom: 4 }}>{s.num}</div>
+                <div style={{ fontSize: 12, color: C.textOnDarkMed, letterSpacing: "0.06em", textTransform: "uppercase" }}>{s.label}</div>
+              </div>
             ))}
           </div>
         </Reveal>
@@ -288,24 +310,30 @@ function Hero() {
 function PromoSection() {
   if (!CONFIG.promoSection.active) return null;
   return (
-    <section style={{ background: `linear-gradient(135deg, ${C.primary}10 0%, ${C.accent}08 100%)`, padding: "40px 20px" }}>
+    <section style={{ background: C.cream, padding: "80px 24px" }}>
       <Reveal>
         <div style={{
           maxWidth: 800, margin: "0 auto", textAlign: "center",
-          background: C.card, borderRadius: 24, padding: "40px 32px",
-          border: `2px solid ${C.primary}20`, boxShadow: `0 8px 32px ${C.primary}10`,
+          background: C.white, padding: "56px 40px",
+          border: `1px solid ${C.borderGold}`, position: "relative",
         }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: C.accent, marginBottom: 8, letterSpacing: "0.06em" }}>
-            🎁 AKTUALNA PROMOCJA
+          {/* Corner accents */}
+          <div style={{ position: "absolute", top: 12, left: 12, width: 24, height: 24, borderTop: `1.5px solid ${C.gold}`, borderLeft: `1.5px solid ${C.gold}` }} />
+          <div style={{ position: "absolute", top: 12, right: 12, width: 24, height: 24, borderTop: `1.5px solid ${C.gold}`, borderRight: `1.5px solid ${C.gold}` }} />
+          <div style={{ position: "absolute", bottom: 12, left: 12, width: 24, height: 24, borderBottom: `1.5px solid ${C.gold}`, borderLeft: `1.5px solid ${C.gold}` }} />
+          <div style={{ position: "absolute", bottom: 12, right: 12, width: 24, height: 24, borderBottom: `1.5px solid ${C.gold}`, borderRight: `1.5px solid ${C.gold}` }} />
+
+          <div style={{ fontSize: 11, fontWeight: 600, color: C.gold, marginBottom: 16, letterSpacing: "0.2em", textTransform: "uppercase" }}>
+            Oferta limitowana
           </div>
-          <h3 style={{ fontFamily: fontSerif, fontSize: "clamp(22px, 4vw, 30px)", color: C.text, marginBottom: 12, fontWeight: 700 }}>
-            {CONFIG.promoSection.title}
+          <h3 style={{ fontFamily: fontSerif, fontSize: "clamp(24px, 4vw, 34px)", color: C.text, marginBottom: 16, fontWeight: 600 }}>
+            {CONFIG.promoSection.subtitle}
           </h3>
-          <p style={{ fontSize: 16, color: C.textMed, marginBottom: 8 }}>{CONFIG.promoSection.description}</p>
-          <p style={{ fontSize: 14, color: C.textLight, marginBottom: 20 }}>
-            Oferta ważna do <strong style={{ color: C.accent }}>{CONFIG.promoSection.deadline}</strong> · Cena TM7: <strong>{CONFIG.promoSection.price}</strong>
+          <p style={{ fontSize: 16, color: C.textMed, marginBottom: 12, lineHeight: 1.7 }}>{CONFIG.promoSection.description}</p>
+          <p style={{ fontSize: 14, color: C.textLight, marginBottom: 28 }}>
+            Ważne do <strong style={{ color: C.text }}>{CONFIG.promoSection.deadline}</strong>&ensp;·&ensp;Cena: <strong style={{ color: C.text }}>{CONFIG.promoSection.price}</strong>
           </p>
-          <a href="#rezerwacja" style={S.btn}>{CONFIG.promoSection.ctaText} →</a>
+          <a href="#rezerwacja" style={S.btn}>{CONFIG.promoSection.ctaText}</a>
         </div>
       </Reveal>
     </section>
@@ -317,43 +345,47 @@ function PromoSection() {
 // ═══════════════════════════════════════════════════════════
 function About() {
   return (
-    <section id="omnie" style={{ ...S.sectionAlt, padding: "80px 20px" }}>
-      <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", gap: 48, alignItems: "center", flexWrap: "wrap" }}>
+    <section id="omnie" style={{ background: C.white, padding: "100px 24px" }}>
+      <div style={{ maxWidth: 920, margin: "0 auto", display: "flex", gap: 56, alignItems: "flex-start", flexWrap: "wrap" }}>
         <Reveal style={{ flex: "0 0 auto" }}>
           <div style={{
-            width: 220, height: 220, borderRadius: 28,
-            background: `linear-gradient(135deg, ${C.primary}18 0%, ${C.secondary}18 100%)`,
+            width: 240, height: 300, background: C.creamDark,
             display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-            border: `2px dashed ${C.primary}30`, position: "relative",
+            border: `1px solid ${C.borderGold}`, position: "relative",
           }}>
-            <span style={{ fontSize: 72 }}>👩‍🍳</span>
-            <span style={{ fontSize: 12, color: C.textLight, marginTop: 8, fontWeight: 500 }}>Zdjęcie wkrótce</span>
+            <span style={{ fontSize: 72, opacity: 0.8 }}>👩‍🍳</span>
+            <span style={{ fontSize: 11, color: C.textLight, marginTop: 12, letterSpacing: "0.08em", textTransform: "uppercase" }}>Zdjęcie wkrótce</span>
+            {/* Gold corner */}
+            <div style={{ position: "absolute", bottom: -4, right: -4, width: 40, height: 40, borderBottom: `2px solid ${C.gold}`, borderRight: `2px solid ${C.gold}` }} />
           </div>
         </Reveal>
 
-        <Reveal delay={0.15} style={{ flex: 1, minWidth: 280 }}>
-          <h2 style={{ ...S.h2, marginBottom: 16 }}>Cześć, jestem Kasia!</h2>
-          <div style={{ fontSize: 16, color: C.textMed, lineHeight: 1.85 }}>
-            <p style={{ marginBottom: 14 }}>
+        <Reveal delay={0.15} style={{ flex: 1, minWidth: 300 }}>
+          <div style={{ ...S.divider, margin: "0 0 20px 0" }} />
+          <h2 style={{ ...S.h2, marginBottom: 20 }}>Moja historia</h2>
+          <div style={{ fontSize: 16, color: C.textMed, lineHeight: 1.9 }}>
+            <p style={{ marginBottom: 16 }}>
               Gotowanie to moja pasja od lat. Gotuję codziennie dla mojej dużej rodziny — i uwielbiam każdą chwilę spędzoną w kuchni. Znajomi mówią, że mam do tego talent, ja mówię, że po prostu kocham dobrze karmić bliskich.
             </p>
-            <p style={{ marginBottom: 14 }}>
-              A Thermomix? Zabawna historia — dostałam go w prezencie i byłam oburzona. <em>„Ja umiem gotować! Po co mi to?!"</em> Ale ciekawość wygrała. I okazało się, że Thermomix nie zastępuje umiejętności — on je wzmacnia. Moje zupy, ciasta i obiady weszły na zupełnie nowy poziom. A przede wszystkim odzyskałam czas na to, co kocham najbardziej.
+            <p style={{ marginBottom: 16 }}>
+              A Thermomix? Zabawna historia — dostałam go w prezencie i byłam oburzona. <em>„Ja umiem gotować! Po co mi to?!"</em> Ale ciekawość wygrała. I okazało się, że Thermomix nie zastępuje umiejętności — on je wzmacnia. Moje zupy, ciasta i obiady weszły na zupełnie nowy poziom.
             </p>
-            <p style={{ marginBottom: 14 }}>
+            <p style={{ marginBottom: 16 }}>
               Dziś chcę to samo pokazać Tobie. Nie jestem typową sprzedawczynią — jestem osobą, która sama nie wierzyła, a teraz nie wyobraża sobie kuchni bez Thermomixa.
             </p>
             <p>
-              Przyjadę do Ciebie, ugotuję, porozmawiamy przy dobrej kawie. Zero presji, 100% smaku. Pokazy prowadzę w Trójmieście, a jeśli jesteś dalej — zapraszam na pokaz online na żywo!
+              Przyjadę do Ciebie, ugotuję, porozmawiamy. Zero presji, czysta przyjemność. Pokazy prowadzę w Trójmieście oraz online w całej Polsce.
             </p>
           </div>
 
           <div style={{
-            marginTop: 24, padding: "20px 24px", borderRadius: 16,
-            background: `${C.primary}08`, borderLeft: `4px solid ${C.primary}`,
-            fontStyle: "italic", color: C.textMed, fontSize: 15, lineHeight: 1.7,
+            marginTop: 28, padding: "24px 28px", position: "relative",
+            background: `linear-gradient(135deg, ${C.goldGlow} 0%, transparent 100%)`,
+            borderLeft: `2px solid ${C.gold}`,
           }}>
-            „Dostałam Thermomix w prezencie i byłam pewna, że go nie potrzebuję. Dziś nie wyobrażam sobie bez niego ani jednego dnia w kuchni."
+            <p style={{ fontFamily: fontSerif, fontStyle: "italic", color: C.text, fontSize: 16, lineHeight: 1.8, margin: 0 }}>
+              „Dostałam Thermomix w prezencie i byłam pewna, że go nie potrzebuję. Dziś nie wyobrażam sobie bez niego ani jednego dnia w kuchni."
+            </p>
           </div>
         </Reveal>
       </div>
@@ -362,36 +394,45 @@ function About() {
 }
 
 // ═══════════════════════════════════════════════════════════
-// WHAT TO EXPECT AT THE SHOW
+// WHAT TO EXPECT
 // ═══════════════════════════════════════════════════════════
 function WhatToExpect() {
   const items = [
-    { icon: "👀", title: "Zobaczysz Thermomix w akcji", desc: "Pokażę Ci na żywo jak działa" },
-    { icon: "🍳", title: "Wspólnie ugotujemy", desc: "Pełny posiłek w ok. godziny" },
-    { icon: "🧺", title: "Przywiozę składniki", desc: "Nie musisz nic przygotowywać" },
-    { icon: "🍽️", title: "Spróbujesz potraw", desc: "Degustacja tego co ugotujemy" },
-    { icon: "🆓", title: "Bezpłatnie i bez zobowiązań", desc: "Zero presji zakupowej" },
+    { icon: "✦", title: "Thermomix w akcji", desc: "Pokaz na żywo — zobaczysz jak działa" },
+    { icon: "✦", title: "Wspólne gotowanie", desc: "Przygotujemy pełen posiłek razem" },
+    { icon: "✦", title: "Składniki od nas", desc: "Nie musisz niczego przygotowywać" },
+    { icon: "✦", title: "Degustacja", desc: "Spróbujesz każdej przygotowanej potrawy" },
+    { icon: "✦", title: "Zero zobowiązań", desc: "Bezpłatny pokaz bez presji zakupu" },
   ];
   return (
-    <section style={{ padding: "80px 20px", background: C.bg }}>
+    <section style={{
+      background: `linear-gradient(175deg, ${C.dark} 0%, ${C.forest} 100%)`,
+      padding: "100px 24px",
+    }}>
       <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
-        <Reveal><h2 style={S.h2}>Co Cię czeka na pokazie?</h2></Reveal>
-        <Reveal delay={0.1}><p style={S.subtitle}>Pokaz to wspólne gotowanie, degustacja i rozmowa. Bez prezentacji slajdów, bez presji.</p></Reveal>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "center" }}>
+        <Reveal>
+          <div style={S.divider} />
+          <h2 style={S.h2Light}>Czego się spodziewać na pokazie</h2>
+        </Reveal>
+        <Reveal delay={0.1}><p style={{ ...S.subtitleLight, margin: "0 auto 48px" }}>Pokaz to wspólne gotowanie, degustacja i rozmowa. Bez slajdów, bez presji — sama przyjemność.</p></Reveal>
+
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 2, justifyContent: "center" }}>
           {items.map((it, i) => (
-            <Reveal key={i} delay={0.1 + i * 0.08} style={{ flex: "1 1 160px", maxWidth: 200 }}>
+            <Reveal key={i} delay={0.1 + i * 0.08} style={{ flex: "1 1 170px", maxWidth: 210 }}>
               <div style={{
-                ...S.card, textAlign: "center", padding: "28px 16px",
+                background: "rgba(255,255,255,0.04)", padding: "36px 20px", textAlign: "center",
+                border: `1px solid rgba(255,255,255,0.06)`, transition: "all 0.4s ease",
               }}>
-                <div style={{ fontSize: 40, marginBottom: 12 }}>{it.icon}</div>
-                <div style={{ fontWeight: 700, fontSize: 15, color: C.text, marginBottom: 6 }}>{it.title}</div>
-                <div style={{ fontSize: 13, color: C.textLight }}>{it.desc}</div>
+                <div style={{ color: C.gold, fontSize: 20, marginBottom: 16, fontFamily: fontSerif }}>{it.icon}</div>
+                <div style={{ fontWeight: 600, fontSize: 15, color: C.textOnDark, marginBottom: 8 }}>{it.title}</div>
+                <div style={{ fontSize: 13, color: C.textOnDarkMed, lineHeight: 1.6 }}>{it.desc}</div>
               </div>
             </Reveal>
           ))}
         </div>
+
         <Reveal delay={0.6}>
-          <a href="#rezerwacja" style={{ ...S.btn, marginTop: 32 }}>Brzmi dobrze? Umów się →</a>
+          <a href="#rezerwacja" style={{ ...S.btnLight, marginTop: 48 }}>Zarezerwuj termin</a>
         </Reveal>
       </div>
     </section>
@@ -403,25 +444,30 @@ function WhatToExpect() {
 // ═══════════════════════════════════════════════════════════
 function Benefits() {
   const items = [
-    { icon: "⏱️", title: "Oszczędność czasu", desc: "Obiad w 20-30 minut. Thermomix kroi, miesza, gotuje i gotuje na parze — jednocześnie.", color: C.primary },
-    { icon: "🥗", title: "Zdrowe jedzenie", desc: "Wiesz dokładnie co jesz. Bez konserwantów, bez sztucznych dodatków. Pełna kontrola.", color: C.secondary },
-    { icon: "📱", title: "80 000+ przepisów", desc: "Platforma Cookidoo® z przepisami krok po kroku. Nawet jeśli nigdy nie gotowałeś.", color: C.accent },
-    { icon: "🔧", title: "1 urządzenie zamiast 20", desc: "Thermomix® zastępuje ponad 20 urządzeń kuchennych. Mniej sprzętów, więcej miejsca.", color: C.primary },
-    { icon: "💰", title: "Oszczędność pieniędzy", desc: "Gotowanie w domu zamiast jedzenia na mieście. Nawet kilkaset złotych miesięcznie.", color: C.secondary },
-    { icon: "🌍", title: "Smaki całego świata", desc: "Kuchnia tajska, indyjska, włoska — kulinarne podróże bez wychodzenia z domu.", color: C.accent },
+    { num: "01", title: "Oszczędność czasu", desc: "Pełen obiad w 20–30 minut. Thermomix kroi, miesza, waży, gotuje i gotuje na parze — jednocześnie." },
+    { num: "02", title: "Zdrowe jedzenie", desc: "Pełna kontrola nad składnikami. Bez konserwantów, bez sztucznych dodatków. Wiesz co jesz." },
+    { num: "03", title: "80 000+ przepisów", desc: "Platforma Cookidoo® prowadzi Cię krok po kroku. Nawet jeśli nigdy nie gotowałeś — dasz radę." },
+    { num: "04", title: "1 urządzenie zamiast 20", desc: "Thermomix® zastępuje ponad 20 urządzeń kuchennych. Mniej sprzętów, więcej przestrzeni." },
+    { num: "05", title: "Oszczędność pieniędzy", desc: "Gotowanie w domu zamiast jedzenia na mieście. Nawet kilkaset złotych oszczędności miesięcznie." },
+    { num: "06", title: "Smaki całego świata", desc: "Kuchnia tajska, indyjska, włoska, francuska — kulinarne podróże bez wychodzenia z domu." },
   ];
   return (
-    <section id="thermomix" style={{ ...S.sectionAlt, padding: "80px 20px" }}>
-      <div style={{ maxWidth: 1000, margin: "0 auto", textAlign: "center" }}>
-        <Reveal><h2 style={S.h2}>Jedno urządzenie. Nieskończone możliwości.</h2></Reveal>
-        <Reveal delay={0.1}><p style={S.subtitle}>Thermomix® TM7 to Twój osobisty sous chef. Oto dlaczego warto:</p></Reveal>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 20 }}>
+    <section id="thermomix" style={{ background: C.cream, padding: "100px 24px" }}>
+      <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+        <div style={{ textAlign: "center" }}>
+          <Reveal><div style={S.divider} /><h2 style={S.h2}>Dlaczego Thermomix® TM7</h2></Reveal>
+          <Reveal delay={0.1}><p style={{ ...S.subtitle, margin: "0 auto 56px" }}>Jedno urządzenie, które zmieni sposób, w jaki myślisz o gotowaniu.</p></Reveal>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 2 }}>
           {items.map((it, i) => (
-            <Reveal key={i} delay={0.1 + i * 0.08}>
-              <div style={{ ...S.card, textAlign: "left", borderTop: `3px solid ${it.color}` }}>
-                <div style={{ fontSize: 36, marginBottom: 12 }}>{it.icon}</div>
-                <div style={{ fontFamily: fontSerif, fontWeight: 700, fontSize: 19, color: C.text, marginBottom: 8 }}>{it.title}</div>
-                <div style={{ fontSize: 15, color: C.textMed, lineHeight: 1.7 }}>{it.desc}</div>
+            <Reveal key={i} delay={0.05 + i * 0.06}>
+              <div style={{
+                ...S.card, padding: "40px 32px",
+                borderBottom: i < 4 ? `1px solid ${C.border}` : `1px solid ${C.border}`,
+              }}>
+                <div style={{ fontFamily: fontSerif, fontSize: 32, color: C.goldLight, marginBottom: 16, fontWeight: 300 }}>{it.num}</div>
+                <div style={{ fontFamily: fontSerif, fontWeight: 600, fontSize: 20, color: C.text, marginBottom: 10 }}>{it.title}</div>
+                <div style={{ fontSize: 15, color: C.textMed, lineHeight: 1.75 }}>{it.desc}</div>
               </div>
             </Reveal>
           ))}
@@ -443,59 +489,58 @@ function Calculator() {
   const yearly = savings * 12;
 
   return (
-    <section id="kalkulator" style={{ padding: "80px 20px", background: C.bg }}>
-      <div style={{ maxWidth: 600, margin: "0 auto", textAlign: "center" }}>
-        <Reveal><h2 style={S.h2}>Ile możesz zaoszczędzić?</h2></Reveal>
-        <Reveal delay={0.1}><p style={S.subtitle}>Policz, ile wydajesz na jedzenie na mieście — a ile byś wydał gotując w domu z Thermomixem.</p></Reveal>
+    <section id="kalkulator" style={{ background: C.white, padding: "100px 24px" }}>
+      <div style={{ maxWidth: 580, margin: "0 auto", textAlign: "center" }}>
+        <Reveal><div style={S.divider} /><h2 style={S.h2}>Kalkulator oszczędności</h2></Reveal>
+        <Reveal delay={0.1}><p style={{ ...S.subtitle, margin: "0 auto 40px" }}>Sprawdź, ile możesz zaoszczędzić gotując w domu z Thermomixem.</p></Reveal>
 
         <Reveal delay={0.2}>
-          <div style={{ ...S.card, padding: "36px 32px", textAlign: "left" }}>
-            <label style={{ display: "block", marginBottom: 24 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-                <span style={{ fontWeight: 700, fontSize: 15 }}>Ile osób w rodzinie?</span>
-                <span style={{ fontWeight: 800, color: C.primary, fontSize: 20, fontFamily: fontSerif }}>{people}</span>
+          <div style={{ ...S.card, padding: "44px 36px", textAlign: "left", border: `1px solid ${C.borderGold}` }}>
+            <label style={{ display: "block", marginBottom: 32 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
+                <span style={{ fontWeight: 600, fontSize: 14, color: C.text, letterSpacing: "0.02em" }}>Osób w rodzinie</span>
+                <span style={{ fontFamily: fontSerif, fontWeight: 600, color: C.gold, fontSize: 24 }}>{people}</span>
               </div>
               <input type="range" min={1} max={8} value={people} onChange={e => setPeople(+e.target.value)}
-                style={{ width: "100%", accentColor: C.primary, height: 6 }} />
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, color: C.textLight }}>
+                style={{ width: "100%", accentColor: C.gold, height: 2 }} />
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: C.textLight, marginTop: 6, letterSpacing: "0.04em" }}>
                 <span>1</span><span>8+</span>
               </div>
             </label>
 
-            <label style={{ display: "block", marginBottom: 32 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-                <span style={{ fontWeight: 700, fontSize: 15 }}>Ile razy w tygodniu jesz na mieście?</span>
-                <span style={{ fontWeight: 800, color: C.primary, fontSize: 20, fontFamily: fontSerif }}>{meals}</span>
+            <label style={{ display: "block", marginBottom: 40 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
+                <span style={{ fontWeight: 600, fontSize: 14, color: C.text, letterSpacing: "0.02em" }}>Posiłki na mieście / tydzień</span>
+                <span style={{ fontFamily: fontSerif, fontWeight: 600, color: C.gold, fontSize: 24 }}>{meals}</span>
               </div>
               <input type="range" min={0} max={7} value={meals} onChange={e => setMeals(+e.target.value)}
-                style={{ width: "100%", accentColor: C.primary, height: 6 }} />
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, color: C.textLight }}>
+                style={{ width: "100%", accentColor: C.gold, height: 2 }} />
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: C.textLight, marginTop: 6, letterSpacing: "0.04em" }}>
                 <span>0</span><span>codziennie</span>
               </div>
             </label>
 
             <div style={{
-              background: `linear-gradient(135deg, ${C.primary}10 0%, ${C.secondary}10 100%)`,
-              borderRadius: 16, padding: "24px", textAlign: "center",
+              background: C.dark, padding: "32px", textAlign: "center",
             }}>
-              <div style={{ fontSize: 14, color: C.textMed, marginBottom: 4 }}>Szacowana oszczędność</div>
-              <div style={{ fontFamily: fontSerif, fontSize: 44, fontWeight: 800, color: C.primary, lineHeight: 1 }}>
+              <div style={{ fontSize: 12, color: C.textOnDarkMed, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>Szacowana oszczędność</div>
+              <div style={{ fontFamily: fontSerif, fontSize: 52, fontWeight: 600, color: C.gold, lineHeight: 1 }}>
                 {Math.round(savings)} zł
               </div>
-              <div style={{ fontSize: 14, color: C.textMed, marginTop: 4 }}>miesięcznie</div>
+              <div style={{ fontSize: 13, color: C.textOnDarkMed, marginTop: 6 }}>miesięcznie</div>
               <div style={{
-                marginTop: 12, fontSize: 16, fontWeight: 700, color: C.secondary,
-                background: `${C.secondary}10`, padding: "8px 16px", borderRadius: 50, display: "inline-block",
+                marginTop: 16, fontSize: 15, fontWeight: 600, color: C.textOnDark,
+                borderTop: `1px solid rgba(255,255,255,0.1)`, paddingTop: 16,
               }}>
-                💰 {Math.round(yearly).toLocaleString("pl-PL")} zł rocznie!
+                {Math.round(yearly).toLocaleString("pl-PL")} zł rocznie
               </div>
             </div>
 
-            <div style={{ textAlign: "center", marginTop: 20 }}>
-              <a href="#rezerwacja" style={S.btn}>Chcesz zobaczyć to w akcji? →</a>
+            <div style={{ textAlign: "center", marginTop: 28 }}>
+              <a href="#rezerwacja" style={S.btn}>Przekonaj się na pokazie</a>
             </div>
-            <p style={{ fontSize: 12, color: C.textLight, textAlign: "center", marginTop: 12 }}>
-              * Szacunek na podstawie średnich cen (posiłek na mieście ~35 zł/os., w domu ~12 zł/os.)
+            <p style={{ fontSize: 11, color: C.textLight, textAlign: "center", marginTop: 16, letterSpacing: "0.02em" }}>
+              Szacunek na podstawie średnich cen: posiłek na mieście ~35 zł/os., w domu ~12 zł/os.
             </p>
           </div>
         </Reveal>
@@ -512,22 +557,28 @@ function Testimonials() {
     { text: "Nie wierzyłam, że jedno urządzenie może zastąpić tyle sprzętów. Teraz gotuję codziennie w 30 minut — z trójką dzieci to zbawienie.", author: "Mama trójki dzieci" },
     { text: "Myślałem, że Thermomix to gadżet. Ale mój niedzielny meal prep skrócił się z 4 godzin do półtorej. Rewolucja.", author: "Tata, fan zdrowego jedzenia" },
     { text: "Gotuję od 30 lat i byłam pewna, że żaden robot mi nie jest potrzebny. Myliłam się — moja zupa krem nigdy nie była lepsza.", author: "Doświadczona kucharka" },
-    { text: "Robię domowe hummusy, pasty curry, mleko roślinne — rzeczy, na które ręcznie potrzebowałam godzin. Jakość nieporównywalna.", author: "Studentka, miłośniczka zdrowej kuchni" },
+    { text: "Robię domowe hummusy, pasty curry, mleko roślinne — rzeczy, na które ręcznie potrzebowałam godzin.", author: "Miłośniczka zdrowej kuchni" },
   ];
   return (
-    <section id="opinie" style={{ ...S.sectionAlt, padding: "80px 20px" }}>
+    <section id="opinie" style={{
+      background: `linear-gradient(175deg, ${C.dark} 0%, ${C.darkSoft} 100%)`,
+      padding: "100px 24px",
+    }}>
       <div style={{ maxWidth: 1000, margin: "0 auto", textAlign: "center" }}>
-        <Reveal><h2 style={S.h2}>Co mówią użytkownicy Thermomixa</h2></Reveal>
-        <Reveal delay={0.1}><p style={S.subtitle}>Thermomix zmienił życie milionów rodzin na świecie.</p></Reveal>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: 20 }}>
+        <Reveal><div style={S.divider} /><h2 style={S.h2Light}>Opinie użytkowników</h2></Reveal>
+        <Reveal delay={0.1}><p style={{ ...S.subtitleLight, margin: "0 auto 48px" }}>Thermomix zmienił sposób gotowania milionów rodzin na świecie.</p></Reveal>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 2 }}>
           {items.map((it, i) => (
-            <Reveal key={i} delay={0.1 + i * 0.1}>
-              <div style={{ ...S.card, textAlign: "left" }}>
-                <div style={{ color: C.primary, fontSize: 14, letterSpacing: 2, marginBottom: 12 }}>★★★★★</div>
-                <p style={{ fontSize: 15, color: C.textMed, lineHeight: 1.75, fontStyle: "italic", marginBottom: 16 }}>
+            <Reveal key={i} delay={0.1 + i * 0.08}>
+              <div style={{
+                background: "rgba(255,255,255,0.03)", padding: "36px 28px", textAlign: "left",
+                border: `1px solid rgba(255,255,255,0.06)`,
+              }}>
+                <div style={{ color: C.gold, fontSize: 12, letterSpacing: 4, marginBottom: 16 }}>★ ★ ★ ★ ★</div>
+                <p style={{ fontFamily: fontSerif, fontSize: 16, color: C.textOnDark, lineHeight: 1.8, fontStyle: "italic", marginBottom: 20 }}>
                   „{it.text}"
                 </p>
-                <div style={{ fontSize: 14, fontWeight: 700, color: C.text }}>— {it.author}</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: C.goldLight, letterSpacing: "0.06em", textTransform: "uppercase" }}>— {it.author}</div>
               </div>
             </Reveal>
           ))}
@@ -543,45 +594,44 @@ function Testimonials() {
 function FAQ() {
   const [open, setOpen] = useState(null);
   const items = [
-    { q: "Ile kosztuje Thermomix?", a: "Nowy Thermomix® TM7 kosztuje 6 669 zł. Są też opcje ratalne i regularne promocje (np. aktualna: SodaStream za 49 zł przy zakupie TM7). Wszystkie szczegóły omówię na pokazie!" },
-    { q: "Czy mogę kupić na raty?", a: "Tak! Oferuję wygodne raty 0% oraz inne formy finansowania. Szczegóły na spotkaniu." },
-    { q: "Czym różni się od zwykłego robota kuchennego?", a: "Thermomix gotuje! Nie tylko kroi i miesza, ale też podgrzewa, gotuje na parze, waży składniki i prowadzi Cię krok po kroku na dużym 10-calowym ekranie dotykowym. Zastępuje ponad 20 urządzeń kuchennych." },
-    { q: "Jak wygląda pokaz?", a: "Gotuję u Ciebie (lub online na żywo) pełny posiłek w ok. 1 godziny. Możesz zaprosić rodzinę i znajomych — im więcej osób, tym więcej zabawy! A dla gospodarzy prezentacji Vorwerk ma specjalny katalog prezentów." },
-    { q: "Czy pokaz jest naprawdę darmowy?", a: "Tak, całkowicie. Przyjeżdżam, gotuję, rozmawiamy. Nie musisz niczego kupować." },
-    { q: "Co jeśli nie umiem gotować?", a: "To najlepsza wiadomość! Thermomix prowadzi Cię krok po kroku. Wystarczy dodawać składniki — resztę robi sam. Idealny dla początkujących." },
-    { q: "Czy można zamówić pokaz online?", a: "Oczywiście! Prowadzę pokazy na żywo przez internet. Gotuję w swojej kuchni, a Ty oglądasz i zadajesz pytania. Wygodne jeśli jesteś poza Trójmiastem." },
-    { q: "Mam starszy model (TM5/TM6) — czy mogę wymienić?", a: "Tak! Vorwerk oferuje program wymiany starszych modeli na nowy TM7. Na pokazie opowiem o szczegółach i aktualnych warunkach." },
+    { q: "Ile kosztuje Thermomix?", a: "Nowy Thermomix® TM7 kosztuje 6 669 zł. Dostępne są opcje ratalne oraz regularne promocje. Wszystkie szczegóły omówię na pokazie." },
+    { q: "Czy mogę kupić na raty?", a: "Tak! Oferuję wygodne raty 0% oraz inne formy finansowania. Szczegóły ustalimy na spotkaniu." },
+    { q: "Czym różni się od zwykłego robota kuchennego?", a: "Thermomix gotuje! Nie tylko kroi i miesza, ale też podgrzewa, gotuje na parze, waży składniki i prowadzi Cię krok po kroku na 10-calowym ekranie dotykowym. Zastępuje ponad 20 urządzeń." },
+    { q: "Jak wygląda pokaz?", a: "Gotuję u Ciebie (lub online) pełny posiłek w ok. 1 godziny. Możesz zaprosić rodzinę i znajomych. Dla gospodarzy prezentacji Vorwerk przygotował specjalny katalog upominków." },
+    { q: "Czy pokaz jest naprawdę darmowy?", a: "Tak. Przyjeżdżam, gotuję, rozmawiamy. Nie musisz niczego kupować — zero zobowiązań." },
+    { q: "Co jeśli nie umiem gotować?", a: "To idealna sytuacja! Thermomix prowadzi Cię krok po kroku na ekranie. Wystarczy dodawać składniki — resztą zajmie się sam." },
+    { q: "Czy można zamówić pokaz online?", a: "Oczywiście! Prowadzę pokazy na żywo przez internet. Gotuję w swojej kuchni, a Ty oglądasz, pytasz i inspirujesz się. Wygodne, jeśli jesteś poza Trójmiastem." },
+    { q: "Mam starszy model — czy mogę wymienić?", a: "Tak. Vorwerk oferuje program wymiany starszych modeli (TM31/TM5/TM6) na nowy TM7. Szczegóły i warunki chętnie omówię na pokazie." },
   ];
   return (
-    <section id="faq" style={{ padding: "80px 20px", background: C.bg }}>
-      <div style={{ maxWidth: 700, margin: "0 auto" }}>
-        <Reveal><h2 style={{ ...S.h2, textAlign: "center" }}>Najczęstsze pytania</h2></Reveal>
-        <div style={{ marginTop: 32 }}>
+    <section id="faq" style={{ background: C.cream, padding: "100px 24px" }}>
+      <div style={{ maxWidth: 680, margin: "0 auto" }}>
+        <div style={{ textAlign: "center" }}>
+          <Reveal><div style={S.divider} /><h2 style={S.h2}>Najczęstsze pytania</h2></Reveal>
+        </div>
+        <div style={{ marginTop: 48 }}>
           {items.map((it, i) => (
-            <Reveal key={i} delay={i * 0.05}>
-              <div style={{
-                borderBottom: `1px solid ${C.border}`,
-                overflow: "hidden",
-              }}>
+            <Reveal key={i} delay={i * 0.04}>
+              <div style={{ borderBottom: `1px solid ${C.border}` }}>
                 <button onClick={() => setOpen(open === i ? null : i)} style={{
                   width: "100%", textAlign: "left", background: "none", border: "none",
-                  padding: "20px 0", cursor: "pointer", display: "flex", justifyContent: "space-between",
-                  alignItems: "center", fontFamily: font,
+                  padding: "24px 0", cursor: "pointer", display: "flex", justifyContent: "space-between",
+                  alignItems: "center", fontFamily: fontSans,
                 }}>
-                  <span style={{ fontWeight: 700, fontSize: 16, color: C.text, paddingRight: 16 }}>{it.q}</span>
+                  <span style={{ fontWeight: 600, fontSize: 16, color: C.text, paddingRight: 20, lineHeight: 1.4 }}>{it.q}</span>
                   <span style={{
-                    fontSize: 20, color: C.primary, fontWeight: 300,
+                    fontSize: 18, color: C.gold, fontWeight: 300, flexShrink: 0,
                     transform: open === i ? "rotate(45deg)" : "rotate(0deg)",
-                    transition: "transform 0.3s ease", flexShrink: 0,
+                    transition: "transform 0.3s ease",
                   }}>+</span>
                 </button>
                 <div style={{
                   maxHeight: open === i ? 300 : 0, overflow: "hidden",
-                  transition: "max-height 0.4s ease",
+                  transition: "max-height 0.5s ease",
                 }}>
                   <p style={{
-                    fontSize: 15, color: C.textMed, lineHeight: 1.75,
-                    padding: "0 0 20px", margin: 0,
+                    fontSize: 15, color: C.textMed, lineHeight: 1.8,
+                    padding: "0 0 24px", margin: 0,
                   }}>{it.a}</p>
                 </div>
               </div>
@@ -594,43 +644,49 @@ function FAQ() {
 }
 
 // ═══════════════════════════════════════════════════════════
-// BOOKING (CTA SECTION)
+// BOOKING
 // ═══════════════════════════════════════════════════════════
 function Booking() {
   return (
     <section id="rezerwacja" style={{
-      background: `linear-gradient(160deg, ${C.dark} 0%, ${C.darkLight} 100%)`,
-      padding: "80px 20px", textAlign: "center",
+      background: `linear-gradient(175deg, ${C.dark} 0%, ${C.forest} 100%)`,
+      padding: "100px 24px", textAlign: "center", position: "relative", overflow: "hidden",
     }}>
-      <div style={{ maxWidth: 650, margin: "0 auto" }}>
-        <Reveal>
-          <h2 style={{ fontFamily: fontSerif, fontSize: "clamp(28px, 5vw, 40px)", fontWeight: 700, color: "#fff", marginBottom: 16 }}>
-            Umów się na darmowy pokaz gotowania
-          </h2>
-        </Reveal>
+      <div style={{
+        position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
+        width: 500, height: 500, borderRadius: "50%",
+        background: `radial-gradient(circle, ${C.goldGlow} 0%, transparent 70%)`,
+        pointerEvents: "none",
+      }} />
+
+      <div style={{ maxWidth: 620, margin: "0 auto", position: "relative" }}>
+        <Reveal><div style={S.divider} /></Reveal>
         <Reveal delay={0.1}>
-          <p style={{ fontSize: 17, color: "rgba(255,255,255,0.75)", marginBottom: 28, lineHeight: 1.7 }}>
-            Pokaz trwa ok. 1 godziny. Gotuję na żywo — zobaczysz Thermomix w akcji i spróbujesz potraw. Zero zobowiązań.
-          </p>
+          <h2 style={{ ...S.h2Light, marginBottom: 20 }}>Zarezerwuj prywatny pokaz</h2>
         </Reveal>
         <Reveal delay={0.15}>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center", marginBottom: 32 }}>
-            {["🍳 Gotowanie na żywo", "🏠 U Ciebie w domu", "📺 Lub online", "👩‍👧‍👦 Zaproś znajomych", "🆓 Za darmo"].map((b, i) => (
+          <p style={{ fontSize: 17, color: C.textOnDarkMed, marginBottom: 40, lineHeight: 1.8 }}>
+            Pokaz trwa ok. 1 godziny. Gotuję na żywo, degustujesz potrawy i zadajesz pytania. Bez zobowiązań.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.2}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center", marginBottom: 44 }}>
+            {["U Ciebie w domu", "Online na żywo", "Zaproś bliskich", "Bezpłatnie"].map((b, i) => (
               <span key={i} style={{
-                background: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.9)",
-                padding: "8px 16px", borderRadius: 50, fontSize: 14, fontWeight: 500,
-                border: "1px solid rgba(255,255,255,0.15)",
+                color: C.goldPale, padding: "8px 20px", fontSize: 13, fontWeight: 500,
+                border: `1px solid ${C.borderGold}`, letterSpacing: "0.04em",
               }}>{b}</span>
             ))}
           </div>
         </Reveal>
-        <Reveal delay={0.2}>
+
+        <Reveal delay={0.3}>
           <a href={CONFIG.googleCalendarLink} style={{
-            ...S.btn, padding: "18px 40px", fontSize: 18,
-            boxShadow: `0 8px 32px ${C.primary}50`,
-          }}>📅 Wybierz termin w kalendarzu</a>
-          <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", marginTop: 16 }}>
-            Zostaniesz przekierowany/a do Google Calendar
+            ...S.btnLight, padding: "18px 44px", fontSize: 15,
+          }}>Wybierz termin</a>
+          <p style={{ fontSize: 12, color: C.textOnDarkMed, marginTop: 16, letterSpacing: "0.04em" }}>
+            Przekierowanie do Google Calendar
           </p>
         </Reveal>
       </div>
@@ -643,24 +699,24 @@ function Booking() {
 // ═══════════════════════════════════════════════════════════
 function Contact() {
   return (
-    <section id="kontakt" style={{ ...S.sectionAlt, padding: "80px 20px" }}>
+    <section id="kontakt" style={{ background: C.white, padding: "100px 24px" }}>
       <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
-        <Reveal><h2 style={S.h2}>Masz pytania? Napisz do mnie!</h2></Reveal>
-        <Reveal delay={0.1}><p style={S.subtitle}>Chętnie odpowiem na wszystkie pytania. Napisz, zadzwoń lub kliknij — jak Ci wygodniej.</p></Reveal>
+        <Reveal><div style={S.divider} /><h2 style={S.h2}>Kontakt</h2></Reveal>
+        <Reveal delay={0.1}><p style={{ ...S.subtitle, margin: "0 auto 48px" }}>Chętnie odpowiem na pytania. Napisz, zadzwoń lub kliknij — jak wygodniej.</p></Reveal>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16, marginTop: 24 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 2 }}>
           {[
-            { icon: "💬", label: "WhatsApp", value: CONFIG.phone, href: `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(CONFIG.whatsappDefaultMsg)}`, color: "#25D366" },
-            { icon: "📞", label: "Telefon", value: CONFIG.phone, href: `tel:${CONFIG.phoneFormatted}`, color: C.primary },
-            { icon: "📧", label: "Email", value: CONFIG.email, href: `mailto:${CONFIG.email}`, color: C.accent },
+            { icon: "✆", label: "Telefon", value: CONFIG.phone, href: `tel:${CONFIG.phoneFormatted}` },
+            { icon: "✉", label: "WhatsApp", value: CONFIG.phone, href: `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(CONFIG.whatsappDefaultMsg)}` },
+            { icon: "@", label: "Email", value: CONFIG.email, href: `mailto:${CONFIG.email}` },
           ].map((ch, i) => (
             <Reveal key={i} delay={0.1 + i * 0.08}>
               <a href={ch.href} target={ch.label === "WhatsApp" ? "_blank" : undefined} rel="noopener noreferrer" style={{
                 ...S.card, textDecoration: "none", display: "block", textAlign: "center",
-                borderTop: `3px solid ${ch.color}`,
+                padding: "40px 24px",
               }}>
-                <div style={{ fontSize: 32, marginBottom: 8 }}>{ch.icon}</div>
-                <div style={{ fontWeight: 700, fontSize: 15, color: C.text, marginBottom: 4 }}>{ch.label}</div>
+                <div style={{ fontFamily: fontSerif, fontSize: 28, color: C.gold, marginBottom: 12 }}>{ch.icon}</div>
+                <div style={{ fontWeight: 600, fontSize: 14, color: C.text, marginBottom: 6, letterSpacing: "0.06em", textTransform: "uppercase" }}>{ch.label}</div>
                 <div style={{ fontSize: 14, color: C.textMed }}>{ch.value}</div>
               </a>
             </Reveal>
@@ -668,18 +724,18 @@ function Contact() {
         </div>
 
         <Reveal delay={0.4}>
-          <div style={{ display: "flex", gap: 16, justifyContent: "center", marginTop: 32 }}>
+          <div style={{ display: "flex", gap: 20, justifyContent: "center", marginTop: 40 }}>
             {[
-              { icon: "📸", label: "Instagram", href: CONFIG.instagram },
-              { icon: "📘", label: "Facebook", href: CONFIG.facebook },
-              { icon: "🎵", label: "TikTok", href: CONFIG.tiktok },
+              { label: "Instagram", href: CONFIG.instagram },
+              { label: "Facebook", href: CONFIG.facebook },
+              { label: "TikTok", href: CONFIG.tiktok },
             ].map((s, i) => (
               <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" style={{
-                textDecoration: "none", display: "flex", alignItems: "center", gap: 6,
-                background: `${C.text}06`, padding: "10px 20px", borderRadius: 50,
-                color: C.textMed, fontSize: 14, fontWeight: 600,
-                border: `1px solid ${C.border}`, transition: "all 0.2s",
-              }}>{s.icon} {s.label}</a>
+                textDecoration: "none", color: C.textLight, fontSize: 13, fontWeight: 500,
+                letterSpacing: "0.06em", textTransform: "uppercase",
+                borderBottom: `1px solid ${C.border}`, paddingBottom: 2,
+                transition: "color 0.3s",
+              }}>{s.label}</a>
             ))}
           </div>
         </Reveal>
@@ -698,28 +754,26 @@ function Referral() {
     navigator.clipboard.writeText(url).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2500); });
   };
   return (
-    <section style={{
-      background: `linear-gradient(135deg, ${C.primary} 0%, ${C.primaryLight} 100%)`,
-      padding: "60px 20px", textAlign: "center",
-    }}>
-      <div style={{ maxWidth: 600, margin: "0 auto" }}>
+    <section style={{ background: C.cream, padding: "80px 24px", textAlign: "center" }}>
+      <div style={{ maxWidth: 560, margin: "0 auto" }}>
         <Reveal>
-          <h2 style={{ fontFamily: fontSerif, fontSize: "clamp(24px, 4vw, 34px)", fontWeight: 700, color: "#fff", marginBottom: 12 }}>
-            🎁 Poleć mnie znajomym!
-          </h2>
-          <p style={{ fontSize: 16, color: "rgba(255,255,255,0.85)", marginBottom: 24 }}>
-            Znasz kogoś, kto chciałby gotować szybciej i zdrowiej? Wyślij link — a ja zadbam o resztę!
+          <div style={S.divider} />
+          <h3 style={{ fontFamily: fontSerif, fontSize: "clamp(22px, 4vw, 30px)", fontWeight: 600, color: C.text, marginBottom: 12 }}>
+            Poleć mnie bliskim
+          </h3>
+          <p style={{ fontSize: 15, color: C.textMed, marginBottom: 28, lineHeight: 1.7 }}>
+            Znasz kogoś, kto chciałby gotować szybciej i zdrowiej? Wyślij link — a ja zadbam o resztę.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <button onClick={handleCopy} style={{
-              ...S.btn, background: "#fff", color: C.primary, boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
+              ...S.btnOutline, ...(copied ? { borderColor: C.gold, color: C.gold } : {}),
             }}>
-              {copied ? "✅ Skopiowano!" : "📋 Skopiuj link"}
+              {copied ? "✓ Skopiowano" : "Skopiuj link"}
             </button>
-            <a href={`https://wa.me/?text=${encodeURIComponent(`Hej! Polecam Ci Kasię — świetna przedstawicielka Thermomix. Zobacz: ${url}`)}`}
-              target="_blank" rel="noopener noreferrer" style={{
-                ...S.btn, background: "#25D366", boxShadow: "0 4px 16px rgba(37,211,102,0.3)",
-              }}>💬 Wyślij przez WhatsApp</a>
+            <a href={`https://wa.me/?text=${encodeURIComponent(`Polecam Ci Kasię — świetna przedstawicielka Thermomix. Zobacz: ${url}`)}`}
+              target="_blank" rel="noopener noreferrer" style={S.btn}>
+              Wyślij przez WhatsApp
+            </a>
           </div>
         </Reveal>
       </div>
@@ -732,17 +786,15 @@ function Referral() {
 // ═══════════════════════════════════════════════════════════
 function Footer() {
   return (
-    <footer style={{
-      background: C.dark, padding: "40px 20px", textAlign: "center",
-    }}>
-      <div style={{ fontFamily: fontSerif, fontSize: 20, fontWeight: 700, color: "#fff", marginBottom: 4 }}>
+    <footer style={{ background: C.dark, padding: "48px 24px", textAlign: "center" }}>
+      <div style={{ fontFamily: fontSerif, fontSize: 18, fontWeight: 600, color: C.textOnDark, marginBottom: 6, letterSpacing: "0.02em" }}>
         {CONFIG.brandName}
       </div>
-      <div style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 16 }}>{CONFIG.tagline}</div>
+      <div style={{ fontSize: 12, color: C.textOnDarkMed, marginBottom: 20, letterSpacing: "0.1em", textTransform: "uppercase" }}>{CONFIG.tagline}</div>
       <a href={`tel:${CONFIG.phoneFormatted}`} style={{
-        color: "rgba(255,255,255,0.8)", textDecoration: "none", fontSize: 16, fontWeight: 600,
-      }}>📞 {CONFIG.phone}</a>
-      <div style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", marginTop: 24 }}>
+        color: C.gold, textDecoration: "none", fontSize: 15, fontWeight: 600, letterSpacing: "0.06em",
+      }}>{CONFIG.phone}</a>
+      <div style={{ fontSize: 11, color: "rgba(232,226,216,0.2)", marginTop: 32, letterSpacing: "0.04em" }}>
         © 2026 {CONFIG.brandName} · {CONFIG.domain}
       </div>
     </footer>
@@ -753,35 +805,39 @@ function Footer() {
 // FLOATING WHATSAPP
 // ═══════════════════════════════════════════════════════════
 function WhatsAppFloat() {
+  const [hover, setHover] = useState(false);
   return (
     <a href={`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(CONFIG.whatsappDefaultMsg)}`}
       target="_blank" rel="noopener noreferrer"
+      onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
       style={{
-        position: "fixed", bottom: 24, right: 24, zIndex: 999,
-        width: 60, height: 60, borderRadius: "50%",
-        background: "#25D366", color: "#fff",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        fontSize: 30, textDecoration: "none",
-        boxShadow: "0 4px 20px rgba(37,211,102,0.4)",
-        animation: "whatsapp-pulse 2s infinite",
-      }}>💬</a>
+        position: "fixed", bottom: 28, right: 28, zIndex: 999,
+        display: "flex", alignItems: "center", gap: 10,
+        background: C.dark, color: C.gold,
+        padding: hover ? "14px 24px 14px 18px" : "14px 18px",
+        borderRadius: 0, textDecoration: "none",
+        border: `1px solid ${C.borderGold}`,
+        boxShadow: "0 8px 32px rgba(0,0,0,0.25)",
+        transition: "all 0.3s ease",
+        fontSize: 14, fontWeight: 600, letterSpacing: "0.04em",
+      }}>
+      <span style={{ fontSize: 20 }}>💬</span>
+      {hover && <span>Napisz</span>}
+    </a>
   );
 }
 
 // ═══════════════════════════════════════════════════════════
-// GLOBAL STYLES (injected)
+// GLOBAL STYLES
 // ═══════════════════════════════════════════════════════════
 function GlobalStyles() {
   return (
     <style>{`
-      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,800&family=Nunito:wght@400;500;600;700;800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
       html { scroll-behavior: smooth; scroll-padding-top: 80px; }
       body { overflow-x: hidden; }
-      @keyframes whatsapp-pulse {
-        0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
-        50% { box-shadow: 0 4px 32px rgba(37,211,102,0.7), 0 0 0 12px rgba(37,211,102,0.1); }
-      }
+      ::selection { background: ${C.goldGlow}; color: ${C.dark}; }
       @media (max-width: 768px) {
         .desktop-only { display: none !important; }
         .mobile-menu-btn { display: block !important; }
@@ -790,8 +846,15 @@ function GlobalStyles() {
       @media (min-width: 769px) {
         .mobile-menu-btn { display: none !important; }
       }
-      input[type="range"] { -webkit-appearance: none; appearance: none; border-radius: 6px; outline: none; }
-      input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; height: 22px; width: 22px; border-radius: 50%; background: ${C.primary}; cursor: pointer; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+      input[type="range"] {
+        -webkit-appearance: none; appearance: none; outline: none;
+        height: 1px; background: ${C.creamMid};
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none; height: 18px; width: 18px;
+        background: ${C.gold}; cursor: pointer; border: none;
+        box-shadow: 0 2px 8px rgba(196,162,101,0.3);
+      }
     `}</style>
   );
 }
