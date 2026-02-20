@@ -1005,9 +1005,12 @@ export default function App() {
   const [promoVisible, setPromoVisible] = useState(true);
   const [popupOpen, setPopupOpen] = useState(CONFIG.promoPopup);
   useEffect(() => {
-    const h = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", h, { passive: true });
-    return () => window.removeEventListener("scroll", h);
+    const link = document.querySelector("link[rel~='icon']") || document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/svg+xml';
+    link.href = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="%230D1A0F"/><circle cx="32" cy="28" r="16" fill="none" stroke="%2300a651" stroke-width="3"/><rect x="22" y="44" width="20" height="6" rx="2" fill="%2300a651"/><rect x="26" y="50" width="12" height="4" rx="1" fill="%2300a651" opacity="0.7"/><circle cx="32" cy="28" r="6" fill="%2300a651" opacity="0.3"/><rect x="29" y="18" width="6" height="4" rx="1" fill="%2300a651"/></svg>')}`;
+    document.head.appendChild(link);
+    document.title = "Katarzyna Kamińska — Thermomix® TM7";
   }, []);
 
   return (
