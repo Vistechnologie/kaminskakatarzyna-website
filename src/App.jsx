@@ -746,7 +746,32 @@ function FAQ() {
 // ═══════════════════════════════════════════════════════════
 // BOOKING
 // ═══════════════════════════════════════════════════════════
+function GoldCorners({ size = 24, thickness = 1.5 }) {
+  const st = { position: "absolute", width: size, height: size };
+  return (
+    <>
+      <div style={{ ...st, top: 12, left: 12, borderTop: `${thickness}px solid ${C.gold}`, borderLeft: `${thickness}px solid ${C.gold}` }} />
+      <div style={{ ...st, top: 12, right: 12, borderTop: `${thickness}px solid ${C.gold}`, borderRight: `${thickness}px solid ${C.gold}` }} />
+      <div style={{ ...st, bottom: 12, left: 12, borderBottom: `${thickness}px solid ${C.gold}`, borderLeft: `${thickness}px solid ${C.gold}` }} />
+      <div style={{ ...st, bottom: 12, right: 12, borderBottom: `${thickness}px solid ${C.gold}`, borderRight: `${thickness}px solid ${C.gold}` }} />
+    </>
+  );
+}
+
 function Booking() {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = () => {
+    if (!name.trim() || !phone.trim()) return;
+    const text = `Cześć Kasiu! Proszę o kontakt.\n\nImię: ${name}\nTelefon: ${phone}${message ? `\nWiadomość: ${message}` : ""}`;
+    window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`, "_blank");
+    setSent(true);
+    setTimeout(() => setSent(false), 5000);
+  };
+
   return (
     <section id="rezerwacja" style={{
       background: `linear-gradient(175deg, ${C.dark} 0%, ${C.forest} 100%)`,
@@ -759,35 +784,68 @@ function Booking() {
         pointerEvents: "none",
       }} />
 
-      <div style={{ maxWidth: 620, margin: "0 auto", position: "relative" }}>
+      <div style={{ maxWidth: 520, margin: "0 auto", position: "relative" }}>
         <Reveal><div style={S.divider} /></Reveal>
         <Reveal delay={0.1}>
-          <h2 style={{ ...S.h2Light, marginBottom: 20 }}>Zarezerwuj prywatny pokaz</h2>
-        </Reveal>
-        <Reveal delay={0.15}>
-          <p style={{ fontSize: 17, color: C.textOnDarkMed, marginBottom: 40, lineHeight: 1.8 }}>
-            Pokaz trwa ok. 1 godziny. Gotuję na żywo, degustujesz potrawy i zadajesz pytania. Bez zobowiązań.
+          <h2 style={{ ...S.h2Light, marginBottom: 12 }}>Umów się na pokaz</h2>
+          <p style={{ fontSize: 16, color: C.textOnDarkMed, marginBottom: 40, lineHeight: 1.7 }}>
+            Zostaw swoje dane — oddzwonię i umówimy wygodny termin.
           </p>
         </Reveal>
 
         <Reveal delay={0.2}>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center", marginBottom: 44 }}>
-            {["U Ciebie w domu", "Online na żywo", "Zaproś bliskich", "Bezpłatnie"].map((b, i) => (
-              <span key={i} style={{
-                color: C.goldPale, padding: "8px 20px", fontSize: 13, fontWeight: 500,
-                border: `1px solid ${C.borderGold}`, letterSpacing: "0.04em",
-              }}>{b}</span>
-            ))}
+          <div style={{
+            background: "rgba(255,255,255,0.04)", border: `1px solid ${C.goldBorder}`,
+            padding: "40px 32px", position: "relative",
+          }}>
+            <GoldCorners size={18} thickness={1} />
+
+            <div style={{ marginBottom: 20 }}>
+              <label style={{ display: "block", fontSize: 11, color: C.goldLight, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8, textAlign: "left" }}>Imię *</label>
+              <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Twoje imię"
+                style={{ width: "100%", padding: "14px 16px", background: "rgba(255,255,255,0.06)", border: `1px solid rgba(196,162,101,0.2)`, color: C.textOnDark, fontSize: 15, fontFamily: fontSans, outline: "none" }} />
+            </div>
+
+            <div style={{ marginBottom: 20 }}>
+              <label style={{ display: "block", fontSize: 11, color: C.goldLight, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8, textAlign: "left" }}>Telefon *</label>
+              <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="Twój numer telefonu"
+                style={{ width: "100%", padding: "14px 16px", background: "rgba(255,255,255,0.06)", border: `1px solid rgba(196,162,101,0.2)`, color: C.textOnDark, fontSize: 15, fontFamily: fontSans, outline: "none" }} />
+            </div>
+
+            <div style={{ marginBottom: 28 }}>
+              <label style={{ display: "block", fontSize: 11, color: C.goldLight, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8, textAlign: "left" }}>Wiadomość <span style={{ color: C.textOnDarkMed }}>(opcjonalnie)</span></label>
+              <textarea value={message} onChange={e => setMessage(e.target.value)} placeholder="Np. preferowany termin, pytania..." rows={3}
+                style={{ width: "100%", padding: "14px 16px", background: "rgba(255,255,255,0.06)", border: `1px solid rgba(196,162,101,0.2)`, color: C.textOnDark, fontSize: 15, fontFamily: fontSans, outline: "none", resize: "vertical" }} />
+            </div>
+
+            <button onClick={handleSubmit} disabled={!name.trim() || !phone.trim()} style={{
+              ...S.btnLight, width: "100%", justifyContent: "center",
+              opacity: (!name.trim() || !phone.trim()) ? 0.5 : 1,
+              cursor: (!name.trim() || !phone.trim()) ? "default" : "pointer",
+            }}>
+              {sent ? "✓ Wysłano!" : "Wyślij — oddzwonię"}
+            </button>
+
+            <p style={{ fontSize: 12, color: C.textOnDarkMed, marginTop: 16 }}>
+              Formularz otworzy WhatsApp z Twoimi danymi
+            </p>
           </div>
         </Reveal>
 
         <Reveal delay={0.3}>
-          <a href={CONFIG.googleCalendarLink} style={{
-            ...S.btnLight, padding: "18px 44px", fontSize: 15,
-          }}>Wybierz termin</a>
-          <p style={{ fontSize: 12, color: C.textOnDarkMed, marginTop: 16, letterSpacing: "0.04em" }}>
-            Przekierowanie do Google Calendar
-          </p>
+          <div style={{ marginTop: 32, padding: "24px 0", borderTop: `1px solid rgba(196,162,101,0.15)` }}>
+            <p style={{ fontSize: 13, color: C.textOnDarkMed, marginBottom: 16 }}>Wolisz bezpośrednio?</p>
+            <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap" }}>
+              <a href={`tel:${CONFIG.phoneFormatted}`} style={{ color: C.gold, textDecoration: "none", fontSize: 16, fontWeight: 600, letterSpacing: "0.04em" }}>
+                ✆ {CONFIG.phone}
+              </a>
+              <a href={`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(CONFIG.whatsappDefaultMsg)}`}
+                target="_blank" rel="noopener noreferrer"
+                style={{ color: C.gold, textDecoration: "none", fontSize: 16, fontWeight: 600 }}>
+                WhatsApp →
+              </a>
+            </div>
+          </div>
         </Reveal>
       </div>
     </section>
