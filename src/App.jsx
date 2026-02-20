@@ -169,7 +169,7 @@ function PromoBar({ onClose }) {
 // ═══════════════════════════════════════════════════════════
 function Nav({ scrolled }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const links = ["O mnie", "Thermomix", "Kalkulator", "Opinie", "FAQ", "Kontakt"];
+  const links = ["O mnie", "Galeria", "Thermomix", "Kalkulator", "Opinie", "FAQ", "Kontakt"];
   return (
     <nav style={{
       position: "sticky", top: 0, zIndex: 1000,
@@ -554,35 +554,135 @@ function Calculator() {
 // ═══════════════════════════════════════════════════════════
 function Testimonials() {
   const items = [
-    { text: "Nie wierzyłam, że jedno urządzenie może zastąpić tyle sprzętów. Teraz gotuję codziennie w 30 minut — z trójką dzieci to zbawienie.", author: "Mama trójki dzieci" },
-    { text: "Myślałem, że Thermomix to gadżet. Ale mój niedzielny meal prep skrócił się z 4 godzin do półtorej. Rewolucja.", author: "Tata, fan zdrowego jedzenia" },
-    { text: "Gotuję od 30 lat i byłam pewna, że żaden robot mi nie jest potrzebny. Myliłam się — moja zupa krem nigdy nie była lepsza.", author: "Doświadczona kucharka" },
-    { text: "Robię domowe hummusy, pasty curry, mleko roślinne — rzeczy, na które ręcznie potrzebowałam godzin.", author: "Miłośniczka zdrowej kuchni" },
+    { text: "Nie wierzyłam, że jedno urządzenie może zastąpić tyle sprzętów. Teraz gotuję codziennie w 30 minut — z trójką dzieci to zbawienie.", author: "Mama trójki dzieci", initials: "MT" },
+    { text: "Myślałem, że Thermomix to gadżet. Ale mój niedzielny meal prep skrócił się z 4 godzin do półtorej. Rewolucja.", author: "Tata, fan zdrowego jedzenia", initials: "TF" },
+    { text: "Gotuję od 30 lat i byłam pewna, że żaden robot mi nie jest potrzebny. Myliłam się — moja zupa krem nigdy nie była lepsza.", author: "Doświadczona kucharka", initials: "DK" },
+    { text: "Robię domowe hummusy, pasty curry, mleko roślinne — rzeczy, na które ręcznie potrzebowałam godzin. Jakość nieporównywalna.", author: "Miłośniczka zdrowej kuchni", initials: "MZ" },
+    { text: "Kupiłam Thermomix sceptycznie, bo mąż nalegał. Po tygodniu to ja nie chciałam go oddawać. Teraz gotuję z uśmiechem.", author: "Żona sceptyczka", initials: "ŻS" },
+    { text: "Jako singiel myślałem, że to sprzęt dla rodzin. Ale gotowanie dla jednego jest jeszcze prostsze — i w końcu jem zdrowo.", author: "Singiel, 32 lata", initials: "S3" },
   ];
+
+  const cardStyles = [
+    { borderLeft: `2px solid ${C.gold}`, borderTop: "none", borderRight: "none", borderBottom: "none" },
+    { borderTop: `2px solid ${C.gold}`, borderLeft: "none", borderRight: "none", borderBottom: "none" },
+    { borderRight: `2px solid ${C.gold}`, borderLeft: "none", borderTop: "none", borderBottom: "none" },
+    { borderBottom: `2px solid ${C.gold}`, borderLeft: "none", borderTop: "none", borderRight: "none" },
+    { border: `1px solid rgba(196,162,101,0.2)` },
+    { borderLeft: `2px solid ${C.gold}`, borderTop: "none", borderRight: "none", borderBottom: "none" },
+  ];
+
   return (
     <section id="opinie" style={{
       background: `linear-gradient(175deg, ${C.dark} 0%, ${C.darkSoft} 100%)`,
-      padding: "100px 24px",
+      padding: "100px 24px", position: "relative",
     }}>
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent 10%, ${C.gold}30 50%, transparent 90%)` }} />
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent 10%, ${C.gold}30 50%, transparent 90%)` }} />
       <div style={{ maxWidth: 1000, margin: "0 auto", textAlign: "center" }}>
         <Reveal><div style={S.divider} /><h2 style={S.h2Light}>Opinie użytkowników</h2></Reveal>
         <Reveal delay={0.1}><p style={{ ...S.subtitleLight, margin: "0 auto 48px" }}>Thermomix zmienił sposób gotowania milionów rodzin na świecie.</p></Reveal>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 2 }}>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
           {items.map((it, i) => (
-            <Reveal key={i} delay={0.1 + i * 0.08}>
+            <Reveal key={i} delay={0.1 + i * 0.06}>
               <div style={{
-                background: "rgba(255,255,255,0.03)", padding: "36px 28px", textAlign: "left",
-                border: `1px solid rgba(255,255,255,0.06)`,
+                background: i === 1 || i === 4 ? "rgba(196,162,101,0.06)" : "rgba(255,255,255,0.02)",
+                padding: i === 0 || i === 3 ? "40px 28px" : "36px 28px",
+                ...cardStyles[i],
+                display: "flex", flexDirection: "column", justifyContent: "space-between",
+                height: "100%",
               }}>
-                <div style={{ color: C.gold, fontSize: 12, letterSpacing: 4, marginBottom: 16 }}>★ ★ ★ ★ ★</div>
-                <p style={{ fontFamily: fontSerif, fontSize: 16, color: C.textOnDark, lineHeight: 1.8, fontStyle: "italic", marginBottom: 20 }}>
-                  „{it.text}"
-                </p>
-                <div style={{ fontSize: 12, fontWeight: 600, color: C.goldLight, letterSpacing: "0.06em", textTransform: "uppercase" }}>— {it.author}</div>
+                <div style={{ flex: 1 }}>
+                  {/* Big quote mark for first card in each row */}
+                  {(i === 0 || i === 3) && (
+                    <div style={{ fontFamily: fontSerif, fontSize: 64, color: C.gold, lineHeight: 0.6, marginBottom: 12, opacity: 0.4 }}>"</div>
+                  )}
+                  {/* Stars for middle cards */}
+                  {(i === 1 || i === 4) && (
+                    <div style={{ color: C.gold, fontSize: 12, letterSpacing: 4, marginBottom: 16, textAlign: "center" }}>★ ★ ★ ★ ★</div>
+                  )}
+                  {/* Gold diamond for right cards */}
+                  {(i === 2 || i === 5) && (
+                    <div style={{ color: C.gold, fontSize: 18, marginBottom: 16, textAlign: "right", letterSpacing: 6 }}>✦ ✦ ✦</div>
+                  )}
+                  <p style={{ fontFamily: fontSerif, fontSize: 15, color: C.textOnDark, lineHeight: 1.8, fontStyle: "italic", marginBottom: 20, textAlign: "left" }}>
+                    „{it.text}"
+                  </p>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  <div style={{
+                    width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center",
+                    border: `1px solid ${C.goldBorder}`, fontSize: 12, color: C.gold,
+                    fontWeight: 600, letterSpacing: "0.04em", flexShrink: 0,
+                  }}>{it.initials}</div>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: C.goldLight, letterSpacing: "0.06em", textTransform: "uppercase", textAlign: "left" }}>{it.author}</div>
+                </div>
               </div>
             </Reveal>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
+// THERMOMIX TM7 GALLERY
+// ═══════════════════════════════════════════════════════════
+function Gallery() {
+  const images = [
+    { label: "Thermomix® TM7", desc: "10-calowy ekran dotykowy", aspect: "4/3" },
+    { label: "Gotowanie na parze", desc: "Zdrowe potrawy bez wysiłku", aspect: "4/3" },
+    { label: "Cookidoo® przepisy", desc: "Krok po kroku na ekranie", aspect: "4/3" },
+    { label: "Elegancki design", desc: "Ozdoba każdej kuchni", aspect: "4/5" },
+    { label: "Wielofunkcyjność", desc: "Zastępuje 20+ urządzeń", aspect: "4/3" },
+    { label: "Gotowanie w rodzinie", desc: "Wspólne chwile w kuchni", aspect: "4/5" },
+  ];
+
+  return (
+    <section id="galeria" style={{
+      background: `linear-gradient(175deg, ${C.dark} 0%, ${C.forest} 100%)`,
+      padding: "100px 24px", position: "relative",
+    }}>
+      <div style={{ position: "absolute", top: 32, left: 32, width: 80, height: 80, borderTop: `1px solid ${C.goldBorder}`, borderLeft: `1px solid ${C.goldBorder}`, pointerEvents: "none" }} />
+      <div style={{ position: "absolute", bottom: 32, right: 32, width: 80, height: 80, borderBottom: `1px solid ${C.goldBorder}`, borderRight: `1px solid ${C.goldBorder}`, pointerEvents: "none" }} />
+
+      <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+        <div style={{ textAlign: "center" }}>
+          <Reveal><div style={S.divider} /><h2 style={S.h2Light}>Thermomix® TM7</h2></Reveal>
+          <Reveal delay={0.1}><p style={{ ...S.subtitleLight, margin: "0 auto 16px" }}>Poznaj urządzenie, które zmienia zasady gry w kuchni.</p></Reveal>
+          <Reveal delay={0.15}><div style={{ fontSize: 13, color: C.gold, letterSpacing: "0.1em", marginBottom: 48 }}>✦&ensp;CENA: {CONFIG.promoSection.price}&ensp;✦</div></Reveal>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 4 }}>
+          {images.map((img, i) => (
+            <Reveal key={i} delay={0.1 + i * 0.06}>
+              <div style={{
+                aspectRatio: img.aspect,
+                background: `linear-gradient(135deg, ${C.darkCard} 0%, ${C.forestLight}40 100%)`,
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                border: `1px solid rgba(196,162,101,0.1)`,
+                position: "relative", overflow: "hidden",
+              }}>
+                <div style={{
+                  width: 56, height: 56, border: `1px solid ${C.goldBorder}`,
+                  display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16,
+                }}>
+                  <span style={{ color: C.gold, fontSize: 11, letterSpacing: "0.1em" }}>IMG</span>
+                </div>
+                <div style={{ fontFamily: fontSerif, fontSize: 16, color: C.textOnDark, marginBottom: 4, fontWeight: 600 }}>{img.label}</div>
+                <div style={{ fontSize: 12, color: C.textOnDarkMed, letterSpacing: "0.04em" }}>{img.desc}</div>
+                <div style={{ position: "absolute", bottom: 0, left: "20%", right: "20%", height: 1, background: `linear-gradient(90deg, transparent, ${C.gold}40, transparent)` }} />
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={0.5}>
+          <p style={{ textAlign: "center", fontSize: 12, color: C.textOnDarkMed, marginTop: 24, letterSpacing: "0.04em", fontStyle: "italic" }}>
+            Zdjęcia poglądowe — na pokazie zobaczysz Thermomix na żywo
+          </p>
+        </Reveal>
       </div>
     </section>
   );
@@ -880,6 +980,7 @@ export default function App() {
       <Hero />
       <PromoSection />
       <About />
+      <Gallery />
       <WhatToExpect />
       <Benefits />
       <Calculator />
