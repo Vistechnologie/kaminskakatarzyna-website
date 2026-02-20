@@ -334,7 +334,7 @@ function Gallery() {
           </Reveal>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridAutoRows: "240px", gap: 4 }}>
+        <div className="gallery-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridAutoRows: "240px", gap: 4 }}>
           {images.map((img, i) => (
             <Reveal key={i} delay={0.08 + i * 0.06} style={{ gridColumn: `span ${img.span}` }}>
               <div style={{ width: "100%", height: "100%", position: "relative", overflow: "hidden", border: `1px solid rgba(196,162,101,0.1)` }}>
@@ -353,7 +353,7 @@ function Gallery() {
         <Reveal delay={0.5}>
           <div style={{ textAlign: "center", marginTop: 48, paddingTop: 32, borderTop: `1px solid rgba(196,162,101,0.15)` }}>
             <div style={{ fontSize: 11, color: C.gold, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 24, fontWeight: 600 }}>✦&ensp;Nagrodzony Thermomix® TM7&ensp;✦</div>
-            <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap" }}>
+            <div className="awards-row" style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap" }}>
               {[
                 { src: TM7.awardUx, name: "UX Design Awards" },
                 { src: TM7.awardPxa, name: "Plus X Award" },
@@ -435,7 +435,7 @@ function Specs() {
           ))}
         </div>
         <Reveal delay={0.4}>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 2, justifyContent: "center", marginTop: 32, padding: "24px 0", borderTop: `1px solid rgba(196,162,101,0.15)` }}>
+          <div className="specs-params" style={{ display: "flex", flexWrap: "wrap", gap: 2, justifyContent: "center", marginTop: 32, padding: "24px 0", borderTop: `1px solid rgba(196,162,101,0.15)` }}>
             {[
               { val: "500W", label: "Silnik" },
               { val: "2,2 l", label: "Naczynie" },
@@ -602,7 +602,7 @@ function Testimonials() {
       <div style={{ maxWidth: 1000, margin: "0 auto", textAlign: "center" }}>
         <Reveal><div style={S.divider} /><h2 style={S.h2Light}>Opinie użytkowników</h2></Reveal>
         <Reveal delay={0.1}><p style={{ ...S.subtitleLight, margin: "0 auto 48px" }}>Thermomix zmienił sposób gotowania milionów rodzin na świecie.</p></Reveal>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+        <div className="testimonials-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
           {items.map((it, i) => (
             <Reveal key={i} delay={0.1 + i * 0.06}>
               <div style={{
@@ -855,6 +855,11 @@ function GlobalStyles() {
         .desktop-only { display: none !important; }
         .mobile-menu-btn { display: block !important; }
         .phone-text { display: none; }
+        .gallery-grid { grid-template-columns: 1fr !important; grid-auto-rows: 200px !important; }
+        .gallery-grid > div { grid-column: span 1 !important; }
+        .testimonials-grid { grid-template-columns: 1fr !important; }
+        .awards-row { flex-direction: column !important; align-items: center !important; }
+        .specs-params { grid-template-columns: repeat(3, 1fr) !important; }
       }
       @media (min-width: 769px) { .mobile-menu-btn { display: none !important; } }
       input[type="range"] { -webkit-appearance: none; appearance: none; outline: none; height: 1px; background: #E8E0D0; }
