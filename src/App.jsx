@@ -351,11 +351,22 @@ function Gallery() {
 
         {/* Awards */}
         <Reveal delay={0.5}>
-          <div style={{ display: "flex", gap: 40, justifyContent: "center", alignItems: "center", marginTop: 40, padding: "32px 0", borderTop: `1px solid rgba(196,162,101,0.15)` }}>
-            <span style={{ fontSize: 11, color: C.textOnDarkMed, letterSpacing: "0.1em", textTransform: "uppercase" }}>Nagrody 2025:</span>
-            {[TM7.awardUx, TM7.awardPxa, TM7.awardGc].map((src, i) => (
-              <img key={i} src={src} alt="Award" loading="lazy" style={{ height: 80, background: "rgba(255,255,255,0.9)", padding: 8 }} />
-            ))}
+          <div style={{ textAlign: "center", marginTop: 48, paddingTop: 32, borderTop: `1px solid rgba(196,162,101,0.15)` }}>
+            <div style={{ fontSize: 11, color: C.gold, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 24, fontWeight: 600 }}>✦&ensp;Nagrodzony Thermomix® TM7&ensp;✦</div>
+            <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap" }}>
+              {[
+                { src: TM7.awardUx, name: "UX Design Awards" },
+                { src: TM7.awardPxa, name: "Plus X Award" },
+                { src: TM7.awardGc, name: "Goldene Computer" },
+              ].map((a, i) => (
+                <div key={i} style={{ textAlign: "center" }}>
+                  <div style={{ background: C.white, padding: 12, marginBottom: 8 }}>
+                    <img src={a.src} alt={a.name} loading="lazy" style={{ height: 72, display: "block" }} />
+                  </div>
+                  <div style={{ fontSize: 10, color: C.textOnDarkMed, letterSpacing: "0.06em" }}>{a.name}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </Reveal>
       </div>
@@ -408,7 +419,7 @@ function Specs() {
           {[
             { img: TM7.main, title: "Thermomix® TM7", desc: "Baza z 10\" ekranem dotykowym, naczynie 2,2 l, 20+ trybów gotowania" },
             { img: TM7.varoma, title: "Varoma", desc: "45% większa niż w TM6, gotowanie na parze dla całej rodziny, 6,8 l pojemności" },
-            { img: TM7.blade, title: "Akcesoria", desc: "Kopystka, osłona noży, obieraczka + 3 mies. Cookidoo® gratis" },
+            { img: TM7.bowl, title: "Akcesoria", desc: "Kopystka, motylek, koszyczek, pokrywa + 3 mies. Cookidoo® gratis i e-book powitalny" },
           ].map((it, i) => (
             <Reveal key={i} delay={0.1 + i * 0.1}>
               <div style={{ background: "rgba(255,255,255,0.03)", border: `1px solid rgba(196,162,101,0.1)`, overflow: "hidden", height: "100%", display: "flex", flexDirection: "column" }}>
