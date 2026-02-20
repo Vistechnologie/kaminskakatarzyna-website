@@ -31,6 +31,7 @@ facebook: "https://www.facebook.com/share/1aeVTjz83u/",
     deadline: "28.02.2026",
     price: "6 669 zł",
     ctaText: "Umów prywatny pokaz",
+     promoPopup: true,  // false = wyłącza popup
   },
 };
 
@@ -217,6 +218,18 @@ function Hero() {
             </div>
           </Reveal>
         </div>
+
+        <Reveal delay={0.45}>
+            <div style={{ display: "flex", gap: 16, marginTop: 24, alignItems: "center" }}>
+              <span style={{ fontSize: 11, color: C.textOnDarkMed, letterSpacing: "0.08em", textTransform: "uppercase" }}>Obserwuj:</span>
+              <a href={CONFIG.instagram} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", border: `1px solid ${C.goldBorder}`, textDecoration: "none", color: C.goldPale, fontSize: 13, fontWeight: 600, transition: "all 0.3s" }}>
+                📸 Instagram
+              </a>
+              <a href={CONFIG.facebook} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", border: `1px solid ${C.goldBorder}`, textDecoration: "none", color: C.goldPale, fontSize: 13, fontWeight: 600, transition: "all 0.3s" }}>
+                📘 Facebook
+              </a>
+            </div>
+          </Reveal>
 
         {/* TM7 image right */}
         <Reveal delay={0.3} style={{ flex: "1 1 320px", minWidth: 280, textAlign: "center" }}>
@@ -771,11 +784,22 @@ function Contact() {
           ))}
         </div>
         <Reveal delay={0.4}>
-          <div style={{ display: "flex", gap: 24, justifyContent: "center", marginTop: 40 }}>
-            {[{ label: "Instagram", href: CONFIG.instagram }, { label: "Facebook", href: CONFIG.facebook }].map((s, i) => (
-              <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: C.textLight, fontSize: 13, fontWeight: 500, letterSpacing: "0.06em", textTransform: "uppercase", borderBottom: `1px solid ${C.border}`, paddingBottom: 2 }}>{s.label}</a>
-            ))}
+          <div style={{ marginTop: 40 }}>
+            <div style={{ fontSize: 12, color: C.textMed, marginBottom: 12 }}>Obserwuj mnie — rolki, przepisy, inspiracje:</div>
+            <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+              <a href={CONFIG.instagram} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "12px 24px", border: `1.5px solid ${C.text}`, textDecoration: "none", color: C.text, fontSize: 14, fontWeight: 600, letterSpacing: "0.04em" }}>
+                📸 Instagram
+              </a>
+              <a href={CONFIG.facebook} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "12px 24px", border: `1.5px solid ${C.text}`, textDecoration: "none", color: C.text, fontSize: 14, fontWeight: 600, letterSpacing: "0.04em" }}>
+                📘 Facebook
+              </a>
+            </div>
           </div>
+```
+
+Zapisz → sprawdź → potem:
+```
+git add . && git commit -m "popup config flag, prominent social links" && git push origin main
         </Reveal>
       </div>
     </section>
@@ -816,10 +840,16 @@ function Footer() {
       <div style={{ fontFamily: fontSerif, fontSize: 18, fontWeight: 600, color: C.textOnDark, marginBottom: 6 }}>{CONFIG.brandName}</div>
       <div style={{ fontSize: 12, color: C.textOnDarkMed, marginBottom: 20, letterSpacing: "0.1em", textTransform: "uppercase" }}>{CONFIG.tagline}</div>
       <a href={`tel:${CONFIG.phoneFormatted}`} style={{ color: C.gold, textDecoration: "none", fontSize: 15, fontWeight: 600 }}>{CONFIG.phone}</a>
-      <div style={{ display: "flex", gap: 20, justifyContent: "center", marginTop: 20 }}>
-        {[{ label: "Instagram", href: CONFIG.instagram }, { label: "Facebook", href: CONFIG.facebook }].map((s, i) => (
-          <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" style={{ color: C.textOnDarkMed, textDecoration: "none", fontSize: 12, letterSpacing: "0.06em", textTransform: "uppercase" }}>{s.label}</a>
-        ))}
+      <div style={{ marginTop: 20 }}>
+        <div style={{ fontSize: 11, color: C.textOnDarkMed, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 12 }}>Rolki · Przepisy · Inspiracje</div>
+        <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
+          <a href={CONFIG.instagram} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "10px 20px", border: `1px solid ${C.goldBorder}`, textDecoration: "none", color: C.gold, fontSize: 13, fontWeight: 600 }}>
+            📸 Instagram
+          </a>
+          <a href={CONFIG.facebook} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "10px 20px", border: `1px solid ${C.goldBorder}`, textDecoration: "none", color: C.gold, fontSize: 13, fontWeight: 600 }}>
+            📘 Facebook
+          </a>
+        </div>
       </div>
       <div style={{ fontSize: 11, color: "rgba(232,226,216,0.15)", marginTop: 28 }}>© 2026 {CONFIG.brandName} · {CONFIG.domain}</div>
     </footer>
@@ -972,7 +1002,7 @@ function PromoPopup({ onClose }) {
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [promoVisible, setPromoVisible] = useState(true);
-  const [popupOpen, setPopupOpen] = useState(true);
+  const [popupOpen, setPopupOpen] = useState(CONFIG.promoPopup);
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", h, { passive: true });
