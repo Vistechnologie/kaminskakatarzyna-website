@@ -860,8 +860,6 @@ function GlobalStyles() {
         .testimonials-grid { grid-template-columns: 1fr !important; }
         .awards-row { flex-direction: column !important; align-items: center !important; }
         .specs-params { grid-template-columns: repeat(3, 1fr) !important; }
-        .promo-popup-content { flex-direction: column !important; }
-        .promo-popup-img { flex: 0 0 160px !important; min-height: 160px !important; }
       }
       @media (min-width: 769px) { .mobile-menu-btn { display: none !important; } }
       input[type="range"] { -webkit-appearance: none; appearance: none; outline: none; height: 1px; background: #E8E0D0; }
@@ -901,7 +899,7 @@ function PromoPopup({ onClose }) {
   return (
     <div style={{ position: "fixed", inset: 0, zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
       <div onClick={onClose} style={{ position: "absolute", inset: 0, background: "rgba(13,26,15,0.75)", backdropFilter: "blur(4px)" }} />
-      <div style={{ position: "relative", background: C.dark, maxWidth: 560, width: "100%", border: `1px solid ${C.goldBorder}`, overflow: "hidden" }}>
+      <div style={{ position: "relative", background: C.dark, maxWidth: 560, width: "100%", border: `1px solid ${C.goldBorder}`, overflow: "auto", maxHeight: "90vh" }}>
         <GoldCorners size={20} thickness={1} />
 
         {/* Header */}
@@ -925,25 +923,25 @@ function PromoPopup({ onClose }) {
         </div>
 
         {/* Content with image */}
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
-          {/* Image */}
-          <div style={{ flex: "0 0 200px", minHeight: 220, overflow: "hidden", background: C.darkCard }}>
-            <img src={promos[active].img} alt={promos[active].title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-          </div>
+        <div>
+          {/* Image — full width */}
+         <div style={{ width: "100%", background: C.darkCard, textAlign: "center", padding: 8 }}>
+  <img src={promos[active].img} alt={promos[active].title} style={{ maxWidth: "100%", maxHeight: 680, objectFit: "contain" }} />
+</div>
 
           {/* Text */}
-          <div style={{ flex: 1, minWidth: 240, padding: "24px 24px 20px" }}>
-            <h3 style={{ fontFamily: fontSerif, fontSize: 20, color: C.white, fontWeight: 600, marginBottom: 10, lineHeight: 1.3 }}>
+          <div style={{ padding: "24px 28px 16px" }}>
+            <h3 style={{ fontFamily: fontSerif, fontSize: 22, color: C.white, fontWeight: 600, marginBottom: 10, lineHeight: 1.3 }}>
               {promos[active].title}
             </h3>
             <div style={{ width: 40, height: 1, background: C.gold, marginBottom: 10 }} />
             <p style={{ fontSize: 14, color: C.textOnDarkMed, lineHeight: 1.7, marginBottom: 12 }}>
               {promos[active].desc}
             </p>
-            <div style={{ fontSize: 11, color: C.textOnDarkMed, marginBottom: 16 }}>
+            <div style={{ fontSize: 11, color: C.textOnDarkMed, marginBottom: 4 }}>
               <span>⏳ Do: <strong style={{ color: C.goldLight }}>{promos[active].deadline}</strong></span>
-              <br /><span style={{ fontSize: 10 }}>{promos[active].note}</span>
             </div>
+            <div style={{ fontSize: 10, color: C.textOnDarkMed }}>{promos[active].note}</div>
           </div>
         </div>
 
