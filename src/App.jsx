@@ -31,8 +31,9 @@ facebook: "https://www.facebook.com/share/1aeVTjz83u/",
     deadline: "28.02.2026",
     price: "6 669 zł",
     ctaText: "Umów prywatny pokaz",
-     promoPopup: true,  // false = wyłącza popup
+
   },
+  promoPopup: true,  // false = wyłącza popup
 };
 
 // ═══════════════════════════════════════════════════════════
@@ -137,12 +138,12 @@ function GoldCorners({ size = 24, thickness = 1.5 }) {
 // ═══════════════════════════════════════════════════════════
 // PROMO BAR
 // ═══════════════════════════════════════════════════════════
-function PromoBar({ onClose }) {
+function PromoBar({ onClose, onDetails }) {
   if (!CONFIG.promotion.active) return null;
   return (
     <div style={{ background: C.dark, color: C.goldPale, padding: "11px 20px", fontSize: 13, textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap", letterSpacing: "0.06em", fontWeight: 500 }}>
       <span><span style={{ color: C.gold, marginRight: 8 }}>{CONFIG.promotion.emoji}</span>{CONFIG.promotion.text}</span>
-      <a href={CONFIG.promotion.linkUrl} style={{ color: C.gold, fontWeight: 600, textDecoration: "none", borderBottom: `1px solid ${C.gold}`, paddingBottom: 1 }}>{CONFIG.promotion.linkText}</a>
+     <a href="#" onClick={(e) => { e.preventDefault(); onDetails(); }} style={{ color: C.gold, fontWeight: 600, textDecoration: "none", borderBottom: `1px solid ${C.gold}`, paddingBottom: 1, cursor: "pointer" }}>{CONFIG.promotion.linkText}</a>
       <button onClick={onClose} style={{ background: "none", border: "none", color: "rgba(232,226,216,0.35)", cursor: "pointer", fontSize: 16, padding: "0 0 0 8px", lineHeight: 1 }}>×</button>
     </div>
   );
@@ -795,11 +796,6 @@ function Contact() {
               </a>
             </div>
           </div>
-```
-
-Zapisz → sprawdź → potem:
-```
-git add . && git commit -m "popup config flag, prominent social links" && git push origin main
         </Reveal>
       </div>
     </section>
@@ -1012,7 +1008,7 @@ export default function App() {
   return (
     <div style={S.page}>
       <GlobalStyles />
-      {promoVisible && <PromoBar onClose={() => setPromoVisible(false)} />}
+     {promoVisible && <PromoBar onClose={() => setPromoVisible(false)} onDetails={() => setPopupOpen(true)} />}
       <Nav scrolled={scrolled} />
       <Hero />
       <PromoSection />
