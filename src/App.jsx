@@ -238,9 +238,6 @@ function Hero() {
 
        <Reveal delay={0.45}>
             <div style={{ display: "flex", gap: 20, marginTop: 28, alignItems: "center" }}>
-              <div style={{ width: 40, height: 40, borderRadius: "50%", overflow: "hidden", border: `1.5px solid ${C.gold}`, flexShrink: 0 }}>
-                <img src={KASIA.portrait} alt="Kasia" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 15%" }} />
-              </div>
               <a href={CONFIG.instagram} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: C.textOnDarkMed, fontSize: 13, fontWeight: 500, letterSpacing: "0.06em", borderBottom: `1px solid rgba(232,226,216,0.2)`, paddingBottom: 2, transition: "color 0.3s" }}>
                 Instagram
               </a>
@@ -312,10 +309,18 @@ function About() {
       <div style={{ maxWidth: 920, margin: "0 auto", display: "flex", gap: 56, alignItems: "flex-start", flexWrap: "wrap" }}>
         <Reveal style={{ flex: "0 0 auto", alignSelf: "stretch" }}>
           <div style={{ width: 320, height: "100%", position: "relative", overflow: "hidden" }}>
-            <img src={KASIA.portrait} alt="Katarzyna Kamińska" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 10%", display: "block" }} />
-            <div style={{ position: "absolute", bottom: -6, right: -6, width: 48, height: 48, borderBottom: `2px solid ${C.gold}`, borderRight: `2px solid ${C.gold}` }} />
-            <div style={{ position: "absolute", top: -6, left: -6, width: 48, height: 48, borderTop: `2px solid ${C.gold}`, borderLeft: `2px solid ${C.gold}` }} />
-          </div>
+<div style={{ width: 320, height: "100%", position: "relative", overflow: "hidden" }}>
+  <img src={KASIA.portrait} alt="Katarzyna Kamińska" style={{
+    position: "absolute",
+    left: 0,
+    width: "100%",
+    top: "-15%",        // ← przycięcie GÓRY (więcej = więcej ucięte)
+    height: "120%",    // ← rozciąga obraz (musi być > 100% żeby przyciąć dół)
+    objectFit: "cover",
+    objectPosition: "center",
+  }} />
+</div>
+</div>
         </Reveal>
         <Reveal delay={0.15} style={{ flex: 1, minWidth: 300 }}>
           <div style={{ width: 48, height: 1, background: C.gold, marginBottom: 20 }} />
@@ -764,16 +769,24 @@ function Booking() {
           </Reveal>
           {/* PHOTO — full height right column */}
           <Reveal delay={0.3} style={{ flex: "1 1 340px", minWidth: 300 }}>
-            <div style={{ height: "100%", position: "relative", overflow: "hidden", border: `1px solid ${C.goldBorder}` }}>
-              <div style={{ position: "absolute", top: 12, left: 12, width: 24, height: 24, borderTop: `1.5px solid ${C.gold}`, borderLeft: `1.5px solid ${C.gold}`, zIndex: 2 }} />
-              <div style={{ position: "absolute", bottom: 12, right: 12, width: 24, height: 24, borderBottom: `1.5px solid ${C.gold}`, borderRight: `1.5px solid ${C.gold}`, zIndex: 2 }} />
-              <img src={KASIA.writing} alt={`${CONFIG.shortName} — Thermomix`} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 20%", display: "block" }} />
-              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "linear-gradient(transparent, rgba(13,26,15,0.85))", padding: "40px 20px 16px", textAlign: "center" }}>
-                <div style={{ fontFamily: fontSerif, fontSize: 18, color: C.textOnDark, fontWeight: 600, marginBottom: 4 }}>{CONFIG.shortName} + Thermomix</div>
-                <div style={{ fontSize: 12, color: C.textOnDarkMed, letterSpacing: "0.08em" }}>Zapraszam na pokaz!</div>
-              </div>
-            </div>
-          </Reveal>
+  <div style={{ height: "100%", position: "relative", overflow: "hidden", border: `1px solid ${C.goldBorder}` }}>
+    <div style={{ position: "absolute", top: 12, left: 12, width: 24, height: 24, borderTop: `1.5px solid ${C.gold}`, borderLeft: `1.5px solid ${C.gold}`, zIndex: 2 }} />
+    <div style={{ position: "absolute", bottom: 12, right: 12, width: 24, height: 24, borderBottom: `1.5px solid ${C.gold}`, borderRight: `1.5px solid ${C.gold}`, zIndex: 2 }} />
+    <img src={KASIA.writing} alt={`${CONFIG.shortName} — Thermomix`} style={{
+      position: "absolute",
+      left: 0,
+      width: "100%",
+      top: "-10%",       // ← przycięcie góry (ciemne tło)
+      height: "125%",    // ← zoom + przycięcie dołu
+      objectFit: "cover",
+      objectPosition: "center",
+    }} />
+    <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "linear-gradient(transparent, rgba(13,26,15,0.85))", padding: "40px 20px 16px", textAlign: "center", zIndex: 1 }}>
+      <div style={{ fontFamily: fontSerif, fontSize: 18, color: C.textOnDark, fontWeight: 600, marginBottom: 4 }}>{CONFIG.shortName} + Thermomix</div>
+      <div style={{ fontSize: 12, color: C.textOnDarkMed, letterSpacing: "0.08em" }}>Zapraszam na pokaz!</div>
+    </div>
+  </div>
+</Reveal>
         </div>
       </div>
     </section>
@@ -787,12 +800,7 @@ function Contact() {
   return (
     <section id="kontakt" style={{ background: C.white, padding: "100px 24px" }}>
       <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
-        <Reveal>
-          <div style={{ width: 96, height: 96, borderRadius: "50%", overflow: "hidden", margin: "0 auto 20px", border: `2px solid ${C.gold}`, boxShadow: `0 0 0 6px ${C.goldGlow}` }}>
-            <img src={KASIA.writing} alt="Kasia" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 15%" }} />
-          </div>
-          <div style={S.divider} /><h2 style={S.h2}>Kontakt</h2>
-        </Reveal>
+        <Reveal><div style={S.divider} /><h2 style={S.h2}>Kontakt</h2></Reveal>
         <Reveal delay={0.1}><p style={{ ...S.subtitle, margin: "0 auto 48px" }}>Chętnie odpowiem na pytania. Napisz, zadzwoń lub kliknij.</p></Reveal>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 2 }}>
           {[
@@ -856,9 +864,6 @@ function Footer() {
   return (
     <footer style={{ background: C.dark, padding: "48px 24px", textAlign: "center", position: "relative" }}>
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent 20%, ${C.gold}40 50%, transparent 80%)` }} />
-      <div style={{ width: 56, height: 56, borderRadius: "50%", overflow: "hidden", margin: "0 auto 16px", border: `1.5px solid ${C.gold}` }}>
-        <img src={KASIA.portrait} alt="Kasia" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 15%" }} />
-      </div>
       <div style={{ fontFamily: fontSerif, fontSize: 18, fontWeight: 600, color: C.textOnDark, marginBottom: 6 }}>{CONFIG.brandName}</div>
       <div style={{ fontSize: 12, color: C.textOnDarkMed, marginBottom: 20, letterSpacing: "0.1em", textTransform: "uppercase" }}>{CONFIG.tagline}</div>
       <a href={`tel:${CONFIG.phoneFormatted}`} style={{ color: C.gold, textDecoration: "none", fontSize: 15, fontWeight: 600 }}>{CONFIG.phone}</a>
