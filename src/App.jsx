@@ -388,26 +388,7 @@ function Gallery() {
           ))}
         </div>
 
-        {/* Awards */}
-        <Reveal delay={0.5}>
-          <div style={{ textAlign: "center", marginTop: 48, paddingTop: 32, borderTop: `1px solid rgba(196,162,101,0.15)` }}>
-            <div style={{ fontSize: 11, color: C.gold, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 24, fontWeight: 600 }}>✦&ensp;Nagrodzony Thermomix® TM7&ensp;✦</div>
-            <div className="awards-row" style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap" }}>
-              {[
-                { src: TM7.awardUx, name: "UX Design Awards" },
-                { src: TM7.awardPxa, name: "Plus X Award" },
-                { src: TM7.awardGc, name: "Goldene Computer" },
-              ].map((a, i) => (
-                <div key={i} style={{ textAlign: "center" }}>
-                  <div style={{ background: C.white, padding: 12, marginBottom: 8 }}>
-                    <img src={a.src} alt={a.name} loading="lazy" style={{ height: 72, display: "block" }} />
-                  </div>
-                  <div style={{ fontSize: 10, color: C.textOnDarkMed, letterSpacing: "0.06em" }}>{a.name}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Reveal>
+
       </div>
     </section>
   );
