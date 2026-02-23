@@ -7,7 +7,7 @@ const CONFIG = {
   brandName: "Katarzyna Kamińska",
   shortName: "Kasia",
   tagline: "Autoryzowany przedstawiciel Thermomix®",
-  region: "Trójmiasto · Prezentacje online w całej Polsce",
+  region: "Trójmiasto · Pokazy online w całej Polsce",
   domain: "kaminskakatarzyna.com",
   phone: "506 507 563",
   phoneFormatted: "+48 506 507 563",
@@ -16,25 +16,73 @@ const CONFIG = {
 instagram: "https://www.instagram.com/katarzyna.groszek?utm_source=qr&igsh=MWJicTE0bWt2dGQyMg==",
 facebook: "https://www.facebook.com/share/1aeVTjz83u/",
   whatsappDefaultMsg: "Cześć Kasiu! Chciałabym umówić się na prezentację Thermomixa 😊",
-  promotion: {
-    active: true,
-    text: "Thermomix® TM7 + SodaStream za 49 zł — oferta do 28.02.2026",
-    emoji: "✦",
-    linkText: "Szczegóły",
-    linkUrl: "#rezerwacja",
-  },
-  promoSection: {
-    active: true,
-    title: "Ekskluzywna oferta limitowana",
-    subtitle: "Thermomix® TM7 + SodaStream za 49 zł",
-    description: "Zamów nowy Thermomix® TM7 do końca lutego i odbierz elegancki saturator SodaStream w promocyjnej cenie.",
-    deadline: "28.02.2026",
-    price: "6 669 zł",
-    ctaText: "Umów bezpłatną prezentację",
-
-  },
-  promoPopup: true,  // false = wyłącza popup
+  promoPopup: true,  // false = wyłącza popup globalnie
 };
+
+// ═══════════════════════════════════════════════════════════
+// PROMOCJE — CENTRALNA LISTA
+// Dodaj nową promocję = skopiuj blok i zmień daty.
+// Strona automatycznie pokaże/schowa po dacie start/end.
+// ═══════════════════════════════════════════════════════════
+const PROMOTIONS = [
+  {
+    id: "raty-naczynie-03",
+    badge: "NOWOŚĆ",
+    barText: "NOWOŚĆ: 36 rat RRSO 0% + drugie naczynie za 499 zł — do 31.03",
+    title: "36 rat RRSO 0% + drugie naczynie za 499 zł",
+    subtitle: "36 rat RRSO 0% + drugie naczynie za 499 zł",
+    description: "Kup Thermomix® TM7 na 36 rat RRSO 0% lub w zestawie z drugim kompletnym naczyniem miksującym za jedyne 499 zł (zamiast 1 400 zł)!",
+    price: "6 669 zł",
+    note: "Cofidis · Alior Bank · Credit Agricole",
+    img: "https://media.vorwerk.com/is/image/vorwerk/1080x1350%20Thermomix%20promocja%20dodatkowe%20naczynie%20marzec?wid=600&fmt=webp",
+    start: "2026-02-20",  // YYYY-MM-DD
+    end: "2026-03-31",    // YYYY-MM-DD (włącznie)
+  },
+  {
+    id: "sodastream-02",
+    badge: "DO 28.02",
+    barText: "Thermomix® TM7 + SodaStream za 49 zł — do 28.02.2026",
+    title: "Thermomix® TM7 + SodaStream za 49 zł",
+    subtitle: "Thermomix® TM7 + SodaStream za 49 zł",
+    description: "Zamów nowy Thermomix® TM7 i odbierz elegancki saturator SodaStream w promocyjnej cenie. Idealne połączenie smaku i stylu!",
+    price: "6 669 zł",
+    note: "Nie łączy się z innymi promocjami",
+    img: "https://media.vorwerk.com/is/image/vorwerk/oferta-luty-thermomix-tm7-sodastream-zestaw-vorwerk?wid=600&fmt=webp",
+    start: "2026-02-01",
+    end: "2026-02-28",
+  },
+  // ── SZABLON — skopiuj i uzupełnij ──
+  // {
+  //   id: "nazwa-promocji",
+  //   badge: "NOWOŚĆ",
+  //   barText: "Krótki tekst do paska na górze strony",
+  //   title: "Tytuł promocji",
+  //   subtitle: "Podtytuł do sekcji na stronie",
+  //   description: "Dłuższy opis promocji.",
+  //   price: "6 669 zł",
+  //   note: "Dodatkowa informacja",
+  //   img: "https://...",
+  //   start: "2026-04-01",
+  //   end: "2026-04-30",
+  // },
+];
+
+// Filtruj aktywne promocje po dacie
+function getActivePromos() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return PROMOTIONS.filter(p => {
+    const start = new Date(p.start + "T00:00:00");
+    const end = new Date(p.end + "T23:59:59");
+    return today >= start && today <= end;
+  });
+}
+
+// Format daty: "2026-02-28" → "28.02.2026"
+function formatDate(isoDate) {
+  const [y, m, d] = isoDate.split("-");
+  return `${d}.${m}.${y}`;
+}
 
 // ═══════════════════════════════════════════════════════════
 // TM7 IMAGES — oficjalne CDN Vorwerk
@@ -145,19 +193,21 @@ function GoldCorners({ size = 24, thickness = 1.5 }) {
 // ═══════════════════════════════════════════════════════════
 function PromoBar({ onClose, onDetails }) {
   const [idx, setIdx] = useState(0);
-  const promos = [
-    "NOWOŚĆ: 36 rat RRSO 0% + drugie naczynie za 499 zł — do 31.03",
-    "Thermomix® TM7 + SodaStream za 49 zł — do 28.02.2026",
-  ];
+  const activePromos = getActivePromos();
+  const texts = activePromos.map(p => p.barText);
+
   useEffect(() => {
-    const t = setInterval(() => setIdx(i => (i + 1) % promos.length), 5000);
+    if (texts.length <= 1) return;
+    const t = setInterval(() => setIdx(i => (i + 1) % texts.length), 5000);
     return () => clearInterval(t);
-  }, []);
+  }, [texts.length]);
+
+  if (texts.length === 0) return null;
 
   return (
     <div style={{ background: C.dark, color: C.goldPale, padding: "11px 20px", fontSize: 13, textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap", letterSpacing: "0.06em", fontWeight: 500 }}>
       <span style={{ transition: "opacity 0.4s", cursor: "default" }}>
-        <span style={{ color: C.gold, marginRight: 8 }}>✦</span>{promos[idx]}
+        <span style={{ color: C.gold, marginRight: 8 }}>✦</span>{texts[idx % texts.length]}
       </span>
       <a href="#" onClick={(e) => { e.preventDefault(); onDetails(); }} style={{ color: C.gold, fontWeight: 600, textDecoration: "none", borderBottom: `1px solid ${C.gold}`, paddingBottom: 1, cursor: "pointer" }}>Szczegóły</a>
       <button onClick={onClose} style={{ background: "none", border: "none", color: "rgba(232,226,216,0.35)", cursor: "pointer", fontSize: 16, padding: "0 0 0 8px", lineHeight: 1 }}>×</button>
@@ -280,22 +330,28 @@ function Hero() {
 // PROMO SECTION
 // ═══════════════════════════════════════════════════════════
 function PromoSection() {
-  if (!CONFIG.promoSection.active) return null;
+  const activePromos = getActivePromos();
+  if (activePromos.length === 0) return null;
+
   return (
     <section style={{ background: C.cream, padding: "80px 24px" }}>
-      <Reveal>
-        <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center", background: C.white, padding: "56px 40px", border: `1px solid ${C.goldBorder}`, position: "relative" }}>
-          <GoldCorners />
-          <div style={{ fontSize: 11, fontWeight: 600, color: C.gold, marginBottom: 16, letterSpacing: "0.2em", textTransform: "uppercase" }}>✦&ensp;Oferta limitowana&ensp;✦</div>
-          <h3 style={{ fontFamily: fontSerif, fontSize: "clamp(24px, 4vw, 34px)", color: C.text, marginBottom: 16, fontWeight: 600 }}>{CONFIG.promoSection.subtitle}</h3>
-          <div style={{ width: 40, height: 1, background: C.gold, margin: "0 auto 16px" }} />
-          <p style={{ fontSize: 16, color: C.textMed, marginBottom: 12, lineHeight: 1.7 }}>{CONFIG.promoSection.description}</p>
-          <p style={{ fontSize: 14, color: C.textLight, marginBottom: 28 }}>
-            Ważne do <strong style={{ color: C.text }}>{CONFIG.promoSection.deadline}</strong>&ensp;·&ensp;Cena: <strong style={{ color: C.text }}>{CONFIG.promoSection.price}</strong>
-          </p>
-          <a href="#rezerwacja" style={S.btn}>{CONFIG.promoSection.ctaText}</a>
-        </div>
-      </Reveal>
+      <div style={{ maxWidth: 800, margin: "0 auto", display: "flex", flexDirection: "column", gap: 24 }}>
+        {activePromos.map((promo, i) => (
+          <Reveal key={promo.id} delay={i * 0.1}>
+            <div style={{ textAlign: "center", background: C.white, padding: "56px 40px", border: `1px solid ${C.goldBorder}`, position: "relative" }}>
+              <GoldCorners />
+              <div style={{ fontSize: 11, fontWeight: 600, color: C.gold, marginBottom: 16, letterSpacing: "0.2em", textTransform: "uppercase" }}>✦&ensp;{promo.badge}&ensp;✦</div>
+              <h3 style={{ fontFamily: fontSerif, fontSize: "clamp(24px, 4vw, 34px)", color: C.text, marginBottom: 16, fontWeight: 600 }}>{promo.subtitle}</h3>
+              <div style={{ width: 40, height: 1, background: C.gold, margin: "0 auto 16px" }} />
+              <p style={{ fontSize: 16, color: C.textMed, marginBottom: 12, lineHeight: 1.7 }}>{promo.description}</p>
+              <p style={{ fontSize: 14, color: C.textLight, marginBottom: 28 }}>
+                Ważne do <strong style={{ color: C.text }}>{formatDate(promo.end)}</strong>&ensp;·&ensp;Cena: <strong style={{ color: C.text }}>{promo.price}</strong>
+              </p>
+              <a href="#rezerwacja" style={S.btn}>Umów bezpłatną prezentację</a>
+            </div>
+          </Reveal>
+        ))}
+      </div>
     </section>
   );
 }
@@ -329,7 +385,7 @@ function About() {
             <p style={{ marginBottom: 16 }}>Gotowanie to moja pasja od lat. Gotuję codziennie dla mojej dużej rodziny — i uwielbiam każdą chwilę spędzoną w kuchni. Znajomi mówią, że mam do tego talent, ja mówię, że po prostu kocham dobrze karmić bliskich.</p>
             <p style={{ marginBottom: 16 }}>A Thermomix? Zabawna historia — dostałam go w prezencie i byłam oburzona. <em>„Ja umiem gotować! Po co mi to?!"</em> Ale ciekawość wygrała. I okazało się, że Thermomix nie zastępuje umiejętności — on je wzmacnia.</p>
             <p style={{ marginBottom: 16 }}>Dziś chcę to samo pokazać Tobie. Nie jestem typową sprzedawczynią — jestem osobą, która sama nie wierzyła, a teraz nie wyobraża sobie kuchni bez Thermomixa.</p>
-            <p>Przyjadę do Ciebie, ugotuję, porozmawiamy. Zero presji, czysta przyjemność. Prezentacje prowadzę w Trójmieście oraz online w całej Polsce.</p>
+            <p>Przyjadę do Ciebie, ugotuję, porozmawiamy. Zero presji, czysta przyjemność. Pokazy prowadzę w Trójmieście oraz online w całej Polsce.</p>
           </div>
           <div style={{ marginTop: 28, padding: "24px 28px", background: `linear-gradient(135deg, ${C.goldGlow} 0%, transparent 100%)`, borderLeft: `2px solid ${C.gold}` }}>
             <p style={{ fontFamily: fontSerif, fontStyle: "italic", color: C.text, fontSize: 16, lineHeight: 1.8, margin: 0 }}>
@@ -366,7 +422,7 @@ function Gallery() {
           <Reveal delay={0.1}><p style={{ ...S.subtitleLight, margin: "0 auto 16px" }}>Poznaj urządzenie, które zmienia zasady gry w kuchni.</p></Reveal>
           <Reveal delay={0.15}>
             <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap", marginBottom: 48 }}>
-              <span style={{ fontSize: 13, color: C.gold, letterSpacing: "0.08em" }}>✦ CENA: {CONFIG.promoSection.price}</span>
+              <span style={{ fontSize: 13, color: C.gold, letterSpacing: "0.08em" }}>✦ CENA: 6 669 zł</span>
               <span style={{ fontSize: 13, color: C.textOnDarkMed }}>|</span>
               <span style={{ fontSize: 13, color: C.goldPale, letterSpacing: "0.08em" }}>RATY OD 185 ZŁ/MIES.</span>
             </div>
@@ -481,7 +537,7 @@ function Specs() {
 // ═══════════════════════════════════════════════════════════
 function WhatToExpect() {
   const items = [
-    { icon: "✦", title: "Thermomix w akcji", desc: "Prezentacja na żywo — zobaczysz jak działa" },
+    { icon: "✦", title: "Thermomix w akcji", desc: "Pokaz na żywo — zobaczysz jak działa" },
     { icon: "✦", title: "Wspólne gotowanie", desc: "Przygotujemy pełen posiłek razem" },
     { icon: "✦", title: "Składniki od nas", desc: "Nie musisz niczego przygotowywać" },
     { icon: "✦", title: "Degustacja", desc: "Spróbujesz każdej przygotowanej potrawy" },
@@ -491,7 +547,7 @@ function WhatToExpect() {
     <section style={{ background: C.cream, padding: "100px 24px" }}>
       <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
         <Reveal><div style={S.divider} /><h2 style={S.h2}>Czego się spodziewać na prezentacji</h2></Reveal>
-        <Reveal delay={0.1}><p style={{ ...S.subtitle, margin: "0 auto 48px" }}>Prezentacja to wspólne gotowanie, degustacja i rozmowa. Bez slajdów, bez presji.</p></Reveal>
+        <Reveal delay={0.1}><p style={{ ...S.subtitle, margin: "0 auto 48px" }}>Pokaz to wspólne gotowanie, degustacja i rozmowa. Bez slajdów, bez presji.</p></Reveal>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 2, justifyContent: "center" }}>
           {items.map((it, i) => (
             <Reveal key={i} delay={0.1 + i * 0.08} style={{ flex: "1 1 170px", maxWidth: 210 }}>
@@ -910,24 +966,9 @@ function GlobalStyles() {
 // ═══════════════════════════════════════════════════════════
 function PromoPopup({ onClose }) {
   const [active, setActive] = useState(0);
-  const promos = [
-    {
-      badge: "NOWOŚĆ",
-      title: "36 rat RRSO 0% + drugie naczynie za 499 zł",
-      desc: "Kup Thermomix® TM7 na 36 rat RRSO 0% lub w zestawie z drugim kompletnym naczyniem miksującym za jedyne 499 zł (zamiast 1 400 zł)!",
-      deadline: "31.03.2026",
-      note: "Cofidis · Alior Bank · Credit Agricole",
-      img: "https://media.vorwerk.com/is/image/vorwerk/1080x1350%20Thermomix%20promocja%20dodatkowe%20naczynie%20marzec?wid=600&fmt=webp",
-    },
-    {
-      badge: "DO 28.02",
-      title: "Thermomix® TM7 + SodaStream za 49 zł",
-      desc: "Zamów nowy Thermomix® TM7 i odbierz elegancki saturator SodaStream w promocyjnej cenie. Idealne połączenie smaku i stylu!",
-      deadline: "28.02.2026",
-      note: "Nie łączy się z innymi promocjami",
-      img: "https://media.vorwerk.com/is/image/vorwerk/oferta-luty-thermomix-tm7-sodastream-zestaw-vorwerk?wid=600&fmt=webp",
-    },
-  ];
+  const promos = getActivePromos();
+
+  if (promos.length === 0) { onClose(); return null; }
 
   return (
     <div style={{ position: "fixed", inset: 0, zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
@@ -938,41 +979,40 @@ function PromoPopup({ onClose }) {
         {/* Header */}
         <div style={{ background: `linear-gradient(135deg, ${C.forest} 0%, ${C.dark} 100%)`, padding: "24px 28px 16px", textAlign: "center" }}>
           <div style={{ fontSize: 11, color: C.gold, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 8, fontWeight: 600 }}>✦&ensp;Aktualne promocje Thermomix®&ensp;✦</div>
-          <div style={{ fontSize: 13, color: C.textOnDarkMed }}>Wybierz ofertę, która Ci odpowiada</div>
+          <div style={{ fontSize: 13, color: C.textOnDarkMed }}>{promos.length > 1 ? "Wybierz ofertę, która Ci odpowiada" : "Sprawdź aktualną ofertę"}</div>
         </div>
 
-        {/* Tabs */}
-        <div style={{ display: "flex", borderBottom: `1px solid rgba(196,162,101,0.15)` }}>
-          {promos.map((p, i) => (
-            <button key={i} onClick={() => setActive(i)} style={{
-              flex: 1, padding: "14px 12px", background: active === i ? "rgba(196,162,101,0.08)" : "transparent",
-              border: "none", borderBottom: active === i ? `2px solid ${C.gold}` : "2px solid transparent",
-              color: active === i ? C.gold : C.textOnDarkMed, fontSize: 12, fontWeight: 600,
-              fontFamily: fontSans, cursor: "pointer", letterSpacing: "0.04em", transition: "all 0.3s",
-            }}>
-              {p.badge}
-            </button>
-          ))}
-        </div>
+        {/* Tabs — only if multiple */}
+        {promos.length > 1 && (
+          <div style={{ display: "flex", borderBottom: `1px solid rgba(196,162,101,0.15)` }}>
+            {promos.map((p, i) => (
+              <button key={p.id} onClick={() => setActive(i)} style={{
+                flex: 1, padding: "14px 12px", background: active === i ? "rgba(196,162,101,0.08)" : "transparent",
+                border: "none", borderBottom: active === i ? `2px solid ${C.gold}` : "2px solid transparent",
+                color: active === i ? C.gold : C.textOnDarkMed, fontSize: 12, fontWeight: 600,
+                fontFamily: fontSans, cursor: "pointer", letterSpacing: "0.04em", transition: "all 0.3s",
+              }}>
+                {p.badge}
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Content with image */}
         <div>
-          {/* Image — full width */}
-         <div style={{ width: "100%", background: C.darkCard, textAlign: "center", padding: 8 }}>
-  <img src={promos[active].img} alt={promos[active].title} style={{ maxWidth: "100%", maxHeight: 680, objectFit: "contain" }} />
-</div>
-
-          {/* Text */}
+          <div style={{ width: "100%", background: C.darkCard, textAlign: "center", padding: 8 }}>
+            <img src={promos[active].img} alt={promos[active].title} style={{ maxWidth: "100%", maxHeight: 680, objectFit: "contain" }} />
+          </div>
           <div style={{ padding: "24px 28px 16px" }}>
             <h3 style={{ fontFamily: fontSerif, fontSize: 22, color: C.white, fontWeight: 600, marginBottom: 10, lineHeight: 1.3 }}>
               {promos[active].title}
             </h3>
             <div style={{ width: 40, height: 1, background: C.gold, marginBottom: 10 }} />
             <p style={{ fontSize: 14, color: C.textOnDarkMed, lineHeight: 1.7, marginBottom: 12 }}>
-              {promos[active].desc}
+              {promos[active].description}
             </p>
             <div style={{ fontSize: 11, color: C.textOnDarkMed, marginBottom: 4 }}>
-              <span>⏳ Do: <strong style={{ color: C.goldLight }}>{promos[active].deadline}</strong></span>
+              <span>⏳ Do: <strong style={{ color: C.goldLight }}>{formatDate(promos[active].end)}</strong></span>
             </div>
             <div style={{ fontSize: 10, color: C.textOnDarkMed }}>{promos[active].note}</div>
           </div>
@@ -1005,7 +1045,7 @@ function PromoPopup({ onClose }) {
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [promoVisible, setPromoVisible] = useState(true);
-  const [popupOpen, setPopupOpen] = useState(CONFIG.promoPopup);
+  const [popupOpen, setPopupOpen] = useState(CONFIG.promoPopup && getActivePromos().length > 0);
   useEffect(() => {
     const link = document.querySelector("link[rel~='icon']") || document.createElement('link');
     link.rel = 'icon';
