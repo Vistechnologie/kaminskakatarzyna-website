@@ -7,7 +7,7 @@ const CONFIG = {
   brandName: "Katarzyna Kamińska",
   shortName: "Kasia",
   tagline: "Autoryzowany przedstawiciel Thermomix®",
-  region: "Trójmiasto · Pokazy online w całej Polsce",
+  region: "Trójmiasto · Prezentacje online w całej Polsce",
   domain: "kaminskakatarzyna.com",
   phone: "506 507 563",
   phoneFormatted: "+48 506 507 563",
@@ -15,7 +15,7 @@ const CONFIG = {
   email: "kontakt@kaminskakatarzyna.com",
 instagram: "https://www.instagram.com/katarzyna.groszek?utm_source=qr&igsh=MWJicTE0bWt2dGQyMg==",
 facebook: "https://www.facebook.com/share/1aeVTjz83u/",
-  whatsappDefaultMsg: "Cześć Kasiu! Chciałabym umówić się na pokaz Thermomixa 😊",
+  whatsappDefaultMsg: "Cześć Kasiu! Chciałabym umówić się na prezentację Thermomixa 😊",
   promotion: {
     active: true,
     text: "Thermomix® TM7 + SodaStream za 49 zł — oferta do 28.02.2026",
@@ -30,7 +30,7 @@ facebook: "https://www.facebook.com/share/1aeVTjz83u/",
     description: "Zamów nowy Thermomix® TM7 do końca lutego i odbierz elegancki saturator SodaStream w promocyjnej cenie.",
     deadline: "28.02.2026",
     price: "6 669 zł",
-    ctaText: "Umów prywatny pokaz",
+    ctaText: "Umów bezpłatną prezentację",
 
   },
   promoPopup: true,  // false = wyłącza popup
@@ -186,7 +186,7 @@ function Nav({ scrolled }) {
           <a href={`tel:${CONFIG.phoneFormatted}`} style={{ textDecoration: "none", color: C.text, fontWeight: 600, fontSize: 14, letterSpacing: "0.04em", display: "flex", alignItems: "center", gap: 6 }}>
             <span style={{ fontSize: 15 }}>✆</span><span className="phone-text">{CONFIG.phone}</span>
           </a>
-          <a href="#rezerwacja" style={{ ...S.btn, padding: "10px 24px", fontSize: 12 }}>Umów pokaz</a>
+          <a href="#rezerwacja" style={{ ...S.btn, padding: "10px 24px", fontSize: 12 }}>Umów prezentację</a>
           <button onClick={() => setMenuOpen(!menuOpen)} className="mobile-menu-btn" style={{ display: "none", background: "none", border: "none", fontSize: 22, cursor: "pointer", color: C.text, padding: 4 }}>☰</button>
         </div>
       </div>
@@ -230,7 +230,7 @@ function Hero() {
           </Reveal>
           <Reveal delay={0.35}>
             <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-              <a href="#rezerwacja" style={S.btnLight}>Umów prywatny pokaz</a>
+              <a href="#rezerwacja" style={S.btnLight}>Umów bezpłatną prezentację</a>
               <a href="#tm7" style={S.btnOutlineLight}>Poznaj TM7</a>
             </div>
           </Reveal>
@@ -329,7 +329,7 @@ function About() {
             <p style={{ marginBottom: 16 }}>Gotowanie to moja pasja od lat. Gotuję codziennie dla mojej dużej rodziny — i uwielbiam każdą chwilę spędzoną w kuchni. Znajomi mówią, że mam do tego talent, ja mówię, że po prostu kocham dobrze karmić bliskich.</p>
             <p style={{ marginBottom: 16 }}>A Thermomix? Zabawna historia — dostałam go w prezencie i byłam oburzona. <em>„Ja umiem gotować! Po co mi to?!"</em> Ale ciekawość wygrała. I okazało się, że Thermomix nie zastępuje umiejętności — on je wzmacnia.</p>
             <p style={{ marginBottom: 16 }}>Dziś chcę to samo pokazać Tobie. Nie jestem typową sprzedawczynią — jestem osobą, która sama nie wierzyła, a teraz nie wyobraża sobie kuchni bez Thermomixa.</p>
-            <p>Przyjadę do Ciebie, ugotuję, porozmawiamy. Zero presji, czysta przyjemność. Pokazy prowadzę w Trójmieście oraz online w całej Polsce.</p>
+            <p>Przyjadę do Ciebie, ugotuję, porozmawiamy. Zero presji, czysta przyjemność. Prezentacje prowadzę w Trójmieście oraz online w całej Polsce.</p>
           </div>
           <div style={{ marginTop: 28, padding: "24px 28px", background: `linear-gradient(135deg, ${C.goldGlow} 0%, transparent 100%)`, borderLeft: `2px solid ${C.gold}` }}>
             <p style={{ fontFamily: fontSerif, fontStyle: "italic", color: C.text, fontSize: 16, lineHeight: 1.8, margin: 0 }}>
@@ -481,17 +481,17 @@ function Specs() {
 // ═══════════════════════════════════════════════════════════
 function WhatToExpect() {
   const items = [
-    { icon: "✦", title: "Thermomix w akcji", desc: "Pokaz na żywo — zobaczysz jak działa" },
+    { icon: "✦", title: "Thermomix w akcji", desc: "Prezentacja na żywo — zobaczysz jak działa" },
     { icon: "✦", title: "Wspólne gotowanie", desc: "Przygotujemy pełen posiłek razem" },
     { icon: "✦", title: "Składniki od nas", desc: "Nie musisz niczego przygotowywać" },
     { icon: "✦", title: "Degustacja", desc: "Spróbujesz każdej przygotowanej potrawy" },
-    { icon: "✦", title: "Zero zobowiązań", desc: "Bezpłatny pokaz bez presji zakupu" },
+    { icon: "✦", title: "Zero zobowiązań", desc: "Bezpłatna prezentacja bez presji zakupu" },
   ];
   return (
     <section style={{ background: C.cream, padding: "100px 24px" }}>
       <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
-        <Reveal><div style={S.divider} /><h2 style={S.h2}>Czego się spodziewać na pokazie</h2></Reveal>
-        <Reveal delay={0.1}><p style={{ ...S.subtitle, margin: "0 auto 48px" }}>Pokaz to wspólne gotowanie, degustacja i rozmowa. Bez slajdów, bez presji.</p></Reveal>
+        <Reveal><div style={S.divider} /><h2 style={S.h2}>Czego się spodziewać na prezentacji</h2></Reveal>
+        <Reveal delay={0.1}><p style={{ ...S.subtitle, margin: "0 auto 48px" }}>Prezentacja to wspólne gotowanie, degustacja i rozmowa. Bez slajdów, bez presji.</p></Reveal>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 2, justifyContent: "center" }}>
           {items.map((it, i) => (
             <Reveal key={i} delay={0.1 + i * 0.08} style={{ flex: "1 1 170px", maxWidth: 210 }}>
@@ -585,7 +585,7 @@ function Calculator() {
               <div style={{ fontSize: 13, color: C.textOnDarkMed, marginTop: 6 }}>miesięcznie</div>
               <div style={{ marginTop: 16, fontSize: 15, fontWeight: 600, color: C.textOnDark, borderTop: `1px solid rgba(196,162,101,0.2)`, paddingTop: 16 }}>✦&ensp;{Math.round(yearly).toLocaleString("pl-PL")} zł rocznie&ensp;✦</div>
             </div>
-            <div style={{ textAlign: "center", marginTop: 28 }}><a href="#rezerwacja" style={S.btn}>Przekonaj się na pokazie</a></div>
+            <div style={{ textAlign: "center", marginTop: 28 }}><a href="#rezerwacja" style={S.btn}>Przekonaj się na prezentacji</a></div>
             <p style={{ fontSize: 11, color: C.textLight, textAlign: "center", marginTop: 16 }}>Szacunek: posiłek na mieście ~35 zł/os., w domu ~12 zł/os.</p>
           </div>
         </Reveal>
@@ -658,10 +658,10 @@ function FAQ() {
     { q: "Ile kosztuje Thermomix?", a: "Nowy Thermomix® TM7 kosztuje 6 669 zł. Dostępne są opcje ratalne od 185 zł/mies. oraz regularne promocje." },
     { q: "Czy mogę kupić na raty?", a: "Tak! Oferuję wygodne raty 0% oraz inne formy finansowania. Szczegóły ustalimy na spotkaniu." },
     { q: "Czym różni się od zwykłego robota kuchennego?", a: "Thermomix gotuje! Nie tylko kroi i miesza, ale też podgrzewa, gotuje na parze, waży składniki i prowadzi Cię krok po kroku na 10-calowym ekranie dotykowym. Zastępuje ponad 20 urządzeń." },
-    { q: "Jak wygląda pokaz?", a: "Gotuję u Ciebie (lub online) pełny posiłek w ok. 1 godziny. Możesz zaprosić rodzinę i znajomych. Dla gospodarzy prezentacji Vorwerk przygotował specjalny katalog upominków." },
-    { q: "Czy pokaz jest naprawdę darmowy?", a: "Tak. Przyjeżdżam, gotuję, rozmawiamy. Nie musisz niczego kupować — zero zobowiązań." },
+    { q: "Jak wygląda prezentacja?", a: "Gotuję u Ciebie (lub online) pełny posiłek w ok. 1 godziny. Możesz zaprosić rodzinę i znajomych. Dla gospodarzy prezentacji Vorwerk przygotował specjalny katalog upominków." },
+    { q: "Czy prezentacja jest naprawdę darmowa?", a: "Tak. Przyjeżdżam, gotuję, rozmawiamy. Nie musisz niczego kupować — zero zobowiązań." },
     { q: "Co jeśli nie umiem gotować?", a: "To idealna sytuacja! Thermomix prowadzi Cię krok po kroku na ekranie. Wystarczy dodawać składniki." },
-    { q: "Czy można zamówić pokaz online?", a: "Oczywiście! Prowadzę pokazy na żywo przez internet. Gotuję w swojej kuchni, a Ty oglądasz i inspirujesz się." },
+    { q: "Czy można zamówić prezentację online?", a: "Oczywiście! Prowadzę prezentacje na żywo przez internet. Gotuję w swojej kuchni, a Ty oglądasz i inspirujesz się." },
     { q: "Mam starszy model — czy mogę wymienić?", a: "Tak. Vorwerk oferuje program wymiany starszych modeli (TM31/TM5/TM6) na nowy TM7." },
   ];
   return (
@@ -710,7 +710,7 @@ function Booking() {
       <div style={{ maxWidth: 1000, margin: "0 auto", position: "relative" }}>
         <div style={{ textAlign: "center", marginBottom: 48 }}>
           <Reveal><div style={S.divider} /></Reveal>
-          <Reveal delay={0.1}><h2 style={{ ...S.h2Light, marginBottom: 12 }}>Umów się na pokaz</h2></Reveal>
+          <Reveal delay={0.1}><h2 style={{ ...S.h2Light, marginBottom: 12 }}>Umów się na prezentację</h2></Reveal>
           <Reveal delay={0.15}><p style={{ fontSize: 16, color: C.textOnDarkMed, lineHeight: 1.7 }}>Zostaw dane lub zadzwoń — umówimy wygodny termin.</p></Reveal>
         </div>
         <div style={{ display: "flex", gap: 32, flexWrap: "wrap", alignItems: "stretch" }}>
@@ -764,7 +764,7 @@ function Booking() {
     }} />
     <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "linear-gradient(transparent, rgba(13,26,15,0.85))", padding: "40px 20px 16px", textAlign: "center", zIndex: 1 }}>
       <div style={{ fontFamily: fontSerif, fontSize: 18, color: C.textOnDark, fontWeight: 600, marginBottom: 4 }}>{CONFIG.shortName} + Thermomix</div>
-      <div style={{ fontSize: 12, color: C.textOnDarkMed, letterSpacing: "0.08em" }}>Zapraszam na pokaz!</div>
+      <div style={{ fontSize: 12, color: C.textOnDarkMed, letterSpacing: "0.08em" }}>Zapraszam na prezentację!</div>
     </div>
   </div>
 </Reveal>
@@ -981,11 +981,11 @@ function PromoPopup({ onClose }) {
         {/* CTA */}
         <div style={{ padding: "0 24px 24px" }}>
           <a href="#rezerwacja" onClick={onClose} style={{ ...S.btnLight, width: "100%", justifyContent: "center" }}>
-            Umów pokaz i skorzystaj
+            Umów prezentację i skorzystaj
           </a>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", marginTop: 12 }}>
             <a href={`tel:${CONFIG.phoneFormatted}`} style={{ fontSize: 13, color: C.gold, textDecoration: "none", fontWeight: 600 }}>✆ {CONFIG.phone}</a>
-            <a href={`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent("Cześć Kasiu! Widziałam promocję na stronie — chciałabym się umówić na pokaz!")}`}
+            <a href={`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent("Cześć Kasiu! Widziałam promocję na stronie — chciałabym się umówić na prezentację!")}`}
               target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: C.gold, textDecoration: "none", fontWeight: 600 }}>WhatsApp →</a>
           </div>
         </div>
