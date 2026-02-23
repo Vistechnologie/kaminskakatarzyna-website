@@ -60,7 +60,12 @@ const TM7 = {
 };
 
 // ═══════════════════════════════════════════════════════════
-// LUXURY PALETTE
+// KASIA IMAGES — zdjęcia profilowe
+// ═══════════════════════════════════════════════════════════
+const KASIA = {
+  portrait: "/kasia-portrait.jpg",   // uśmiech, orchidea
+  writing: "/kasia-writing.jpg",     // z notesem
+};
 // ═══════════════════════════════════════════════════════════
 const C = {
   gold: "#C4A265",
@@ -233,6 +238,9 @@ function Hero() {
 
        <Reveal delay={0.45}>
             <div style={{ display: "flex", gap: 20, marginTop: 28, alignItems: "center" }}>
+              <div style={{ width: 40, height: 40, borderRadius: "50%", overflow: "hidden", border: `1.5px solid ${C.gold}`, flexShrink: 0 }}>
+                <img src={KASIA.portrait} alt="Kasia" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 15%" }} />
+              </div>
               <a href={CONFIG.instagram} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: C.textOnDarkMed, fontSize: 13, fontWeight: 500, letterSpacing: "0.06em", borderBottom: `1px solid rgba(232,226,216,0.2)`, paddingBottom: 2, transition: "color 0.3s" }}>
                 Instagram
               </a>
@@ -302,10 +310,9 @@ function About() {
   return (
     <section id="omnie" style={{ background: C.white, padding: "100px 24px" }}>
       <div style={{ maxWidth: 920, margin: "0 auto", display: "flex", gap: 56, alignItems: "flex-start", flexWrap: "wrap" }}>
-        <Reveal style={{ flex: "0 0 auto" }}>
-          <div style={{ width: 240, height: 300, background: C.creamDark, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", border: `1px solid ${C.goldBorder}` }}>
-            <span style={{ fontSize: 72, opacity: 0.8 }}>👩‍🍳</span>
-            <span style={{ fontSize: 11, color: C.textLight, marginTop: 12, letterSpacing: "0.08em", textTransform: "uppercase" }}>Zdjęcie wkrótce</span>
+        <Reveal style={{ flex: "0 0 auto", alignSelf: "stretch" }}>
+          <div style={{ width: 320, height: "100%", position: "relative", overflow: "hidden" }}>
+            <img src={KASIA.portrait} alt="Katarzyna Kamińska" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 10%", display: "block" }} />
             <div style={{ position: "absolute", bottom: -6, right: -6, width: 48, height: 48, borderBottom: `2px solid ${C.gold}`, borderRight: `2px solid ${C.gold}` }} />
             <div style={{ position: "absolute", top: -6, left: -6, width: 48, height: 48, borderTop: `2px solid ${C.gold}`, borderLeft: `2px solid ${C.gold}` }} />
           </div>
@@ -721,7 +728,7 @@ function Booking() {
           <Reveal delay={0.15}><p style={{ fontSize: 16, color: C.textOnDarkMed, lineHeight: 1.7 }}>Zostaw dane lub zadzwoń — umówimy wygodny termin.</p></Reveal>
         </div>
         <div style={{ display: "flex", gap: 32, flexWrap: "wrap", alignItems: "stretch" }}>
-          {/* FORM */}
+          {/* FORM + PHONE merged */}
           <Reveal delay={0.2} style={{ flex: "1 1 340px", minWidth: 300 }}>
             <div style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${C.goldBorder}`, padding: "36px 28px", position: "relative", height: "100%", display: "flex", flexDirection: "column" }}>
               <GoldCorners size={18} thickness={1} />
@@ -734,7 +741,7 @@ function Booking() {
                 <label style={{ display: "block", fontSize: 11, color: C.goldLight, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8, textAlign: "left" }}>Telefon *</label>
                 <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="Twój numer telefonu" style={inp} />
               </div>
-              <div style={{ marginBottom: 24, flex: 1 }}>
+              <div style={{ marginBottom: 24 }}>
                 <label style={{ display: "block", fontSize: 11, color: C.goldLight, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8, textAlign: "left" }}>Wiadomość <span style={{ color: C.textOnDarkMed }}>(opcjonalnie)</span></label>
                 <textarea value={message} onChange={e => setMessage(e.target.value)} placeholder="Np. preferowany termin, pytania..." rows={3} style={{ ...inp, resize: "vertical" }} />
               </div>
@@ -742,27 +749,28 @@ function Booking() {
                 {sent ? "✓ Wysłano!" : "Wyślij — oddzwonię"}
               </button>
               <p style={{ fontSize: 11, color: C.textOnDarkMed, marginTop: 12, textAlign: "center" }}>Otworzy WhatsApp z Twoimi danymi</p>
-            </div>
-          </Reveal>
-          {/* PHOTO + PHONE */}
-          <Reveal delay={0.3} style={{ flex: "1 1 340px", minWidth: 300 }}>
-            <div style={{ height: "100%", display: "flex", flexDirection: "column", gap: 20 }}>
-              <div style={{ flex: 1, background: `linear-gradient(135deg, ${C.darkCard} 0%, ${C.forestLight}40 100%)`, border: `1px solid ${C.goldBorder}`, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", minHeight: 240, overflow: "hidden" }}>
-                <div style={{ position: "absolute", top: 12, left: 12, width: 24, height: 24, borderTop: `1.5px solid ${C.gold}`, borderLeft: `1.5px solid ${C.gold}` }} />
-                <div style={{ position: "absolute", bottom: 12, right: 12, width: 24, height: 24, borderBottom: `1.5px solid ${C.gold}`, borderRight: `1.5px solid ${C.gold}` }} />
-                <span style={{ fontSize: 64, marginBottom: 8 }}>👩‍🍳</span>
-                <div style={{ fontFamily: fontSerif, fontSize: 18, color: C.textOnDark, fontWeight: 600, marginBottom: 4 }}>{CONFIG.shortName} + Thermomix</div>
-                <div style={{ fontSize: 12, color: C.textOnDarkMed, letterSpacing: "0.08em", textTransform: "uppercase" }}>Zdjęcie wkrótce</div>
-              </div>
-              <div style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${C.goldBorder}`, padding: "28px 24px", textAlign: "center" }}>
-                <div style={{ fontSize: 11, color: C.gold, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16, fontWeight: 600 }}>✦&ensp;Wolisz zadzwonić?</div>
-                <a href={`tel:${CONFIG.phoneFormatted}`} style={{ fontFamily: fontSerif, fontSize: 32, color: C.gold, textDecoration: "none", fontWeight: 600, display: "block", marginBottom: 12 }}>{CONFIG.phone}</a>
-                <p style={{ fontSize: 13, color: C.textOnDarkMed, lineHeight: 1.6, marginBottom: 16 }}>Zadzwoń lub napisz SMS — odezwę się najszybciej jak mogę</p>
+
+              {/* Phone section merged */}
+              <div style={{ marginTop: 24, paddingTop: 24, borderTop: `1px solid ${C.goldBorder}`, textAlign: "center" }}>
+                <div style={{ fontSize: 11, color: C.gold, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 12, fontWeight: 600 }}>✦&ensp;Wolisz zadzwonić?</div>
+                <a href={`tel:${CONFIG.phoneFormatted}`} style={{ fontFamily: fontSerif, fontSize: 30, color: C.gold, textDecoration: "none", fontWeight: 600, display: "block", marginBottom: 10 }}>{CONFIG.phone}</a>
                 <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
                   <a href={`tel:${CONFIG.phoneFormatted}`} style={{ ...S.btnOutlineLight, padding: "10px 20px", fontSize: 12 }}>Zadzwoń</a>
                   <a href={`sms:${CONFIG.phoneFormatted}`} style={{ ...S.btnOutlineLight, padding: "10px 20px", fontSize: 12 }}>SMS</a>
                   <a href={`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(CONFIG.whatsappDefaultMsg)}`} target="_blank" rel="noopener noreferrer" style={{ ...S.btnOutlineLight, padding: "10px 20px", fontSize: 12 }}>WhatsApp</a>
                 </div>
+              </div>
+            </div>
+          </Reveal>
+          {/* PHOTO — full height right column */}
+          <Reveal delay={0.3} style={{ flex: "1 1 340px", minWidth: 300 }}>
+            <div style={{ height: "100%", position: "relative", overflow: "hidden", border: `1px solid ${C.goldBorder}` }}>
+              <div style={{ position: "absolute", top: 12, left: 12, width: 24, height: 24, borderTop: `1.5px solid ${C.gold}`, borderLeft: `1.5px solid ${C.gold}`, zIndex: 2 }} />
+              <div style={{ position: "absolute", bottom: 12, right: 12, width: 24, height: 24, borderBottom: `1.5px solid ${C.gold}`, borderRight: `1.5px solid ${C.gold}`, zIndex: 2 }} />
+              <img src={KASIA.writing} alt={`${CONFIG.shortName} — Thermomix`} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 20%", display: "block" }} />
+              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "linear-gradient(transparent, rgba(13,26,15,0.85))", padding: "40px 20px 16px", textAlign: "center" }}>
+                <div style={{ fontFamily: fontSerif, fontSize: 18, color: C.textOnDark, fontWeight: 600, marginBottom: 4 }}>{CONFIG.shortName} + Thermomix</div>
+                <div style={{ fontSize: 12, color: C.textOnDarkMed, letterSpacing: "0.08em" }}>Zapraszam na pokaz!</div>
               </div>
             </div>
           </Reveal>
@@ -779,7 +787,12 @@ function Contact() {
   return (
     <section id="kontakt" style={{ background: C.white, padding: "100px 24px" }}>
       <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
-        <Reveal><div style={S.divider} /><h2 style={S.h2}>Kontakt</h2></Reveal>
+        <Reveal>
+          <div style={{ width: 96, height: 96, borderRadius: "50%", overflow: "hidden", margin: "0 auto 20px", border: `2px solid ${C.gold}`, boxShadow: `0 0 0 6px ${C.goldGlow}` }}>
+            <img src={KASIA.writing} alt="Kasia" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 15%" }} />
+          </div>
+          <div style={S.divider} /><h2 style={S.h2}>Kontakt</h2>
+        </Reveal>
         <Reveal delay={0.1}><p style={{ ...S.subtitle, margin: "0 auto 48px" }}>Chętnie odpowiem na pytania. Napisz, zadzwoń lub kliknij.</p></Reveal>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 2 }}>
           {[
@@ -843,6 +856,9 @@ function Footer() {
   return (
     <footer style={{ background: C.dark, padding: "48px 24px", textAlign: "center", position: "relative" }}>
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent 20%, ${C.gold}40 50%, transparent 80%)` }} />
+      <div style={{ width: 56, height: 56, borderRadius: "50%", overflow: "hidden", margin: "0 auto 16px", border: `1.5px solid ${C.gold}` }}>
+        <img src={KASIA.portrait} alt="Kasia" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 15%" }} />
+      </div>
       <div style={{ fontFamily: fontSerif, fontSize: 18, fontWeight: 600, color: C.textOnDark, marginBottom: 6 }}>{CONFIG.brandName}</div>
       <div style={{ fontSize: 12, color: C.textOnDarkMed, marginBottom: 20, letterSpacing: "0.1em", textTransform: "uppercase" }}>{CONFIG.tagline}</div>
       <a href={`tel:${CONFIG.phoneFormatted}`} style={{ color: C.gold, textDecoration: "none", fontSize: 15, fontWeight: 600 }}>{CONFIG.phone}</a>
