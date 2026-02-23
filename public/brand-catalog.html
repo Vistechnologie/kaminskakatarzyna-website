@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Catalog — Katarzyna Kamińska · Thermomix®</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C4A265;
+  --gold-light: #D4B87A;
+  --gold-pale: #E8D5A8;
+  --gold-glow: rgba(196,162,101,0.15);
+  --gold-border: rgba(196,162,101,0.25);
+  --dark: #0D1A0F;
+  --dark-soft: #152118;
+  --dark-card: #1A2B1E;
+  --forest: #1E3A25;
+  --forest-light: #2A5035;
+  --cream: #FAF6EF;
+  --cream-dark: #F0EBE0;
+  --cream-mid: #E8E0D0;
+  --white: #FFFFFF;
+  --text: #1A1A18;
+  --text-med: #5A5750;
+  --text-light: #8A8578;
+  --text-on-dark: #E8E2D8;
+  --text-on-dark-med: rgba(232,226,216,0.65);
+  --font-sans: 'DM Sans', 'Helvetica Neue', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font-sans); background: #F5F2ED; color: var(--text); -webkit-font-smoothing: antialiased; }
+
+.catalog-header {
+  background: var(--dark);
+  padding: 80px 48px 64px;
+  position: relative;
+  overflow: hidden;
+}
+.catalog-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gold);
+}
+.catalog-header::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,162,101,0.08) 0%, transparent 70%);
+}
+.catalog-header h1 {
+  font-family: var(--font-serif);
+  font-size: 52px;
+  color: var(--white);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  position: relative;
+  z-index: 1;
+}
+.catalog-header h1 span { color: var(--gold); }
+.catalog-header p {
+  color: var(--text-on-dark-med);
+  font-size: 15px;
+  margin-top: 16px;
+  letter-spacing: 0.04em;
+  position: relative;
+  z-index: 1;
+}
+.catalog-header .version {
+  display: inline-block;
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border: 1px solid var(--gold-border);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+section.block {
+  padding: 72px 0;
+  border-bottom: 1px solid rgba(26,26,24,0.08);
+}
+section.block:last-child { border-bottom: none; }
+
+.section-label {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.section-desc {
+  font-size: 15px;
+  color: var(--text-med);
+  line-height: 1.7;
+  margin-bottom: 48px;
+  max-width: 560px;
+}
+
+/* COLORS */
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+.color-card {
+  background: var(--white);
+  border: 1px solid rgba(26,26,24,0.06);
+  overflow: hidden;
+}
+.color-swatch {
+  height: 100px;
+  position: relative;
+}
+.color-swatch::after {
+  content: attr(data-hex);
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+.color-swatch.light-text::after { color: rgba(255,255,255,0.8); }
+.color-swatch.dark-text::after { color: rgba(0,0,0,0.5); }
+.color-info {
+  padding: 14px 16px;
+}
+.color-name {
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+.color-use {
+  font-size: 11px;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+.color-group-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 36px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--gold-border);
+  color: var(--text);
+}
+.color-group-title:first-of-type { margin-top: 0; }
+
+/* TYPOGRAPHY */
+.type-specimen {
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(26,26,24,0.06);
+}
+.type-specimen:last-child { border-bottom: none; }
+.type-meta {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.type-meta span {
+  font-size: 11px;
+  color: var(--text-light);
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  background: var(--cream);
+  border: 1px solid rgba(26,26,24,0.06);
+}
+.type-sample-serif {
+  font-family: var(--font-serif);
+}
+.type-sample-sans {
+  font-family: var(--font-sans);
+}
+
+/* BUTTONS */
+.btn-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 32px;
+}
+.btn-label {
+  font-size: 11px;
+  color: var(--text-light);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: 120px;
+  flex-shrink: 0;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 36px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-gold { background: var(--gold); color: var(--dark); }
+.btn-gold:hover { background: var(--gold-light); }
+.btn-outline { background: transparent; color: var(--text); border: 1.5px solid var(--text); }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+.btn-dark-row {
+  background: var(--dark);
+  padding: 32px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 32px;
+  position: relative;
+}
+.btn-dark-row .btn-label { color: var(--text-on-dark-med); }
+.btn-gold-dark { background: var(--gold); color: var(--dark); }
+.btn-outline-light { background: transparent; color: var(--text-on-dark); border: 1.5px solid rgba(232,226,216,0.3); }
+.btn-outline-light:hover { border-color: var(--gold); color: var(--gold); }
+
+/* CARDS */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2px;
+}
+.card-light {
+  background: var(--white);
+  padding: 36px 28px;
+  border: 1px solid rgba(26,26,24,0.06);
+  position: relative;
+}
+.card-light .gold-top {
+  position: absolute;
+  top: 0;
+  left: 25%;
+  right: 25%;
+  height: 2px;
+  background: var(--gold);
+}
+
+.card-dark-wrap {
+  background: var(--dark);
+  padding: 32px;
+  margin-top: 32px;
+}
+.card-dark {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--gold-border);
+  padding: 36px 28px;
+  position: relative;
+  max-width: 400px;
+}
+
+/* CORNERS */
+.gold-corner { position: absolute; }
+.gold-corner.tl { top: 12px; left: 12px; width: 24px; height: 24px; border-top: 1.5px solid var(--gold); border-left: 1.5px solid var(--gold); }
+.gold-corner.tr { top: 12px; right: 12px; width: 24px; height: 24px; border-top: 1.5px solid var(--gold); border-right: 1.5px solid var(--gold); }
+.gold-corner.bl { bottom: 12px; left: 12px; width: 24px; height: 24px; border-bottom: 1.5px solid var(--gold); border-left: 1.5px solid var(--gold); }
+.gold-corner.br { bottom: 12px; right: 12px; width: 24px; height: 24px; border-bottom: 1.5px solid var(--gold); border-right: 1.5px solid var(--gold); }
+
+/* ELEMENTS */
+.element-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+@media (max-width: 700px) { .element-grid { grid-template-columns: 1fr; } }
+
+.element-box {
+  padding: 32px;
+  background: var(--white);
+  border: 1px solid rgba(26,26,24,0.06);
+}
+.element-box-dark {
+  padding: 32px;
+  background: var(--dark);
+  border: 1px solid var(--gold-border);
+}
+.element-label {
+  font-size: 10px;
+  color: var(--text-light);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.element-label-dark {
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+/* DIVIDERS */
+.divider-gold { width: 48px; height: 1px; background: var(--gold); margin: 0 auto; }
+.divider-wide { width: 100%; height: 1px; background: var(--gold-border); }
+.divider-gradient { width: 100%; height: 1px; background: linear-gradient(90deg, transparent 20%, rgba(196,162,101,0.4) 50%, transparent 80%); }
+
+/* SPACING */
+.spacing-demo {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.spacing-item {
+  text-align: center;
+}
+.spacing-box {
+  background: var(--gold-glow);
+  border: 1px dashed var(--gold-border);
+  margin-bottom: 8px;
+}
+.spacing-val {
+  font-size: 11px;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+/* ICONS */
+.icon-grid {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.icon-item {
+  text-align: center;
+  width: 80px;
+}
+.icon-char {
+  font-size: 28px;
+  margin-bottom: 8px;
+  color: var(--gold);
+  font-family: var(--font-serif);
+}
+.icon-name {
+  font-size: 10px;
+  color: var(--text-light);
+  letter-spacing: 0.04em;
+}
+
+/* SECTIONS MAP */
+.section-map {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.section-map-item {
+  padding: 20px;
+  border: 1px solid rgba(26,26,24,0.06);
+  position: relative;
+}
+.section-map-item .num {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  color: var(--gold);
+  font-weight: 600;
+}
+.section-map-item .name {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+.section-map-item .bg-type {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+.section-map-item .bg-stripe {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+/* GRADIENTS */
+.gradient-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.gradient-card {
+  height: 120px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+}
+.gradient-card .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+.gradient-card .css {
+  font-size: 10px;
+  opacity: 0.6;
+  margin-top: 4px;
+  font-family: monospace;
+}
+</style>
+</head>
+<body>
+
+<header class="catalog-header">
+  <div class="container">
+    <div style="width:48px;height:1px;background:var(--gold);margin-bottom:20px"></div>
+    <h1>Brand <span>Catalog</span></h1>
+    <p>Katarzyna Kamińska · Thermomix® — System projektowy strony kaminskakatarzyna.com</p>
+    <div class="version">wersja 1.0 · luty 2026</div>
+  </div>
+</header>
+
+<main class="container">
+
+<!-- ═══════════════════════════════════════ -->
+<!-- KOLORY -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block">
+  <div class="section-label">01</div>
+  <div class="section-title">Paleta kolorów</div>
+  <div class="section-desc">Trzy grupy: złoto (akcent), ciemna zieleń (premium) i krem (jasne tło). Razem tworzą luksusowy, ciepły charakter.</div>
+
+  <div class="color-group-title">Złoto — akcent</div>
+  <div class="color-grid">
+    <div class="color-card">
+      <div class="color-swatch light-text" style="background:#C4A265" data-hex="#C4A265"></div>
+      <div class="color-info"><div class="color-name">Gold</div><div class="color-use">Przyciski CTA, linie, ikony, nagłówki na ciemnym</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch light-text" style="background:#D4B87A" data-hex="#D4B87A"></div>
+      <div class="color-info"><div class="color-name">Gold Light</div><div class="color-use">Labele formularza, hover CTA</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch dark-text" style="background:#E8D5A8" data-hex="#E8D5A8"></div>
+      <div class="color-info"><div class="color-name">Gold Pale</div><div class="color-use">Delikatne tła, dekoracje</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch dark-text" style="background:rgba(196,162,101,0.15);border:1px dashed rgba(196,162,101,0.3)" data-hex="opacity 15%"></div>
+      <div class="color-info"><div class="color-name">Gold Glow</div><div class="color-use">Radial glow, tła cytatów</div></div>
+    </div>
+  </div>
+
+  <div class="color-group-title">Ciemna zieleń — premium</div>
+  <div class="color-grid">
+    <div class="color-card">
+      <div class="color-swatch light-text" style="background:#0D1A0F" data-hex="#0D1A0F"></div>
+      <div class="color-info"><div class="color-name">Dark</div><div class="color-use">Hero, Booking, Footer — główne ciemne tło</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch light-text" style="background:#152118" data-hex="#152118"></div>
+      <div class="color-info"><div class="color-name">Dark Soft</div><div class="color-use">Gradienty tła</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch light-text" style="background:#1A2B1E" data-hex="#1A2B1E"></div>
+      <div class="color-info"><div class="color-name">Dark Card</div><div class="color-use">Tło kart na ciemnym</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch light-text" style="background:#1E3A25" data-hex="#1E3A25"></div>
+      <div class="color-info"><div class="color-name">Forest</div><div class="color-use">Gradienty, końcówki sekcji</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch light-text" style="background:#2A5035" data-hex="#2A5035"></div>
+      <div class="color-info"><div class="color-name">Forest Light</div><div class="color-use">Akcent zielony, gradienty kart</div></div>
+    </div>
+  </div>
+
+  <div class="color-group-title">Krem — jasne tło</div>
+  <div class="color-grid">
+    <div class="color-card">
+      <div class="color-swatch dark-text" style="background:#FAF6EF" data-hex="#FAF6EF"></div>
+      <div class="color-info"><div class="color-name">Cream</div><div class="color-use">Główne jasne tło strony</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch dark-text" style="background:#F0EBE0" data-hex="#F0EBE0"></div>
+      <div class="color-info"><div class="color-name">Cream Dark</div><div class="color-use">Tło kart, zdjęcia</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch dark-text" style="background:#E8E0D0" data-hex="#E8E0D0"></div>
+      <div class="color-info"><div class="color-name">Cream Mid</div><div class="color-use">Bordery, separatory</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch dark-text" style="background:#FFFFFF;border:1px solid #eee" data-hex="#FFFFFF"></div>
+      <div class="color-info"><div class="color-name">White</div><div class="color-use">Karty, sekcje O mnie / Kontakt</div></div>
+    </div>
+  </div>
+
+  <div class="color-group-title">Tekst</div>
+  <div class="color-grid">
+    <div class="color-card">
+      <div class="color-swatch light-text" style="background:#1A1A18" data-hex="#1A1A18"></div>
+      <div class="color-info"><div class="color-name">Text</div><div class="color-use">Nagłówki, tekst na jasnym tle</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch light-text" style="background:#5A5750" data-hex="#5A5750"></div>
+      <div class="color-info"><div class="color-name">Text Med</div><div class="color-use">Paragrafy, opisy</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch light-text" style="background:#8A8578" data-hex="#8A8578"></div>
+      <div class="color-info"><div class="color-name">Text Light</div><div class="color-use">Podpisy, metadane</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#0D1A0F" data-hex="#E8E2D8">
+        <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#E8E2D8;font-size:14px;font-weight:600">Aa Bb Cc</span>
+      </div>
+      <div class="color-info"><div class="color-name">Text on Dark</div><div class="color-use">Tekst na ciemnym tle</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- TYPOGRAFIA -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block">
+  <div class="section-label">02</div>
+  <div class="section-title">Typografia</div>
+  <div class="section-desc">Dwa fonty: Playfair Display (serif) do nagłówków i DM Sans (sans-serif) do tekstu. Kontrast buduje elegancję.</div>
+
+  <div class="type-specimen">
+    <div class="type-meta">
+      <span>Playfair Display</span>
+      <span>Nagłówki · Cytaty · Cena</span>
+      <span>Waga: 400 / 600 / 700</span>
+    </div>
+    <div class="type-sample-serif" style="font-size:48px;font-weight:600;line-height:1.15;color:var(--text);margin-bottom:12px">
+      Odkryj przyjemność<br><span style="color:var(--gold)">doskonałego</span> gotowania
+    </div>
+    <div class="type-sample-serif" style="font-size:32px;font-weight:600;color:var(--text);margin-bottom:12px">
+      Moja historia
+    </div>
+    <div class="type-sample-serif" style="font-size:22px;font-weight:600;color:var(--text);margin-bottom:12px">
+      Thermomix® TM7 + SodaStream za 49 zł
+    </div>
+    <div class="type-sample-serif" style="font-size:18px;font-style:italic;color:var(--text-med);line-height:1.8">
+      „Dostałam Thermomix w prezencie i byłam pewna, że go nie potrzebuję."
+    </div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-meta">
+      <span>DM Sans</span>
+      <span>Tekst · Przyciski · UI</span>
+      <span>Waga: 400 / 500 / 600 / 700</span>
+    </div>
+    <div class="type-sample-sans" style="font-size:17px;color:var(--text-med);line-height:1.8;margin-bottom:16px;max-width:600px">
+      Thermomix® TM7 — jedno urządzenie, które odmieni Twoją kuchnię. Oszczędność czasu, smak i elegancja w jednym.
+    </div>
+    <div class="type-sample-sans" style="font-size:14px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text);margin-bottom:12px">
+      UMÓW BEZPŁATNĄ PREZENTACJĘ
+    </div>
+    <div class="type-sample-sans" style="font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold)">
+      ✦&ensp;Formularz kontaktowy&ensp;✦
+    </div>
+  </div>
+
+  <div class="type-specimen" style="border-bottom:none;padding-bottom:0">
+    <div class="type-meta"><span>Skala wielkości</span></div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:baseline;gap:16px">
+        <span style="font-size:11px;color:var(--text-light);width:100px;flex-shrink:0">H1 — 56px</span>
+        <span class="type-sample-serif" style="font-size:42px;font-weight:600">Odkryj przyjemność</span>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:16px">
+        <span style="font-size:11px;color:var(--text-light);width:100px;flex-shrink:0">H2 — 48px</span>
+        <span class="type-sample-serif" style="font-size:36px;font-weight:600">Moja historia</span>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:16px">
+        <span style="font-size:11px;color:var(--text-light);width:100px;flex-shrink:0">H3 — 30px</span>
+        <span class="type-sample-serif" style="font-size:26px;font-weight:600">Poleć mnie bliskim</span>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:16px">
+        <span style="font-size:11px;color:var(--text-light);width:100px;flex-shrink:0">Body — 17px</span>
+        <span class="type-sample-sans" style="font-size:17px;color:var(--text-med)">Gotowanie to moja pasja od lat.</span>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:16px">
+        <span style="font-size:11px;color:var(--text-light);width:100px;flex-shrink:0">Small — 14px</span>
+        <span class="type-sample-sans" style="font-size:14px;color:var(--text-med)">Oczywiście! Prowadzę prezentacje na żywo.</span>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:16px">
+        <span style="font-size:11px;color:var(--text-light);width:100px;flex-shrink:0">Label — 11px</span>
+        <span class="type-sample-sans" style="font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold)">AUTORYZOWANY PRZEDSTAWICIEL</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PRZYCISKI -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block">
+  <div class="section-label">03</div>
+  <div class="section-title">Przyciski</div>
+  <div class="section-desc">Cztery warianty: pełne złoto (CTA), outline na jasnym, pełne złoto na ciemnym i outline na ciemnym. Brak border-radius — ostre krawędzie.</div>
+
+  <div class="btn-row">
+    <div class="btn-label">Primary</div>
+    <button class="btn btn-gold">Umów bezpłatną prezentację</button>
+  </div>
+  <div class="btn-row">
+    <div class="btn-label">Outline</div>
+    <button class="btn btn-outline">Poznaj TM7</button>
+  </div>
+  <div class="btn-row">
+    <div class="btn-label">Small</div>
+    <button class="btn btn-gold" style="padding:10px 24px;font-size:12px">Umów prezentację</button>
+    <button class="btn btn-outline" style="padding:10px 24px;font-size:12px">Zarezerwuj termin</button>
+  </div>
+
+  <div class="btn-dark-row">
+    <div class="btn-label">Na ciemnym — Primary</div>
+    <button class="btn btn-gold-dark">Umów bezpłatną prezentację</button>
+    <button class="btn btn-outline-light">Poznaj TM7</button>
+  </div>
+  <div class="btn-dark-row">
+    <div class="btn-label">Na ciemnym — Small</div>
+    <button class="btn btn-outline-light" style="padding:10px 20px;font-size:12px">Zadzwoń</button>
+    <button class="btn btn-outline-light" style="padding:10px 20px;font-size:12px">SMS</button>
+    <button class="btn btn-outline-light" style="padding:10px 20px;font-size:12px">WhatsApp</button>
+  </div>
+
+  <div style="margin-top:32px;padding:20px;background:var(--cream);border:1px solid rgba(26,26,24,0.06)">
+    <div class="element-label">Reguły</div>
+    <div style="font-size:13px;color:var(--text-med);line-height:1.8">
+      <strong>border-radius:</strong> 0 (zawsze)<br>
+      <strong>letter-spacing:</strong> 0.08em<br>
+      <strong>text-transform:</strong> uppercase<br>
+      <strong>font-weight:</strong> 600<br>
+      <strong>padding:</strong> 16px 36px (standard) · 10px 24px (small)<br>
+      <strong>transition:</strong> all 0.3s ease
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- KARTY -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block">
+  <div class="section-label">04</div>
+  <div class="section-title">Karty i kontenery</div>
+  <div class="section-desc">Dwa warianty kart: jasne (na białym/kremowym tle) z subtelnymi borderami, i ciemne z złotymi rogami i złotym borderem.</div>
+
+  <div class="card-grid" style="margin-bottom:24px">
+    <div class="card-light">
+      <div class="gold-top"></div>
+      <div style="font-family:var(--font-serif);font-size:28px;color:var(--gold);margin-bottom:12px">✆</div>
+      <div style="font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px">Telefon</div>
+      <div style="font-size:14px;color:var(--text-med)">506 507 563</div>
+    </div>
+    <div class="card-light">
+      <div class="gold-top"></div>
+      <div style="font-family:var(--font-serif);font-size:28px;color:var(--gold);margin-bottom:12px">✉</div>
+      <div style="font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px">WhatsApp</div>
+      <div style="font-size:14px;color:var(--text-med)">506 507 563</div>
+    </div>
+    <div class="card-light">
+      <div class="gold-top"></div>
+      <div style="font-family:var(--font-serif);font-size:28px;color:var(--gold);margin-bottom:12px">@</div>
+      <div style="font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px">Email</div>
+      <div style="font-size:14px;color:var(--text-med)">kontakt@kaminskakatarzyna.com</div>
+    </div>
+  </div>
+
+  <div class="card-dark-wrap">
+    <div style="font-size:10px;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;font-weight:600">Karta na ciemnym tle z Gold Corners</div>
+    <div class="card-dark">
+      <div class="gold-corner tl"></div>
+      <div class="gold-corner tr"></div>
+      <div class="gold-corner bl"></div>
+      <div class="gold-corner br"></div>
+      <div style="font-size:11px;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;font-weight:600">✦&ensp;Formularz kontaktowy</div>
+      <div style="font-size:14px;color:var(--text-on-dark);line-height:1.7">Treść karty z formularzem, inputami i przyciskami. Gold Corners w 4 rogach nadają ekskluzywny charakter.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ELEMENTY DEKORACYJNE -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block">
+  <div class="section-label">05</div>
+  <div class="section-title">Elementy dekoracyjne</div>
+  <div class="section-desc">Separatory, ikony, narożniki i inne elementy budujące luksusowy charakter.</div>
+
+  <div class="element-grid">
+    <div class="element-box">
+      <div class="element-label">Divider — złoty (48px)</div>
+      <div style="margin:24px 0"><div class="divider-gold"></div></div>
+      <div class="element-label" style="margin-top:32px">Divider — gradient (100%)</div>
+      <div style="margin:24px 0"><div class="divider-gradient"></div></div>
+      <div class="element-label" style="margin-top:32px">Divider — gold border (100%)</div>
+      <div style="margin:24px 0"><div class="divider-wide"></div></div>
+    </div>
+
+    <div class="element-box">
+      <div class="element-label">Ikony / symbole</div>
+      <div class="icon-grid">
+        <div class="icon-item"><div class="icon-char">✦</div><div class="icon-name">Złoty diamencik</div></div>
+        <div class="icon-item"><div class="icon-char">✓</div><div class="icon-name">Checkmark</div></div>
+        <div class="icon-item"><div class="icon-char">✆</div><div class="icon-name">Telefon</div></div>
+        <div class="icon-item"><div class="icon-char">✉</div><div class="icon-name">Email</div></div>
+        <div class="icon-item"><div class="icon-char">@</div><div class="icon-name">At</div></div>
+        <div class="icon-item"><div class="icon-char">→</div><div class="icon-name">Arrow</div></div>
+        <div class="icon-item"><div class="icon-char">⏳</div><div class="icon-name">Timer</div></div>
+        <div class="icon-item"><div class="icon-char">·</div><div class="icon-name">Dot sep</div></div>
+      </div>
+    </div>
+
+    <div class="element-box">
+      <div class="element-label">Gold Corners — jasne</div>
+      <div style="position:relative;width:200px;height:120px;border:1px solid rgba(26,26,24,0.06);margin:16px auto">
+        <div class="gold-corner tl"></div>
+        <div class="gold-corner tr"></div>
+        <div class="gold-corner bl"></div>
+        <div class="gold-corner br"></div>
+      </div>
+    </div>
+
+    <div class="element-box-dark">
+      <div class="element-label-dark">Gold Corners — ciemne</div>
+      <div style="position:relative;width:200px;height:120px;border:1px solid var(--gold-border);margin:16px auto;background:rgba(255,255,255,0.04)">
+        <div class="gold-corner tl"></div>
+        <div class="gold-corner tr"></div>
+        <div class="gold-corner bl"></div>
+        <div class="gold-corner br"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- GRADIENTY -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block">
+  <div class="section-label">06</div>
+  <div class="section-title">Gradienty</div>
+  <div class="section-desc">Gradienty używane na ciemnych sekcjach strony. Kierunek 175° dla subtelnej asymetrii.</div>
+
+  <div class="gradient-row">
+    <div class="gradient-card" style="background:linear-gradient(175deg, #0D1A0F 0%, #152118 40%, #1E3A25 100%)">
+      <div class="label" style="color:var(--text-on-dark)">Hero / Booking</div>
+      <div class="css" style="color:var(--text-on-dark-med)">175deg: dark → darkSoft → forest</div>
+    </div>
+    <div class="gradient-card" style="background:linear-gradient(135deg, #1E3A25 0%, #0D1A0F 100%)">
+      <div class="label" style="color:var(--text-on-dark)">Popup header</div>
+      <div class="css" style="color:var(--text-on-dark-med)">135deg: forest → dark</div>
+    </div>
+    <div class="gradient-card" style="background:linear-gradient(135deg, rgba(196,162,101,0.15) 0%, transparent 100%);border:1px solid rgba(26,26,24,0.06)">
+      <div class="label" style="color:var(--text)">Cytat / quote</div>
+      <div class="css" style="color:var(--text-med)">135deg: goldGlow → transparent</div>
+    </div>
+    <div class="gradient-card" style="background:radial-gradient(circle, rgba(196,162,101,0.15) 0%, transparent 70%);border:1px dashed var(--gold-border)">
+      <div class="label" style="color:var(--text)">Gold Glow (radial)</div>
+      <div class="css" style="color:var(--text-med)">radial: goldGlow → transparent</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SPACING -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block">
+  <div class="section-label">07</div>
+  <div class="section-title">Spacing</div>
+  <div class="section-desc">Konsekwentny system odstępów bazujący na wielokrotnościach 4px.</div>
+
+  <div class="spacing-demo">
+    <div class="spacing-item"><div class="spacing-box" style="width:8px;height:8px"></div><div class="spacing-val">8</div></div>
+    <div class="spacing-item"><div class="spacing-box" style="width:12px;height:12px"></div><div class="spacing-val">12</div></div>
+    <div class="spacing-item"><div class="spacing-box" style="width:16px;height:16px"></div><div class="spacing-val">16</div></div>
+    <div class="spacing-item"><div class="spacing-box" style="width:20px;height:20px"></div><div class="spacing-val">20</div></div>
+    <div class="spacing-item"><div class="spacing-box" style="width:24px;height:24px"></div><div class="spacing-val">24</div></div>
+    <div class="spacing-item"><div class="spacing-box" style="width:28px;height:28px"></div><div class="spacing-val">28</div></div>
+    <div class="spacing-item"><div class="spacing-box" style="width:32px;height:32px"></div><div class="spacing-val">32</div></div>
+    <div class="spacing-item"><div class="spacing-box" style="width:36px;height:36px"></div><div class="spacing-val">36</div></div>
+    <div class="spacing-item"><div class="spacing-box" style="width:48px;height:48px"></div><div class="spacing-val">48</div></div>
+    <div class="spacing-item"><div class="spacing-box" style="width:56px;height:56px"></div><div class="spacing-val">56</div></div>
+    <div class="spacing-item"><div class="spacing-box" style="width:80px;height:80px"></div><div class="spacing-val">80</div></div>
+    <div class="spacing-item"><div class="spacing-box" style="width:100px;height:100px"></div><div class="spacing-val">100</div></div>
+  </div>
+
+  <div style="margin-top:32px;padding:20px;background:var(--cream);border:1px solid rgba(26,26,24,0.06)">
+    <div class="element-label">Zastosowanie</div>
+    <div style="font-size:13px;color:var(--text-med);line-height:2">
+      <strong>Section padding:</strong> 80–100px (vertical) · 24px (horizontal)<br>
+      <strong>Card padding:</strong> 36px 28px (standard) · 28px 24px (compact)<br>
+      <strong>Gap — karty:</strong> 2px (tight grid) · 16–32px (loose)<br>
+      <strong>Gap — przyciski:</strong> 12–16px<br>
+      <strong>Max-width:</strong> 800–1100px (kontenery)
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- MAPA SEKCJI -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block">
+  <div class="section-label">08</div>
+  <div class="section-title">Mapa sekcji strony</div>
+  <div class="section-desc">Kolejność sekcji i ich tła. Naprzemienność jasne/ciemne buduje rytm wizualny.</div>
+
+  <div class="section-map">
+    <div class="section-map-item"><div class="num">01</div><div class="name">Promo Bar</div><div class="bg-type">Dark + gold text</div><div class="bg-stripe" style="background:var(--dark)"></div></div>
+    <div class="section-map-item"><div class="num">02</div><div class="name">Nawigacja</div><div class="bg-type">Transparent → dark</div><div class="bg-stripe" style="background:var(--dark)"></div></div>
+    <div class="section-map-item"><div class="num">03</div><div class="name">Hero</div><div class="bg-type">Gradient dark → forest</div><div class="bg-stripe" style="background:linear-gradient(90deg,var(--dark),var(--forest))"></div></div>
+    <div class="section-map-item"><div class="num">04</div><div class="name">Promo Section</div><div class="bg-type">Cream</div><div class="bg-stripe" style="background:var(--cream)"></div></div>
+    <div class="section-map-item"><div class="num">05</div><div class="name">O mnie</div><div class="bg-type">White</div><div class="bg-stripe" style="background:var(--white)"></div></div>
+    <div class="section-map-item"><div class="num">06</div><div class="name">Galeria TM7</div><div class="bg-type">Cream</div><div class="bg-stripe" style="background:var(--cream)"></div></div>
+    <div class="section-map-item"><div class="num">07</div><div class="name">Showcase</div><div class="bg-type">Gradient dark → forest</div><div class="bg-stripe" style="background:linear-gradient(90deg,var(--dark),var(--forest))"></div></div>
+    <div class="section-map-item"><div class="num">08</div><div class="name">Specyfikacja</div><div class="bg-type">White</div><div class="bg-stripe" style="background:var(--white)"></div></div>
+    <div class="section-map-item"><div class="num">09</div><div class="name">Na prezentacji</div><div class="bg-type">Cream</div><div class="bg-stripe" style="background:var(--cream)"></div></div>
+    <div class="section-map-item"><div class="num">10</div><div class="name">Korzyści</div><div class="bg-type">White</div><div class="bg-stripe" style="background:var(--white)"></div></div>
+    <div class="section-map-item"><div class="num">11</div><div class="name">Kalkulator</div><div class="bg-type">Gradient dark → forest</div><div class="bg-stripe" style="background:linear-gradient(90deg,var(--dark),var(--forest))"></div></div>
+    <div class="section-map-item"><div class="num">12</div><div class="name">Opinie</div><div class="bg-type">Cream</div><div class="bg-stripe" style="background:var(--cream)"></div></div>
+    <div class="section-map-item"><div class="num">13</div><div class="name">FAQ</div><div class="bg-type">White</div><div class="bg-stripe" style="background:var(--white)"></div></div>
+    <div class="section-map-item"><div class="num">14</div><div class="name">Booking</div><div class="bg-type">Gradient dark → forest</div><div class="bg-stripe" style="background:linear-gradient(90deg,var(--dark),var(--forest))"></div></div>
+    <div class="section-map-item"><div class="num">15</div><div class="name">Kontakt</div><div class="bg-type">White</div><div class="bg-stripe" style="background:var(--white)"></div></div>
+    <div class="section-map-item"><div class="num">16</div><div class="name">Poleć mnie</div><div class="bg-type">Cream</div><div class="bg-stripe" style="background:var(--cream)"></div></div>
+    <div class="section-map-item"><div class="num">17</div><div class="name">Footer</div><div class="bg-type">Dark</div><div class="bg-stripe" style="background:var(--dark)"></div></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ANIMACJE -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block" style="border-bottom:none">
+  <div class="section-label">09</div>
+  <div class="section-title">Animacje i interakcje</div>
+  <div class="section-desc">Subtelne reveal na scroll z cubic-bezier. Brak agresywnych animacji — elegancka powściągliwość.</div>
+
+  <div style="padding:24px;background:var(--cream);border:1px solid rgba(26,26,24,0.06)">
+    <div class="element-label">Reveal on scroll</div>
+    <div style="font-size:13px;color:var(--text-med);line-height:2;font-family:monospace">
+      opacity: 0 → 1<br>
+      transform: translateY(24px) → translateY(0)<br>
+      transition: 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)<br>
+      delay: 0s → 0.45s (staggered)<br>
+      trigger: IntersectionObserver, threshold: 0.12
+    </div>
+  </div>
+
+  <div style="padding:24px;background:var(--cream);border:1px solid rgba(26,26,24,0.06);margin-top:16px">
+    <div class="element-label">Hover states</div>
+    <div style="font-size:13px;color:var(--text-med);line-height:2;font-family:monospace">
+      Przyciski: transition all 0.3s ease<br>
+      Karty: transition all 0.4s ease<br>
+      Linki: color transition 0.3s<br>
+      Gallery: transform scale(1.03) on hover
+    </div>
+  </div>
+
+  <div style="padding:24px;background:var(--cream);border:1px solid rgba(26,26,24,0.06);margin-top:16px">
+    <div class="element-label">Promo Bar — autoplay</div>
+    <div style="font-size:13px;color:var(--text-med);line-height:2;font-family:monospace">
+      Rotacja tekstów co 4500ms<br>
+      transition: opacity 0.5s, transform 0.5s<br>
+      translateY(8px) → translateY(0) na zmianę
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer style="background:var(--dark);padding:48px 32px;text-align:center;margin-top:48px">
+  <div style="width:48px;height:1px;background:var(--gold);margin:0 auto 20px"></div>
+  <div style="font-family:var(--font-serif);font-size:18px;color:var(--text-on-dark);font-weight:600">Katarzyna Kamińska</div>
+  <div style="font-size:11px;color:var(--text-on-dark-med);letter-spacing:0.1em;text-transform:uppercase;margin-top:6px">Brand Catalog · kaminskakatarzyna.com · 2026</div>
+</footer>
+
+</body>
+</html>
