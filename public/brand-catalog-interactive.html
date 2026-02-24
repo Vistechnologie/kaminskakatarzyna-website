@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Catalog — Katarzyna Kamińska · Thermomix® — Interactive</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C4A265;
+  --gold-light: #D4B87A;
+  --gold-pale: #E8D5A8;
+  --gold-glow: rgba(196,162,101,0.15);
+  --gold-border: rgba(196,162,101,0.25);
+  --dark: #0D1A0F;
+  --dark-soft: #152118;
+  --dark-card: #1A2B1E;
+  --forest: #1E3A25;
+  --forest-light: #2A5035;
+  --cream: #FAF6EF;
+  --cream-dark: #F0EBE0;
+  --cream-mid: #E8E0D0;
+  --white: #FFFFFF;
+  --text: #1A1A18;
+  --text-med: #5A5750;
+  --text-light: #8A8578;
+  --text-on-dark: #E8E2D8;
+  --text-on-dark-med: rgba(232,226,216,0.65);
+  --font-sans: 'DM Sans', 'Helvetica Neue', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); background: #F5F2ED; color: var(--text); -webkit-font-smoothing: antialiased; }
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--dark);
+  color: var(--text-on-dark);
+  padding: 14px 28px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  border: 1px solid var(--gold-border);
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+.toast .toast-icon {
+  color: var(--gold);
+  font-size: 16px;
+}
+
+/* ===== HEADER ===== */
+.catalog-header {
+  background: var(--dark);
+  padding: 80px 48px 64px;
+  position: relative;
+  overflow: hidden;
+}
+.catalog-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gold);
+}
+.catalog-header::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,162,101,0.08) 0%, transparent 70%);
+}
+.catalog-header h1 {
+  font-family: var(--font-serif);
+  font-size: 52px;
+  color: var(--white);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  position: relative;
+  z-index: 1;
+}
+.catalog-header h1 span { color: var(--gold); }
+.catalog-header p {
+  color: var(--text-on-dark-med);
+  font-size: 15px;
+  margin-top: 16px;
+  letter-spacing: 0.04em;
+  position: relative;
+  z-index: 1;
+}
+.catalog-header .version {
+  display: inline-block;
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border: 1px solid var(--gold-border);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+.header-features {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
+}
+.header-feature {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  padding: 5px 14px;
+  background: rgba(196,162,101,0.08);
+  border: 1px solid rgba(196,162,101,0.15);
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+section.block {
+  padding: 72px 0;
+  border-bottom: 1px solid rgba(26,26,24,0.08);
+}
+section.block:last-child { border-bottom: none; }
+
+.section-label {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.section-desc {
+  font-size: 15px;
+  color: var(--text-med);
+  line-height: 1.7;
+  margin-bottom: 48px;
+  max-width: 560px;
+}
+
+/* ===== COLORS ===== */
+.color-group-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 36px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--gold-border);
+  color: var(--text);
+}
+.color-group-title:first-of-type { margin-top: 0; }
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+.color-card {
+  background: var(--white);
+  border: 1px solid rgba(26,26,24,0.06);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+.color-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+.color-swatch {
+  height: 100px;
+  position: relative;
+}
+.color-swatch::after {
+  content: attr(data-hex);
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+.color-swatch.light-text::after { color: rgba(255,255,255,0.8); }
+.color-swatch.dark-text::after { color: rgba(0,0,0,0.5); }
+.color-info {
+  padding: 14px 16px;
+}
+.color-name {
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+.color-use {
+  font-size: 11px;
+  color: var(--text-light);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+/* Copy buttons row */
+.color-actions {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  letter-spacing: 0.04em;
+  background: var(--cream);
+  border: 1px solid rgba(26,26,24,0.08);
+  color: var(--text-med);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+.copy-btn:hover {
+  background: var(--gold);
+  color: var(--dark);
+  border-color: var(--gold);
+}
+.copy-btn.copied {
+  background: var(--forest);
+  color: var(--text-on-dark);
+  border-color: var(--forest);
+}
+
+/* ===== CSS VAR EXPORT ===== */
+.export-bar {
+  margin-top: 32px;
+  padding: 20px;
+  background: var(--dark);
+  border: 1px solid var(--gold-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.export-bar-label {
+  font-size: 12px;
+  color: var(--text-on-dark-med);
+  letter-spacing: 0.06em;
+}
+.export-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--dark);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.export-btn:hover { background: var(--gold-light); }
+
+/* ===== ICONS ===== */
+.icon-grid-interactive {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+}
+.icon-card {
+  background: var(--white);
+  border: 1px solid rgba(26,26,24,0.06);
+  padding: 24px 16px 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: default;
+  position: relative;
+}
+.icon-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+.icon-card .icon-preview {
+  font-size: 36px;
+  color: var(--gold);
+  font-family: var(--font-serif);
+  margin-bottom: 10px;
+  line-height: 1;
+}
+.icon-card .icon-preview svg {
+  width: 36px;
+  height: 36px;
+}
+.icon-card .icon-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+.icon-card .icon-unicode {
+  font-size: 10px;
+  color: var(--text-light);
+  margin-bottom: 10px;
+  font-family: monospace;
+}
+.icon-actions {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+.icon-btn {
+  padding: 5px 10px;
+  font-size: 9px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--cream);
+  border: 1px solid rgba(26,26,24,0.08);
+  color: var(--text-med);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.icon-btn:hover {
+  background: var(--gold);
+  color: var(--dark);
+  border-color: var(--gold);
+}
+
+/* ===== TYPOGRAPHY ===== */
+.type-specimen {
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(26,26,24,0.06);
+}
+.type-specimen:last-child { border-bottom: none; }
+.type-meta {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.type-meta span {
+  font-size: 11px;
+  color: var(--text-light);
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  background: var(--cream);
+  border: 1px solid rgba(26,26,24,0.06);
+}
+.type-sample-serif { font-family: var(--font-serif); }
+.type-sample-sans { font-family: var(--font-sans); }
+
+.type-copyable {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 2px 4px;
+  margin: -2px -4px;
+}
+.type-copyable:hover {
+  background: var(--gold-glow);
+}
+.type-copyable::after {
+  content: 'KOPIUJ CSS';
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%) translateX(100%);
+  font-size: 9px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  opacity: 0;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+  font-style: normal;
+}
+.type-copyable:hover::after { opacity: 1; }
+
+/* ===== BUTTONS ===== */
+.btn-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 32px;
+}
+.btn-label {
+  font-size: 11px;
+  color: var(--text-light);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: 120px;
+  flex-shrink: 0;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 36px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-gold { background: var(--gold); color: var(--dark); }
+.btn-gold:hover { background: var(--gold-light); }
+.btn-outline { background: transparent; color: var(--text); border: 1.5px solid var(--text); }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+.btn-dark-row {
+  background: var(--dark);
+  padding: 32px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 32px;
+}
+.btn-dark-row .btn-label { color: var(--text-on-dark-med); }
+.btn-gold-dark { background: var(--gold); color: var(--dark); }
+.btn-outline-light { background: transparent; color: var(--text-on-dark); border: 1.5px solid rgba(232,226,216,0.3); }
+.btn-outline-light:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ===== CARDS ===== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2px;
+}
+.card-light {
+  background: var(--white);
+  padding: 36px 28px;
+  border: 1px solid rgba(26,26,24,0.06);
+  position: relative;
+}
+.card-light .gold-top {
+  position: absolute;
+  top: 0; left: 25%; right: 25%;
+  height: 2px;
+  background: var(--gold);
+}
+.card-dark-wrap {
+  background: var(--dark);
+  padding: 32px;
+  margin-top: 32px;
+}
+.card-dark {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--gold-border);
+  padding: 36px 28px;
+  position: relative;
+  max-width: 400px;
+}
+.gold-corner { position: absolute; }
+.gold-corner.tl { top: 12px; left: 12px; width: 24px; height: 24px; border-top: 1.5px solid var(--gold); border-left: 1.5px solid var(--gold); }
+.gold-corner.tr { top: 12px; right: 12px; width: 24px; height: 24px; border-top: 1.5px solid var(--gold); border-right: 1.5px solid var(--gold); }
+.gold-corner.bl { bottom: 12px; left: 12px; width: 24px; height: 24px; border-bottom: 1.5px solid var(--gold); border-left: 1.5px solid var(--gold); }
+.gold-corner.br { bottom: 12px; right: 12px; width: 24px; height: 24px; border-bottom: 1.5px solid var(--gold); border-right: 1.5px solid var(--gold); }
+
+/* ===== DECORATIVE ELEMENTS ===== */
+.element-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+@media (max-width: 700px) { .element-grid { grid-template-columns: 1fr; } }
+.element-box {
+  padding: 32px;
+  background: var(--white);
+  border: 1px solid rgba(26,26,24,0.06);
+}
+.element-box-dark {
+  padding: 32px;
+  background: var(--dark);
+  border: 1px solid var(--gold-border);
+}
+.element-label {
+  font-size: 10px;
+  color: var(--text-light);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.element-label-dark {
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.divider-gold { width: 48px; height: 1px; background: var(--gold); margin: 0 auto; }
+.divider-wide { width: 100%; height: 1px; background: var(--gold-border); }
+.divider-gradient { width: 100%; height: 1px; background: linear-gradient(90deg, transparent 20%, rgba(196,162,101,0.4) 50%, transparent 80%); }
+
+/* ===== GRADIENTS ===== */
+.gradient-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.gradient-card {
+  height: 120px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.gradient-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.gradient-card .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+.gradient-card .css {
+  font-size: 10px;
+  opacity: 0.6;
+  margin-top: 4px;
+  font-family: monospace;
+}
+.gradient-card .copy-hint {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.2s;
+  padding: 3px 8px;
+  background: rgba(0,0,0,0.3);
+  color: #fff;
+}
+.gradient-card:hover .copy-hint { opacity: 1; }
+
+/* ===== SPACING ===== */
+.spacing-demo {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.spacing-item { text-align: center; }
+.spacing-box {
+  background: var(--gold-glow);
+  border: 1px dashed var(--gold-border);
+  margin-bottom: 8px;
+}
+.spacing-val {
+  font-size: 11px;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+/* ===== SECTION MAP ===== */
+.section-map {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.section-map-item {
+  padding: 20px;
+  border: 1px solid rgba(26,26,24,0.06);
+  position: relative;
+}
+.section-map-item .num {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  color: var(--gold);
+  font-weight: 600;
+}
+.section-map-item .name {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+.section-map-item .bg-type {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+.section-map-item .bg-stripe {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+}
+
+/* ===== ANIMATIONS SECTION ===== */
+.anim-spec {
+  padding: 24px;
+  background: var(--cream);
+  border: 1px solid rgba(26,26,24,0.06);
+  margin-bottom: 16px;
+}
+
+/* ===== QUICK NAV ===== */
+.quick-nav {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.quick-nav a {
+  display: block;
+  width: 32px;
+  height: 32px;
+  background: var(--white);
+  border: 1px solid rgba(26,26,24,0.1);
+  text-align: center;
+  line-height: 32px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-med);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.quick-nav a:hover,
+.quick-nav a.active {
+  background: var(--gold);
+  color: var(--dark);
+  border-color: var(--gold);
+}
+@media (max-width: 900px) { .quick-nav { display: none; } }
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span id="toast-msg">Skopiowano!</span>
+</div>
+
+<!-- QUICK NAV -->
+<nav class="quick-nav">
+  <a href="#sec-colors" title="Kolory">01</a>
+  <a href="#sec-typo" title="Typografia">02</a>
+  <a href="#sec-buttons" title="Przyciski">03</a>
+  <a href="#sec-cards" title="Karty">04</a>
+  <a href="#sec-decor" title="Dekoracje">05</a>
+  <a href="#sec-gradients" title="Gradienty">06</a>
+  <a href="#sec-spacing" title="Spacing">07</a>
+  <a href="#sec-map" title="Mapa">08</a>
+  <a href="#sec-anim" title="Animacje">09</a>
+</nav>
+
+<!-- HEADER -->
+<header class="catalog-header">
+  <div class="container">
+    <div style="width:48px;height:1px;background:var(--gold);margin-bottom:20px"></div>
+    <h1>Brand <span>Catalog</span></h1>
+    <p>Katarzyna Kamińska · Thermomix® — System projektowy strony kaminskakatarzyna.com</p>
+    <div class="version">wersja 2.0 · interaktywna · luty 2026</div>
+    <div class="header-features">
+      <div class="header-feature">📋 Kliknij kolor → kopiuj HEX / RGB / CSS var</div>
+      <div class="header-feature">⬇ Pobieraj ikony jako SVG / PNG</div>
+      <div class="header-feature">📄 Eksportuj pełną paletę CSS</div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+<!-- ═══════════════════════════════════════ -->
+<!-- KOLORY -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block" id="sec-colors">
+  <div class="section-label">01</div>
+  <div class="section-title">Paleta kolorów</div>
+  <div class="section-desc">Kliknij przycisk aby skopiować wartość koloru do schowka. Dostępne formaty: HEX, RGB, nazwa zmiennej CSS.</div>
+
+  <div class="color-group-title">Złoto — akcent</div>
+  <div class="color-grid" id="gold-colors"></div>
+
+  <div class="color-group-title">Ciemna zieleń — premium</div>
+  <div class="color-grid" id="dark-colors"></div>
+
+  <div class="color-group-title">Krem — jasne tło</div>
+  <div class="color-grid" id="cream-colors"></div>
+
+  <div class="color-group-title">Tekst</div>
+  <div class="color-grid" id="text-colors"></div>
+
+  <!-- EXPORT BAR -->
+  <div class="export-bar">
+    <div class="export-bar-label">Eksportuj pełną paletę kolorów jako zmienne CSS, gotową do wklejenia</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="export-btn" onclick="exportCSS()">📋 Kopiuj :root CSS</button>
+      <button class="export-btn" onclick="exportJSON()">📋 Kopiuj JSON</button>
+      <button class="export-btn" onclick="exportSCSS()">📋 Kopiuj SCSS</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- TYPOGRAFIA -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block" id="sec-typo">
+  <div class="section-label">02</div>
+  <div class="section-title">Typografia</div>
+  <div class="section-desc">Kliknij styl tekstu, aby skopiować odpowiedni CSS. Dwa fonty: Playfair Display (serif) i DM Sans (sans-serif).</div>
+
+  <div class="type-specimen">
+    <div class="type-meta">
+      <span>Playfair Display</span>
+      <span>Nagłówki · Cytaty · Cena</span>
+      <span>Waga: 400 / 600 / 700</span>
+    </div>
+    <div class="type-sample-serif type-copyable" data-css="font-family: 'Playfair Display', Georgia, serif; font-size: 48px; font-weight: 600; line-height: 1.15;" style="font-size:48px;font-weight:600;line-height:1.15;color:var(--text);margin-bottom:12px" onclick="copyCSS(this)">
+      Odkryj przyjemność<br><span style="color:var(--gold)">doskonałego</span> gotowania
+    </div>
+    <div class="type-sample-serif type-copyable" data-css="font-family: 'Playfair Display', Georgia, serif; font-size: 32px; font-weight: 600;" style="font-size:32px;font-weight:600;color:var(--text);margin-bottom:12px" onclick="copyCSS(this)">
+      Moja historia
+    </div>
+    <div class="type-sample-serif type-copyable" data-css="font-family: 'Playfair Display', Georgia, serif; font-size: 18px; font-style: italic; line-height: 1.8;" style="font-size:18px;font-style:italic;color:var(--text-med);line-height:1.8" onclick="copyCSS(this)">
+      „Dostałam Thermomix w prezencie i byłam pewna, że go nie potrzebuję."
+    </div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-meta">
+      <span>DM Sans</span>
+      <span>Tekst · Przyciski · UI</span>
+      <span>Waga: 400 / 500 / 600 / 700</span>
+    </div>
+    <div class="type-sample-sans type-copyable" data-css="font-family: 'DM Sans', 'Helvetica Neue', sans-serif; font-size: 17px; line-height: 1.8;" style="font-size:17px;color:var(--text-med);line-height:1.8;margin-bottom:16px;max-width:600px" onclick="copyCSS(this)">
+      Thermomix® TM7 — jedno urządzenie, które odmieni Twoją kuchnię. Oszczędność czasu, smak i elegancja w jednym.
+    </div>
+    <div class="type-sample-sans type-copyable" data-css="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;" style="font-size:14px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text);margin-bottom:12px" onclick="copyCSS(this)">
+      UMÓW BEZPŁATNĄ PREZENTACJĘ
+    </div>
+    <div class="type-sample-sans type-copyable" data-css="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #C4A265;" style="font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold)" onclick="copyCSS(this)">
+      ✦&ensp;Formularz kontaktowy&ensp;✦
+    </div>
+  </div>
+
+  <div class="type-specimen" style="border-bottom:none;padding-bottom:0">
+    <div class="type-meta"><span>Skala wielkości — kliknij aby skopiować</span></div>
+    <div style="display:flex;flex-direction:column;gap:12px" id="type-scale"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PRZYCISKI -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block" id="sec-buttons">
+  <div class="section-label">03</div>
+  <div class="section-title">Przyciski</div>
+  <div class="section-desc">Cztery warianty. Kliknij przycisk „Kopiuj CSS" obok, aby skopiować pełne style.</div>
+
+  <div class="btn-row">
+    <div class="btn-label">Primary</div>
+    <button class="btn btn-gold">Umów bezpłatną prezentację</button>
+    <button class="copy-btn" onclick="copyText(`background: #C4A265; color: #0D1A0F; padding: 16px 36px; font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border: none; border-radius: 0; cursor: pointer; transition: all 0.3s;`)">Kopiuj CSS</button>
+  </div>
+  <div class="btn-row">
+    <div class="btn-label">Outline</div>
+    <button class="btn btn-outline">Poznaj TM7</button>
+    <button class="copy-btn" onclick="copyText(`background: transparent; color: #1A1A18; border: 1.5px solid #1A1A18; padding: 16px 36px; font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 0; cursor: pointer; transition: all 0.3s;`)">Kopiuj CSS</button>
+  </div>
+
+  <div class="btn-dark-row">
+    <div class="btn-label">Na ciemnym</div>
+    <button class="btn btn-gold-dark">Umów bezpłatną prezentację</button>
+    <button class="btn btn-outline-light">Poznaj TM7</button>
+    <button class="copy-btn" style="background:rgba(255,255,255,0.1);color:var(--text-on-dark);border-color:rgba(255,255,255,0.15)" onclick="copyText(`/* Outline on dark */\nbackground: transparent; color: #E8E2D8; border: 1.5px solid rgba(232,226,216,0.3); padding: 16px 36px; font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 0;`)">Kopiuj CSS outline</button>
+  </div>
+
+  <div style="margin-top:32px;padding:20px;background:var(--cream);border:1px solid rgba(26,26,24,0.06)">
+    <div class="element-label">Reguły</div>
+    <div style="font-size:13px;color:var(--text-med);line-height:2">
+      <strong>border-radius:</strong> 0 (zawsze) · <strong>letter-spacing:</strong> 0.08em · <strong>text-transform:</strong> uppercase · <strong>font-weight:</strong> 600 · <strong>padding:</strong> 16px 36px (standard) · 10px 24px (small) · <strong>transition:</strong> all 0.3s ease
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- KARTY -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block" id="sec-cards">
+  <div class="section-label">04</div>
+  <div class="section-title">Karty i kontenery</div>
+  <div class="section-desc">Dwa warianty kart: jasne i ciemne z Gold Corners.</div>
+
+  <div class="card-grid" style="margin-bottom:24px">
+    <div class="card-light">
+      <div class="gold-top"></div>
+      <div style="font-family:var(--font-serif);font-size:28px;color:var(--gold);margin-bottom:12px">✆</div>
+      <div style="font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px">Telefon</div>
+      <div style="font-size:14px;color:var(--text-med)">506 507 563</div>
+    </div>
+    <div class="card-light">
+      <div class="gold-top"></div>
+      <div style="font-family:var(--font-serif);font-size:28px;color:var(--gold);margin-bottom:12px">✉</div>
+      <div style="font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px">WhatsApp</div>
+      <div style="font-size:14px;color:var(--text-med)">506 507 563</div>
+    </div>
+    <div class="card-light">
+      <div class="gold-top"></div>
+      <div style="font-family:var(--font-serif);font-size:28px;color:var(--gold);margin-bottom:12px">@</div>
+      <div style="font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px">Email</div>
+      <div style="font-size:14px;color:var(--text-med)">kontakt@kaminskakatarzyna.com</div>
+    </div>
+  </div>
+
+  <div class="card-dark-wrap">
+    <div style="font-size:10px;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;font-weight:600">Karta na ciemnym tle z Gold Corners</div>
+    <div class="card-dark">
+      <div class="gold-corner tl"></div>
+      <div class="gold-corner tr"></div>
+      <div class="gold-corner bl"></div>
+      <div class="gold-corner br"></div>
+      <div style="font-size:11px;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;font-weight:600">✦&ensp;Formularz kontaktowy</div>
+      <div style="font-size:14px;color:var(--text-on-dark);line-height:1.7">Treść karty z formularzem, inputami i przyciskami. Gold Corners w 4 rogach nadają ekskluzywny charakter.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ELEMENTY DEKORACYJNE + IKONY -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block" id="sec-decor">
+  <div class="section-label">05</div>
+  <div class="section-title">Ikony i elementy dekoracyjne</div>
+  <div class="section-desc">Pobierz ikony jako SVG lub PNG. Skopiuj kod Unicode. Każda ikona jest w kolorze Gold (#C4A265).</div>
+
+  <div class="icon-grid-interactive" id="icon-grid"></div>
+
+  <div style="margin-top:48px">
+    <div class="element-grid">
+      <div class="element-box">
+        <div class="element-label">Separatory — kliknij aby skopiować CSS</div>
+        <div style="margin:24px 0;cursor:pointer" onclick="copyText('width: 48px; height: 1px; background: #C4A265;')" title="Kliknij aby skopiować CSS"><div class="divider-gold"></div></div>
+        <div style="font-size:10px;color:var(--text-light);text-align:center;margin-bottom:24px">Divider Gold — 48px</div>
+        <div style="margin:24px 0;cursor:pointer" onclick="copyText('width: 100%; height: 1px; background: linear-gradient(90deg, transparent 20%, rgba(196,162,101,0.4) 50%, transparent 80%);')" title="Kliknij"><div class="divider-gradient"></div></div>
+        <div style="font-size:10px;color:var(--text-light);text-align:center;margin-bottom:24px">Divider Gradient — 100%</div>
+        <div style="margin:24px 0;cursor:pointer" onclick="copyText('width: 100%; height: 1px; background: rgba(196,162,101,0.25);')" title="Kliknij"><div class="divider-wide"></div></div>
+        <div style="font-size:10px;color:var(--text-light);text-align:center">Divider Gold Border — 100%</div>
+      </div>
+
+      <div class="element-box">
+        <div class="element-label">Gold Corners — kliknij aby skopiować CSS</div>
+        <div style="position:relative;width:200px;height:120px;border:1px solid rgba(26,26,24,0.06);margin:16px auto;cursor:pointer" onclick="copyText(`.gold-corner { position: absolute; }\n.gold-corner.tl { top: 12px; left: 12px; width: 24px; height: 24px; border-top: 1.5px solid #C4A265; border-left: 1.5px solid #C4A265; }\n.gold-corner.tr { top: 12px; right: 12px; width: 24px; height: 24px; border-top: 1.5px solid #C4A265; border-right: 1.5px solid #C4A265; }\n.gold-corner.bl { bottom: 12px; left: 12px; width: 24px; height: 24px; border-bottom: 1.5px solid #C4A265; border-left: 1.5px solid #C4A265; }\n.gold-corner.br { bottom: 12px; right: 12px; width: 24px; height: 24px; border-bottom: 1.5px solid #C4A265; border-right: 1.5px solid #C4A265; }`)">
+          <div class="gold-corner tl"></div>
+          <div class="gold-corner tr"></div>
+          <div class="gold-corner bl"></div>
+          <div class="gold-corner br"></div>
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:9px;color:var(--text-light);letter-spacing:0.08em;text-transform:uppercase;font-weight:600">Kliknij → CSS</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- GRADIENTY -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block" id="sec-gradients">
+  <div class="section-label">06</div>
+  <div class="section-title">Gradienty</div>
+  <div class="section-desc">Kliknij gradient, aby skopiować wartość CSS do schowka.</div>
+
+  <div class="gradient-row">
+    <div class="gradient-card" style="background:linear-gradient(175deg, #0D1A0F 0%, #152118 40%, #1E3A25 100%)" onclick="copyText('background: linear-gradient(175deg, #0D1A0F 0%, #152118 40%, #1E3A25 100%);')">
+      <div class="copy-hint">Kliknij → kopiuj</div>
+      <div class="label" style="color:var(--text-on-dark)">Hero / Booking</div>
+      <div class="css" style="color:var(--text-on-dark-med)">175deg: dark → darkSoft → forest</div>
+    </div>
+    <div class="gradient-card" style="background:linear-gradient(135deg, #1E3A25 0%, #0D1A0F 100%)" onclick="copyText('background: linear-gradient(135deg, #1E3A25 0%, #0D1A0F 100%);')">
+      <div class="copy-hint">Kliknij → kopiuj</div>
+      <div class="label" style="color:var(--text-on-dark)">Popup header</div>
+      <div class="css" style="color:var(--text-on-dark-med)">135deg: forest → dark</div>
+    </div>
+    <div class="gradient-card" style="background:linear-gradient(135deg, rgba(196,162,101,0.15) 0%, transparent 100%);border:1px solid rgba(26,26,24,0.06)" onclick="copyText('background: linear-gradient(135deg, rgba(196,162,101,0.15) 0%, transparent 100%);')">
+      <div class="copy-hint">Kliknij → kopiuj</div>
+      <div class="label" style="color:var(--text)">Cytat / quote</div>
+      <div class="css" style="color:var(--text-med)">135deg: goldGlow → transparent</div>
+    </div>
+    <div class="gradient-card" style="background:radial-gradient(circle, rgba(196,162,101,0.15) 0%, transparent 70%);border:1px dashed var(--gold-border)" onclick="copyText('background: radial-gradient(circle, rgba(196,162,101,0.15) 0%, transparent 70%);')">
+      <div class="copy-hint">Kliknij → kopiuj</div>
+      <div class="label" style="color:var(--text)">Gold Glow (radial)</div>
+      <div class="css" style="color:var(--text-med)">radial: goldGlow → transparent</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SPACING -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block" id="sec-spacing">
+  <div class="section-label">07</div>
+  <div class="section-title">Spacing</div>
+  <div class="section-desc">Kliknij wartość, aby skopiować do schowka.</div>
+
+  <div class="spacing-demo" id="spacing-demo"></div>
+
+  <div style="margin-top:32px;padding:20px;background:var(--cream);border:1px solid rgba(26,26,24,0.06)">
+    <div class="element-label">Zastosowanie</div>
+    <div style="font-size:13px;color:var(--text-med);line-height:2">
+      <strong>Section padding:</strong> 80–100px (vertical) · 24px (horizontal)<br>
+      <strong>Card padding:</strong> 36px 28px (standard) · 28px 24px (compact)<br>
+      <strong>Gap — karty:</strong> 2px (tight grid) · 16–32px (loose)<br>
+      <strong>Gap — przyciski:</strong> 12–16px<br>
+      <strong>Max-width:</strong> 800–1100px (kontenery)
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- MAPA SEKCJI -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block" id="sec-map">
+  <div class="section-label">08</div>
+  <div class="section-title">Mapa sekcji strony</div>
+  <div class="section-desc">Kolejność sekcji i ich tła. Naprzemienność jasne/ciemne buduje rytm wizualny.</div>
+
+  <div class="section-map">
+    <div class="section-map-item"><div class="num">01</div><div class="name">Promo Bar</div><div class="bg-type">Dark + gold text</div><div class="bg-stripe" style="background:var(--dark)"></div></div>
+    <div class="section-map-item"><div class="num">02</div><div class="name">Nawigacja</div><div class="bg-type">Transparent → dark</div><div class="bg-stripe" style="background:var(--dark)"></div></div>
+    <div class="section-map-item"><div class="num">03</div><div class="name">Hero</div><div class="bg-type">Gradient dark → forest</div><div class="bg-stripe" style="background:linear-gradient(90deg,var(--dark),var(--forest))"></div></div>
+    <div class="section-map-item"><div class="num">04</div><div class="name">Promo Section</div><div class="bg-type">Cream</div><div class="bg-stripe" style="background:var(--cream)"></div></div>
+    <div class="section-map-item"><div class="num">05</div><div class="name">O mnie</div><div class="bg-type">White</div><div class="bg-stripe" style="background:var(--white)"></div></div>
+    <div class="section-map-item"><div class="num">06</div><div class="name">Galeria TM7</div><div class="bg-type">Cream</div><div class="bg-stripe" style="background:var(--cream)"></div></div>
+    <div class="section-map-item"><div class="num">07</div><div class="name">Showcase</div><div class="bg-type">Gradient dark → forest</div><div class="bg-stripe" style="background:linear-gradient(90deg,var(--dark),var(--forest))"></div></div>
+    <div class="section-map-item"><div class="num">08</div><div class="name">Specyfikacja</div><div class="bg-type">White</div><div class="bg-stripe" style="background:var(--white)"></div></div>
+    <div class="section-map-item"><div class="num">09</div><div class="name">Na prezentacji</div><div class="bg-type">Cream</div><div class="bg-stripe" style="background:var(--cream)"></div></div>
+    <div class="section-map-item"><div class="num">10</div><div class="name">Korzyści</div><div class="bg-type">White</div><div class="bg-stripe" style="background:var(--white)"></div></div>
+    <div class="section-map-item"><div class="num">11</div><div class="name">Kalkulator</div><div class="bg-type">Gradient dark → forest</div><div class="bg-stripe" style="background:linear-gradient(90deg,var(--dark),var(--forest))"></div></div>
+    <div class="section-map-item"><div class="num">12</div><div class="name">Opinie</div><div class="bg-type">Cream</div><div class="bg-stripe" style="background:var(--cream)"></div></div>
+    <div class="section-map-item"><div class="num">13</div><div class="name">FAQ</div><div class="bg-type">White</div><div class="bg-stripe" style="background:var(--white)"></div></div>
+    <div class="section-map-item"><div class="num">14</div><div class="name">Booking</div><div class="bg-type">Gradient dark → forest</div><div class="bg-stripe" style="background:linear-gradient(90deg,var(--dark),var(--forest))"></div></div>
+    <div class="section-map-item"><div class="num">15</div><div class="name">Kontakt</div><div class="bg-type">White</div><div class="bg-stripe" style="background:var(--white)"></div></div>
+    <div class="section-map-item"><div class="num">16</div><div class="name">Poleć mnie</div><div class="bg-type">Cream</div><div class="bg-stripe" style="background:var(--cream)"></div></div>
+    <div class="section-map-item"><div class="num">17</div><div class="name">Footer</div><div class="bg-type">Dark</div><div class="bg-stripe" style="background:var(--dark)"></div></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ANIMACJE -->
+<!-- ═══════════════════════════════════════ -->
+<section class="block" id="sec-anim" style="border-bottom:none">
+  <div class="section-label">09</div>
+  <div class="section-title">Animacje i interakcje</div>
+  <div class="section-desc">Kliknij blok aby skopiować kod CSS.</div>
+
+  <div class="anim-spec" style="cursor:pointer" onclick="copyText(`opacity: 0; transform: translateY(24px);\n/* revealed state */\nopacity: 1; transform: translateY(0);\ntransition: 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);\n/* stagger: delay 0s → 0.45s */`)">
+    <div class="element-label">Reveal on scroll — kliknij aby skopiować</div>
+    <div style="font-size:13px;color:var(--text-med);line-height:2;font-family:monospace">
+      opacity: 0 → 1<br>
+      transform: translateY(24px) → translateY(0)<br>
+      transition: 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)<br>
+      delay: 0s → 0.45s (staggered)<br>
+      trigger: IntersectionObserver, threshold: 0.12
+    </div>
+  </div>
+
+  <div class="anim-spec" style="cursor:pointer" onclick="copyText(`/* Buttons */ transition: all 0.3s ease;\n/* Cards */ transition: all 0.4s ease;\n/* Links */ color: transition 0.3s;\n/* Gallery */ transform: scale(1.03); transition: transform 0.4s ease;`)">
+    <div class="element-label">Hover states — kliknij aby skopiować</div>
+    <div style="font-size:13px;color:var(--text-med);line-height:2;font-family:monospace">
+      Przyciski: transition all 0.3s ease<br>
+      Karty: transition all 0.4s ease<br>
+      Linki: color transition 0.3s<br>
+      Gallery: transform scale(1.03) on hover
+    </div>
+  </div>
+
+  <div class="anim-spec" style="cursor:pointer" onclick="copyText(`/* Promo Bar autoplay */\ninterval: 4500ms;\ntransition: opacity 0.5s, transform 0.5s;\ntranslateY(8px) → translateY(0);`)">
+    <div class="element-label">Promo Bar — autoplay — kliknij aby skopiować</div>
+    <div style="font-size:13px;color:var(--text-med);line-height:2;font-family:monospace">
+      Rotacja tekstów co 4500ms<br>
+      transition: opacity 0.5s, transform 0.5s<br>
+      translateY(8px) → translateY(0) na zmianę
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer style="background:var(--dark);padding:48px 32px;text-align:center;margin-top:48px">
+  <div style="width:48px;height:1px;background:var(--gold);margin:0 auto 20px"></div>
+  <div style="font-family:var(--font-serif);font-size:18px;color:var(--text-on-dark);font-weight:600">Katarzyna Kamińska</div>
+  <div style="font-size:11px;color:var(--text-on-dark-med);letter-spacing:0.1em;text-transform:uppercase;margin-top:6px">Brand Catalog · Interactive v2.0 · kaminskakatarzyna.com · 2026</div>
+</footer>
+
+<script>
+// ===== DATA =====
+const colors = {
+  gold: [
+    { name: 'Gold', hex: '#C4A265', cssVar: '--gold', use: 'Przyciski CTA, linie, ikony, nagłówki na ciemnym', textClass: 'light-text' },
+    { name: 'Gold Light', hex: '#D4B87A', cssVar: '--gold-light', use: 'Labele formularza, hover CTA', textClass: 'light-text' },
+    { name: 'Gold Pale', hex: '#E8D5A8', cssVar: '--gold-pale', use: 'Delikatne tła, dekoracje', textClass: 'dark-text' },
+    { name: 'Gold Glow', hex: 'rgba(196,162,101,0.15)', cssVar: '--gold-glow', use: 'Radial glow, tła cytatów', textClass: 'dark-text', isBorder: true },
+  ],
+  dark: [
+    { name: 'Dark', hex: '#0D1A0F', cssVar: '--dark', use: 'Hero, Booking, Footer — główne ciemne tło', textClass: 'light-text' },
+    { name: 'Dark Soft', hex: '#152118', cssVar: '--dark-soft', use: 'Gradienty tła', textClass: 'light-text' },
+    { name: 'Dark Card', hex: '#1A2B1E', cssVar: '--dark-card', use: 'Tło kart na ciemnym', textClass: 'light-text' },
+    { name: 'Forest', hex: '#1E3A25', cssVar: '--forest', use: 'Gradienty, końcówki sekcji', textClass: 'light-text' },
+    { name: 'Forest Light', hex: '#2A5035', cssVar: '--forest-light', use: 'Akcent zielony, gradienty kart', textClass: 'light-text' },
+  ],
+  cream: [
+    { name: 'Cream', hex: '#FAF6EF', cssVar: '--cream', use: 'Główne jasne tło strony', textClass: 'dark-text' },
+    { name: 'Cream Dark', hex: '#F0EBE0', cssVar: '--cream-dark', use: 'Tło kart, zdjęcia', textClass: 'dark-text' },
+    { name: 'Cream Mid', hex: '#E8E0D0', cssVar: '--cream-mid', use: 'Bordery, separatory', textClass: 'dark-text' },
+    { name: 'White', hex: '#FFFFFF', cssVar: '--white', use: 'Karty, sekcje O mnie / Kontakt', textClass: 'dark-text', isBorder: true },
+  ],
+  text: [
+    { name: 'Text', hex: '#1A1A18', cssVar: '--text', use: 'Nagłówki, tekst na jasnym tle', textClass: 'light-text' },
+    { name: 'Text Med', hex: '#5A5750', cssVar: '--text-med', use: 'Paragrafy, opisy', textClass: 'light-text' },
+    { name: 'Text Light', hex: '#8A8578', cssVar: '--text-light', use: 'Podpisy, metadane', textClass: 'light-text' },
+    { name: 'Text on Dark', hex: '#E8E2D8', cssVar: '--text-on-dark', use: 'Tekst na ciemnym tle', textClass: 'dark-text', previewBg: '#0D1A0F' },
+  ]
+};
+
+const icons = [
+  { char: '✦', name: 'Diamencik', unicode: 'U+2726', svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><path d="M50 5 L60 40 L95 50 L60 60 L50 95 L40 60 L5 50 L40 40 Z" fill="#C4A265"/></svg>` },
+  { char: '✓', name: 'Checkmark', unicode: 'U+2713', svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><path d="M20 55 L40 75 L80 25" stroke="#C4A265" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>` },
+  { char: '✆', name: 'Telefon', unicode: 'U+2706', svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><path d="M25 10C20 10 15 15 15 20C15 50 50 85 80 85C85 85 90 80 90 75L90 65C90 62 88 60 85 59L72 55C69 54 66 55 65 58L60 65C50 60 40 50 35 40L42 35C45 34 46 31 45 28L41 15C40 12 38 10 35 10Z" fill="#C4A265"/></svg>` },
+  { char: '✉', name: 'Email', unicode: 'U+2709', svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><rect x="10" y="25" width="80" height="50" rx="4" fill="none" stroke="#C4A265" stroke-width="6"/><path d="M10 28 L50 55 L90 28" fill="none" stroke="#C4A265" stroke-width="6" stroke-linejoin="round"/></svg>` },
+  { char: '@', name: 'At', unicode: 'U+0040', svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><text x="50" y="72" text-anchor="middle" font-size="72" font-family="Georgia" fill="#C4A265">@</text></svg>` },
+  { char: '→', name: 'Arrow', unicode: 'U+2192', svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><path d="M15 50 L75 50 M60 30 L80 50 L60 70" stroke="#C4A265" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>` },
+  { char: '⏳', name: 'Timer', unicode: 'U+23F3', svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><path d="M30 15 L70 15 L60 45 L50 50 L40 45 Z" fill="#C4A265" opacity="0.6"/><path d="M30 85 L70 85 L60 55 L50 50 L40 55 Z" fill="#C4A265"/><rect x="28" y="12" width="44" height="5" rx="2" fill="#C4A265"/><rect x="28" y="83" width="44" height="5" rx="2" fill="#C4A265"/></svg>` },
+  { char: '·', name: 'Dot sep', unicode: 'U+00B7', svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><circle cx="50" cy="50" r="10" fill="#C4A265"/></svg>` },
+];
+
+const typeScale = [
+  { label: 'H1 — 56px', css: "font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 600; line-height: 1.1;", sample: 'Odkryj przyjemność', size: '42px', serif: true },
+  { label: 'H2 — 48px', css: "font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 600; line-height: 1.15;", sample: 'Moja historia', size: '36px', serif: true },
+  { label: 'H3 — 30px', css: "font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 600; line-height: 1.2;", sample: 'Poleć mnie bliskim', size: '26px', serif: true },
+  { label: 'Body — 17px', css: "font-family: 'DM Sans', sans-serif; font-size: 17px; line-height: 1.8; color: #5A5750;", sample: 'Gotowanie to moja pasja od lat.', size: '17px', serif: false },
+  { label: 'Small — 14px', css: "font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.6; color: #5A5750;", sample: 'Oczywiście! Prowadzę prezentacje na żywo.', size: '14px', serif: false },
+  { label: 'Label — 11px', css: "font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #C4A265;", sample: 'AUTORYZOWANY PRZEDSTAWICIEL', size: '11px', serif: false, isLabel: true },
+];
+
+const spacingValues = [8, 12, 16, 20, 24, 28, 32, 36, 48, 56, 80, 100];
+
+// ===== TOAST =====
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ===== CLIPBOARD =====
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast('Skopiowano do schowka!');
+  } catch {
+    // fallback
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('Skopiowano do schowka!');
+  }
+}
+
+function copyCSS(el) {
+  const css = el.getAttribute('data-css');
+  if (css) copyText(css);
+}
+
+// ===== HEX TO RGB =====
+function hexToRgb(hex) {
+  if (hex.startsWith('rgba')) return hex;
+  hex = hex.replace('#', '');
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+// ===== RENDER COLORS =====
+function renderColors() {
+  Object.entries({ 'gold-colors': 'gold', 'dark-colors': 'dark', 'cream-colors': 'cream', 'text-colors': 'text' }).forEach(([containerId, group]) => {
+    const container = document.getElementById(containerId);
+    colors[group].forEach(c => {
+      const card = document.createElement('div');
+      card.className = 'color-card';
+
+      const bgStyle = c.previewBg
+        ? `background:${c.previewBg}`
+        : c.isBorder
+          ? `background:${c.hex};border:1px dashed rgba(196,162,101,0.3)`
+          : `background:${c.hex}`;
+
+      const displayHex = c.hex.startsWith('rgba') ? 'opacity 15%' : c.hex;
+
+      card.innerHTML = `
+        <div class="color-swatch ${c.textClass}" style="${bgStyle}" data-hex="${displayHex}">
+          ${c.previewBg ? `<span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:${c.hex};font-size:14px;font-weight:600">Aa Bb Cc</span>` : ''}
+        </div>
+        <div class="color-info">
+          <div class="color-name">${c.name}</div>
+          <div class="color-use">${c.use}</div>
+          <div class="color-actions">
+            <button class="copy-btn" onclick="event.stopPropagation();copyText('${c.hex}')">HEX</button>
+            <button class="copy-btn" onclick="event.stopPropagation();copyText('${hexToRgb(c.hex)}')">RGB</button>
+            <button class="copy-btn" onclick="event.stopPropagation();copyText('var(${c.cssVar})')">CSS Var</button>
+            <button class="copy-btn" onclick="event.stopPropagation();copyText('${c.name}')">Nazwa</button>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  });
+}
+
+// ===== RENDER ICONS =====
+function renderIcons() {
+  const grid = document.getElementById('icon-grid');
+  icons.forEach(icon => {
+    const card = document.createElement('div');
+    card.className = 'icon-card';
+    card.innerHTML = `
+      <div class="icon-preview">${icon.char}</div>
+      <div class="icon-label">${icon.name}</div>
+      <div class="icon-unicode">${icon.unicode}</div>
+      <div class="icon-actions">
+        <button class="icon-btn" onclick="downloadSVG(\`${icon.svg.replace(/`/g, '\\`')}\`, '${icon.name}')">SVG</button>
+        <button class="icon-btn" onclick="downloadPNG(\`${icon.svg.replace(/`/g, '\\`')}\`, '${icon.name}')">PNG</button>
+        <button class="icon-btn" onclick="copyText('${icon.char}')">Znak</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// ===== DOWNLOAD SVG =====
+function downloadSVG(svgContent, name) {
+  const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${name.toLowerCase().replace(/\s/g, '-')}-gold.svg`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast(`Pobrano ${name}.svg`);
+}
+
+// ===== DOWNLOAD PNG =====
+function downloadPNG(svgContent, name) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 200;
+  canvas.height = 200;
+  const ctx = canvas.getContext('2d');
+  const img = new Image();
+  const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0, 200, 200);
+    canvas.toBlob(pngBlob => {
+      const pngUrl = URL.createObjectURL(pngBlob);
+      const a = document.createElement('a');
+      a.href = pngUrl;
+      a.download = `${name.toLowerCase().replace(/\s/g, '-')}-gold.png`;
+      a.click();
+      URL.revokeObjectURL(pngUrl);
+      URL.revokeObjectURL(url);
+      showToast(`Pobrano ${name}.png`);
+    });
+  };
+  img.src = url;
+}
+
+// ===== RENDER TYPE SCALE =====
+function renderTypeScale() {
+  const container = document.getElementById('type-scale');
+  typeScale.forEach(t => {
+    const div = document.createElement('div');
+    div.style.cssText = 'display:flex;align-items:baseline;gap:16px;cursor:pointer;padding:4px;transition:background 0.2s;';
+    div.onmouseenter = () => div.style.background = 'var(--gold-glow)';
+    div.onmouseleave = () => div.style.background = 'transparent';
+    div.onclick = () => copyText(t.css);
+
+    const labelSpan = document.createElement('span');
+    labelSpan.style.cssText = 'font-size:11px;color:var(--text-light);width:100px;flex-shrink:0';
+    labelSpan.textContent = t.label;
+
+    const sampleSpan = document.createElement('span');
+    sampleSpan.className = t.serif ? 'type-sample-serif' : 'type-sample-sans';
+    sampleSpan.style.fontSize = t.size;
+    sampleSpan.style.fontWeight = t.serif ? '600' : '400';
+    if (t.isLabel) {
+      sampleSpan.style.fontWeight = '600';
+      sampleSpan.style.letterSpacing = '0.15em';
+      sampleSpan.style.textTransform = 'uppercase';
+      sampleSpan.style.color = 'var(--gold)';
+    } else if (!t.serif) {
+      sampleSpan.style.color = 'var(--text-med)';
+    }
+    sampleSpan.textContent = t.sample;
+
+    div.appendChild(labelSpan);
+    div.appendChild(sampleSpan);
+    container.appendChild(div);
+  });
+}
+
+// ===== RENDER SPACING =====
+function renderSpacing() {
+  const container = document.getElementById('spacing-demo');
+  spacingValues.forEach(val => {
+    const item = document.createElement('div');
+    item.className = 'spacing-item';
+    item.style.cursor = 'pointer';
+    item.onclick = () => copyText(`${val}px`);
+    item.innerHTML = `
+      <div class="spacing-box" style="width:${val}px;height:${val}px"></div>
+      <div class="spacing-val">${val}</div>
+    `;
+    container.appendChild(item);
+  });
+}
+
+// ===== EXPORT FUNCTIONS =====
+function exportCSS() {
+  const allColors = [...colors.gold, ...colors.dark, ...colors.cream, ...colors.text];
+  let css = ':root {\n';
+  allColors.forEach(c => {
+    css += `  ${c.cssVar}: ${c.hex};\n`;
+  });
+  css += '  --gold-border: rgba(196,162,101,0.25);\n';
+  css += '  --text-on-dark-med: rgba(232,226,216,0.65);\n';
+  css += "  --font-sans: 'DM Sans', 'Helvetica Neue', sans-serif;\n";
+  css += "  --font-serif: 'Playfair Display', Georgia, serif;\n";
+  css += '}';
+  copyText(css);
+}
+
+function exportJSON() {
+  const allColors = [...colors.gold, ...colors.dark, ...colors.cream, ...colors.text];
+  const obj = {};
+  allColors.forEach(c => {
+    obj[c.cssVar.replace('--', '')] = c.hex;
+  });
+  copyText(JSON.stringify(obj, null, 2));
+}
+
+function exportSCSS() {
+  const allColors = [...colors.gold, ...colors.dark, ...colors.cream, ...colors.text];
+  let scss = '// Brand Colors — Katarzyna Kamińska · Thermomix®\n\n';
+  allColors.forEach(c => {
+    scss += `$${c.cssVar.replace('--', '')}: ${c.hex};\n`;
+  });
+  scss += '$gold-border: rgba(196,162,101,0.25);\n';
+  scss += '$text-on-dark-med: rgba(232,226,216,0.65);\n';
+  scss += "$font-sans: 'DM Sans', 'Helvetica Neue', sans-serif;\n";
+  scss += "$font-serif: 'Playfair Display', Georgia, serif;\n";
+  copyText(scss);
+}
+
+// ===== INIT =====
+renderColors();
+renderIcons();
+renderTypeScale();
+renderSpacing();
+
+// Quick nav active state
+const sections = document.querySelectorAll('section.block');
+const navLinks = document.querySelectorAll('.quick-nav a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const id = entry.target.id;
+      const link = document.querySelector(`.quick-nav a[href="#${id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { threshold: 0.3 });
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
