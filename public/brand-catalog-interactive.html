@@ -300,17 +300,21 @@ section.block:last-child { border-bottom: none; }
 /* ===== ICONS ===== */
 .icon-grid-interactive {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 12px;
 }
 .icon-card {
   background: var(--white);
   border: 1px solid rgba(26,26,24,0.06);
-  padding: 24px 16px 16px;
+  padding: 24px 12px 14px;
   text-align: center;
   transition: all 0.3s ease;
   cursor: default;
   position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .icon-card:hover {
   box-shadow: 0 4px 20px rgba(0,0,0,0.08);
@@ -344,19 +348,22 @@ section.block:last-child { border-bottom: none; }
   display: flex;
   gap: 4px;
   justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
 }
 .icon-btn {
-  padding: 5px 10px;
+  padding: 4px 8px;
   font-size: 9px;
   font-weight: 600;
   font-family: var(--font-sans);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   background: var(--cream);
   border: 1px solid rgba(26,26,24,0.08);
   color: var(--text-med);
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 .icon-btn:hover {
   background: var(--gold);
@@ -1172,19 +1179,48 @@ function renderColors() {
 // ===== RENDER ICONS =====
 function renderIcons() {
   const grid = document.getElementById('icon-grid');
-  icons.forEach(icon => {
+  icons.forEach((icon, idx) => {
     const card = document.createElement('div');
     card.className = 'icon-card';
-    card.innerHTML = `
-      <div class="icon-preview">${icon.char}</div>
-      <div class="icon-label">${icon.name}</div>
-      <div class="icon-unicode">${icon.unicode}</div>
-      <div class="icon-actions">
-        <button class="icon-btn" onclick="downloadSVG(\`${icon.svg.replace(/`/g, '\\`')}\`, '${icon.name}')">SVG</button>
-        <button class="icon-btn" onclick="downloadPNG(\`${icon.svg.replace(/`/g, '\\`')}\`, '${icon.name}')">PNG</button>
-        <button class="icon-btn" onclick="copyText('${icon.char}')">Znak</button>
-      </div>
-    `;
+
+    const preview = document.createElement('div');
+    preview.className = 'icon-preview';
+    preview.textContent = icon.char;
+
+    const label = document.createElement('div');
+    label.className = 'icon-label';
+    label.textContent = icon.name;
+
+    const unicode = document.createElement('div');
+    unicode.className = 'icon-unicode';
+    unicode.textContent = icon.unicode;
+
+    const actions = document.createElement('div');
+    actions.className = 'icon-actions';
+
+    const btnSvg = document.createElement('button');
+    btnSvg.className = 'icon-btn';
+    btnSvg.textContent = 'SVG';
+    btnSvg.addEventListener('click', () => downloadSVG(icons[idx].svg, icons[idx].name));
+
+    const btnPng = document.createElement('button');
+    btnPng.className = 'icon-btn';
+    btnPng.textContent = 'PNG';
+    btnPng.addEventListener('click', () => downloadPNG(icons[idx].svg, icons[idx].name));
+
+    const btnChar = document.createElement('button');
+    btnChar.className = 'icon-btn';
+    btnChar.textContent = 'Znak';
+    btnChar.addEventListener('click', () => copyText(icons[idx].char));
+
+    actions.appendChild(btnSvg);
+    actions.appendChild(btnPng);
+    actions.appendChild(btnChar);
+
+    card.appendChild(preview);
+    card.appendChild(label);
+    card.appendChild(unicode);
+    card.appendChild(actions);
     grid.appendChild(card);
   });
 }
